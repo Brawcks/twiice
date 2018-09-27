@@ -1,22 +1,18 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+// LOAD HTML DATA TEMPLATES
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
+// LOAD JS FILES
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
+// LOAD LIBRARIES
+import '../lib/router/main.js'; // General file, importing all routes
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
+// LOAD STANDARD MODULES (USE ALPHABETICAL ORDER)
+import './standard/main.js'; // General module
+
+// LOAD CUSTOMER MODULES (USE ALPHABETICAL ORDER)
+import './z-customer/main.js'; // General module
+

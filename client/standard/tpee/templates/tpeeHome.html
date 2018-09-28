@@ -3,7 +3,7 @@
     {{> tpeeHeaderAssets}}
     <div class="container-fluid">
         <div class="row mt-6 ml-3">
-            {{> tpeeSideNavbar}}
+            {{> Template.dynamic template=sidebar}}
             {{> Template.dynamic template=module}}
         </div>
         {{> tpeeFooterAssets}}
@@ -62,7 +62,13 @@
 
 <template name="tpeeDashboard">
     <div class="col-10">
-        <h1>Dashboard</h1>
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">This is your Dashboard. Checkout our features !</p>
+            <hr class="my-4">
+            <p>Tpee Project has a documentation available here :</p>
+            <a class="btn btn-primary btn-lg" href="https://gitlab.com/tpee/tpee/wikis/Cr%C3%A9er-un-module" target="_blank" role="button">Learn Tpee</a>
+        </div>
     </div>
 </template>
 

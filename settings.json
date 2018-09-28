@@ -1,0 +1,30 @@
+{
+    "public": {
+        "modules": {
+            "standard": {
+                "tpee": {
+                    "name": "Tpee",
+                    "technical_name": "tpee",
+                    "url": "http://localhost:3000"
+                },
+                "module_test": {
+                    "name": "Module test",
+                    "technical_name": "module_test",
+                    "url": "http://localhost:3000/module_test"
+                }
+            },
+            "customer": {
+                "Test": {
+                    "name": "Test",
+                    "technical_name": "test",
+                    "url": "http://localhost:3000/test"
+                }
+            }
+        }
+    },
+    "private": {
+        "stripe": {
+            "apiPrivate": "hello"
+        }
+    }
+}

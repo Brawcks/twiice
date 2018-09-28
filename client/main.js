@@ -16,3 +16,6 @@ import './standard/main.js'; // General module
 // LOAD CUSTOMER MODULES (USE ALPHABETICAL ORDER)
 import './z-customer/main.js'; // General module
 
+// LAST LOADER (PUT HERE EVERYTHING THAT NEEDS TO BE LOADED AT THE END)
+
+

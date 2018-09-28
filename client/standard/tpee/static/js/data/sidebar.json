@@ -2,7 +2,7 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "http://localhost:3000/tpee/dashboard"
+            "url": "http://localhost:3000/"
         },
         "sub-module": {
             "name": "Sub-Module",

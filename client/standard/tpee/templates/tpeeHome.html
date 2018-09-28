@@ -1,43 +1,51 @@
-<template name="tpeeHome">
+<template name="mainTemplate">
     {{> tpeeTopNavbar}}
-    <h1>Hello world</h1>
+    <div class="row mt-5 ml-3">
+        {{> Template.dynamic template=module}}
+    </div>
+
 </template>
 
 <template name="tpeeTopNavbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">Tpee</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="#">Tpee</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Standard Modules
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {{{standard_modules}}}
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Specific Modules
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item d-none specific-modules" href="#">Modules Here</a>
-                        {{{customer_modules}}}
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Standard Modules
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {{{standard_modules}}}
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Specific Modules
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item d-none specific-modules" href="#">Modules Here</a>
+                            {{{customer_modules}}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
+</template>
+
+<template name="tpeeHome">
+    <h1>Hello world</h1>
 </template>

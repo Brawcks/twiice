@@ -2,7 +2,7 @@
 import './tpee/main.js';
 
 // LOAD ALL STANDARD MODULES HERE (SHOULD BE A FUNCTION DEPENDING ON SETTINGS.JSON)
-var ModulesLoader = Meteor.settings.public.modules.standard;
+// var ModulesLoader = Meteor.settings.public.modules.standard;
 
 // $.each(ModulesLoader, function(index, value) {
 //     // console.log(value.technical_name);

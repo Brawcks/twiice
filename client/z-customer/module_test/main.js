@@ -1,4 +1,9 @@
-// LOAD HTML FILES HERE
-import './templates/test.html';
+// LOAD ALL TEMPLATES FIRST
+import './templates/module_test.html';
+import './templates/views/sub_module.html';
+import './templates/views/settings.html';
 
-// LOAD JS FILES HERE
+// LOAD ALL JS FILES
+import './static/js/functions/functions.js';
+import './static/js/module_test.js';
+

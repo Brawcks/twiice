@@ -21,22 +21,22 @@ import './templates/views/settings.html';
 import './static/js/functions/functions.js';
 import './static/js/$module_name.js';" > client/z-customer/$module_name/main.js
 
-echo '{
-    "sidebar": {
-        "dashboard": {
-            "name": "Dashboard",
-            "url": "http://localhost:3000/$module_name"
+echo "{
+    \"sidebar\": {
+        \"dashboard\": {
+            \"name\": \"Dashboard\",
+            \"url\": \"http://localhost:3000/$module_name\"
         },
-        "sub-module": {
-            "name": "Sub-Module",
-            "url": "http://localhost:3000/$module_name/sub-module"
+        \"sub-module\": {
+            \"name\": \"Sub-Module\",
+            \"url\": \"http://localhost:3000/$module_name/sub-module\"
         },
-        "settings": {
-            "name": "Settings",
-            "url": "http://localhost:3000/$module_name/settings"
+        \"settings\": {
+            \"name\": \"Settings\",
+            \"url\": \"http://localhost:3000/$module_name/settings\"
         }
     }
-}' > client/z-customer/$module_name/static/js/data/sidebar.json
+}" > client/z-customer/$module_name/static/js/data/sidebar.json
 
 echo "export function leftSidebarCustomer() {
     // SIDEBAR
@@ -93,7 +93,7 @@ echo "FlowRouter.route('/$module_name', {
     name: '$module_name',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: '$module_name', sidebar: 'SideNavbar$module_name'});
+        BlazeLayout.render('mainTemplate', {module: '$module_name', sidebar: 'sideNavbar$module_name'});
     }
 });
 
@@ -101,7 +101,7 @@ FlowRouter.route('/$module_name/sub-module', {
     name: '$module_name/sub-module',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: 'subModule$module_name', sidebar: 'SideNavbar$module_name'});
+        BlazeLayout.render('mainTemplate', {module: 'subModule$module_name', sidebar: 'sideNavbar$module_name'});
     }
 });
 
@@ -109,7 +109,7 @@ FlowRouter.route('/$module_name/settings', {
     name: '$module_name/settings',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: 'settings$module_name', sidebar: 'SideNavbar$module_name'});
+        BlazeLayout.render('mainTemplate', {module: 'settings$module_name', sidebar: 'sideNavbar$module_name'});
     }
 });" > lib/router/z-customer/$module_name/routes.js
 

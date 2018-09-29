@@ -83,7 +83,7 @@ echo "<template name=\"subModule$module_name\">
     </div>
 </template>" > client/z-customer/$module_name/templates/views/sub_module.html
 
-echo "import './$module_name/main.js';" >> client/z-customer/main.js
+echo "\nimport './$module_name/main.js';" >> client/z-customer/main.js
 
 # ROUTING PART
 
@@ -113,5 +113,5 @@ FlowRouter.route('/module-test/settings', {
     }
 });" > lib/router/z-customer/$module_name/routes.js
 
-echo "import './$module_name/routes.js';" >> lib/router/z-customer/main.js
+echo "\nimport './$module_name/routes.js';" >> lib/router/z-customer/main.js
 

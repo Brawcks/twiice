@@ -83,35 +83,35 @@ echo "<template name=\"subModule$module_name\">
     </div>
 </template>" > client/z-customer/$module_name/templates/views/sub_module.html
 
-echo "\nimport './$module_name/main.js';" >> client/z-customer/main.js
+printf "\nimport './$module_name/main.js';" >> client/z-customer/main.js
 
 # ROUTING PART
 
 mkdir lib/router/z-customer/$module_name
 
-echo "FlowRouter.route('/module-test', {
-    name: 'module-test',
+echo "FlowRouter.route('/$module_name', {
+    name: '$module_name',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
         BlazeLayout.render('mainTemplate', {module: '$module_name', sidebar: 'SideNavbar$module_name'});
     }
 });
 
-FlowRouter.route('/module-test/sub-module', {
-    name: 'module-test/sub-module',
+FlowRouter.route('/$module_name/sub-module', {
+    name: '$module_name/sub-module',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
         BlazeLayout.render('mainTemplate', {module: 'subModule$module_name', sidebar: 'SideNavbar$module_name'});
     }
 });
 
-FlowRouter.route('/module-test/settings', {
-    name: 'module-test/settings',
+FlowRouter.route('/$module_name/settings', {
+    name: '$module_name/settings',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
         BlazeLayout.render('mainTemplate', {module: 'settings$module_name', sidebar: 'SideNavbar$module_name'});
     }
 });" > lib/router/z-customer/$module_name/routes.js
 
-echo "\nimport './$module_name/routes.js';" >> lib/router/z-customer/main.js
+printf "\nimport './$module_name/routes.js';" >> lib/router/z-customer/main.js
 

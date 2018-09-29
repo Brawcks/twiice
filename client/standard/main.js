@@ -1,5 +1,6 @@
 // LOAD THE MAIN MODULE
 import './tpee/main.js';
+import './users/main.js';
 
 // LOAD ALL STANDARD MODULES HERE (SHOULD BE A FUNCTION DEPENDING ON SETTINGS.JSON)
 // var ModulesLoader = Meteor.settings.public.modules.standard;

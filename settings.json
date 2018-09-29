@@ -6,6 +6,11 @@
                     "name": "Tpee",
                     "technical_name": "tpee",
                     "url": "http://localhost:3000"
+                },
+                "users": {
+                    "name": "Users",
+                    "technical_name": "users",
+                    "url": "http://localhost:3000/users"
                 }
             },
             "customer": {

@@ -1,5 +1,5 @@
 // LOAD ALL TEMPLATES FIRST
-import './templates/tpeeHome.html';
+import './templates/main.html';
 import './templates/views/sub_module.html';
 import './templates/views/settings.html';
 

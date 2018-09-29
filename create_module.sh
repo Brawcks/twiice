@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "You are about to create a new module. Follow the instructions to finalize it !"
-read -p "Module name : (Set a technical name, like : my_module)" module_name
+read -p "Module name : (Set a technical name, like : my_module) : " module_name
 
 mkdir client/z-customer/$module_name
 mkdir client/z-customer/$module_name/templates
@@ -51,19 +51,19 @@ echo "export function leftSidebarCustomer() {
 
 echo "import { leftSidebarCustomer } from './functions/functions.js';
 
-Template.$module_nameSideNavbar.helpers({
+Template.sideNavbar$module_name.helpers({
     leftSidebar: () => {
         return leftSidebarCustomer();
     },
 });" > client/z-customer/$module_name/static/js/$module_name.js
 
-echo "<template name=\"$module_nameHome\">
+echo "<template name=\"$module_name\">
     <div class=\"col-10\">
         <h1>Hello</h1>
     </div>
 </template>
 
-<template name=\"module_testSideNavbar\">
+<template name=\"sideNavbar$module_name\">
     <div class=\"col\">
         <div class=\"nav flex-column nav-pills\" id=\"v-pills-tab\" role=\"tablist\" aria-orientation=\"vertical\">
             {{{leftSidebar}}}
@@ -71,5 +71,47 @@ echo "<template name=\"$module_nameHome\">
     </div>
 </template>" > client/z-customer/$module_name/templates/$module_name.html
 
+echo "<template name=\"settings$module_name\">
+    <div class=\"col-10\">
+        <h1>Settings</h1>
+    </div>
+</template>" > client/z-customer/$module_name/templates/views/settings.html
+
+echo "<template name=\"subModule$module_name\">
+    <div class=\"col-10\">
+        <h1>Sub-Module</h1>
+    </div>
+</template>" > client/z-customer/$module_name/templates/views/sub_module.html
+
 echo "import './$module_name/main.js';" >> client/z-customer/main.js
+
+# ROUTING PART
+
+mkdir lib/router/z-customer/$module_name
+
+echo "FlowRouter.route('/module-test', {
+    name: 'module-test',
+    action() {
+        // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
+        BlazeLayout.render('mainTemplate', {module: '$module_name', sidebar: 'SideNavbar$module_name'});
+    }
+});
+
+FlowRouter.route('/module-test/sub-module', {
+    name: 'module-test/sub-module',
+    action() {
+        // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
+        BlazeLayout.render('mainTemplate', {module: 'subModule$module_name', sidebar: 'SideNavbar$module_name'});
+    }
+});
+
+FlowRouter.route('/module-test/settings', {
+    name: 'module-test/settings',
+    action() {
+        // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
+        BlazeLayout.render('mainTemplate', {module: 'settings$module_name', sidebar: 'SideNavbar$module_name'});
+    }
+});" > lib/router/z-customer/$module_name/routes.js
+
+echo "import './$module_name/routes.js';" >> lib/router/z-customer/main.js
 

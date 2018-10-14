@@ -115,3 +115,12 @@ FlowRouter.route('/$module_name/settings', {
 
 printf "\nimport './$module_name/routes.js';" >> lib/router/z-customer/main.js
 
+# SERVER SIDE COMPONENTS
+
+mkdir server/z-customer/$module_name
+
+echo "Meteor.startup(() => {
+  // code to run on server at startup
+});" > server/z-customer/$module_name/main.js
+
+printf "\nimport './$module_name/main.js';" >> server/z-customer/main.js

@@ -34,3 +34,9 @@ export function leftSidebarStandard() {
     });
     return leftSidebar;
 }
+
+// GLOBAL FUNCTIONS FOR ALL MODULES SHOULD BE DEFINED HERE
+
+Meteor.methods({
+    
+});

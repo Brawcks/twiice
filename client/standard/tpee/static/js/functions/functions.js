@@ -35,6 +35,9 @@ export function leftSidebarStandard() {
     return leftSidebar;
 }
 
+// ACCOUNTS CONFIGURATION
+
+
 // GLOBAL FUNCTIONS FOR ALL MODULES SHOULD BE DEFINED HERE
 
 Meteor.methods({

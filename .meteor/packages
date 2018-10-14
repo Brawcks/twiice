@@ -27,3 +27,7 @@ kadira:blaze-layout             # Blase js
 
 jquery
 meteortoys:allthings
+
+# ACCOUNTS PACKAGES
+accounts-ui
+accounts-password

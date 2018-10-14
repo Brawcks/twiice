@@ -23,4 +23,7 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 kadira:flow-router              # Routing
 kadira:blaze-layout             # Blase js
 
+# USEFULL Packages
+
 jquery
+meteortoys:allthings

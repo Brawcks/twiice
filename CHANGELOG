@@ -1,0 +1,10 @@
+Version 0.0.1 : 
+
+Début du projet Tpee. Voici les fonctionnalités actuelles :
+
+* Création de module par le biais d'un script bash
+* Inscription et connexion utilisateur
+* Gestion des routes
+* Ajout des outils de débugging
+* Gestion des modules (activation / désactivation). 
+* Gestion du menu et de sous-menus spécifiques aux modules.

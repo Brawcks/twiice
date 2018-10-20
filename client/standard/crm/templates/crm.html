@@ -1,6 +1,13 @@
 <template name="crm">
-    <div class="col-10">
+    <div class="col-12">
         <h1>Hello</h1>
+    </div>
+</template>
+
+<template name="crmNewPipeline">
+    <div class="col-12">
+        <h1>New pipeline</h1>
+        {{> quickForm collection="Pipelines" id="insertPipelinesForm" type="insert" class="new-pipelines-form"}}
     </div>
 </template>
 

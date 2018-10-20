@@ -28,6 +28,12 @@ kadira:blaze-layout             # Blase js
 jquery
 meteortoys:allthings
 
+# Automation
+aldeed:autoform
+aldeed:simple-schema@1.4.3
+aldeed:collection2
+
+
 # ACCOUNTS PACKAGES
 accounts-ui
 accounts-password

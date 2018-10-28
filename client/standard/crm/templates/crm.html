@@ -1,0 +1,20 @@
+<template name="crm">
+    <div class="col-12">
+        <h1>Hello</h1>
+    </div>
+</template>
+
+<template name="crmNewPipeline">
+    <div class="col-12">
+        <h1>New pipeline</h1>
+        {{> quickForm collection="Pipelines" id="insertPipelinesForm" type="insert" class="new-pipelines-form"}}
+    </div>
+</template>
+
+<template name="sideNavbarcrm">
+    <div class="col">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            {{{leftSidebar}}}
+        </div>
+    </div>
+</template>

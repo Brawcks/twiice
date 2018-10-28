@@ -1,4 +1,15 @@
-Pipelines = new Meteor.Collection('pipelines');
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
+import SimpleSchema from 'simpl-schema';
+
+Pipelines = new Mongo.Collection('pipelines');
+
+Pipelines.allow({
+    insert: function(userId, doc) {
+        return !!userId;    
+    }
+});
 
 PipelinesSchema = new SimpleSchema ({
     name: {
@@ -8,26 +19,6 @@ PipelinesSchema = new SimpleSchema ({
     desc: {
         type: String,
         label: "Description"
-    },
-    author: {
-        type: String,
-        label: "Author",
-        autoValue: function() {
-            return this.userId
-        },
-        autoform: {
-            type: "hidden"
-        }
-    },
-    createdAt: {
-        type: Date,
-        label: "Created At",
-        autoValue: function() {
-            return new Date()
-        },
-        autoform: {
-            type: "hidden"
-        }
     }
 });
 

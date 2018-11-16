@@ -81,9 +81,9 @@ echo "<template name=\"$module_name\">
             <thead>
                 <tr>
                     <th scope=\"col\">#</th>
-                    <th scope=\"col\">First</th>
-                    <th scope=\"col\">Last</th>
-                    <th scope=\"col\">Handle</th>
+                    <th scope=\"col\">Name</th>
+                    <th scope=\"col\">Description</th>
+                    <th scope=\"col\">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -92,7 +92,7 @@ echo "<template name=\"$module_name\">
                     <th scope=\"row\">{{@index}}</th>
                     <td>{{name}}</td>
                     <td>{{desc}}</td>
-                    <td>{{desc}}</td>
+                    <td><a href=\"{{pathFor 'crm/pipeline' _id=_id}}\" title=\"{{name}}\">View Details</a></td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -105,6 +105,12 @@ echo "<template name=\"$module_name\">
         <h1>New Collection sample</h1>
         {{> quickForm collection=\"Collection_sample\" id=\"insertCollection_sampleForm\" type=\"insert\" class=\"new-collection-sample-form\"}}
     </div>
+</template>
+
+<template name=\"$module_name\SingleCollectionSample\">
+        <div class=\"col-12\">
+            <h1>View Collection_sample</h1>
+        </div>
 </template>
 
 <template name=\"sideNavbar$module_name\">
@@ -162,6 +168,14 @@ FlowRouter.route('/$module_name/new-collection-sample', {
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
         BlazeLayout.render('mainTemplate', {module: 'newCollectionSample$module_name', sidebar: 'sideNavbar$module_name'});
+    }
+});
+
+FlowRouter.route('/$module_name/collection-sample/:_id', {
+    name: '$module_name/collection-sample',
+    action() {
+        // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
+        BlazeLayout.render('mainTemplate', {module: '$module_name\SingleCollectionSample', sidebar: 'sideNavbarcrm'});
     }
 });" > lib/router/z-customer/$module_name/routes.js
 

@@ -3,7 +3,8 @@ import { Meteor } from 'meteor/meteor';
 
 
 Meteor.startup(() => {
-  // import './client/standard/crm/collections/crm.js';
+  // code to run on server at startup
+  import '../collections/main.js'
 });
 
 import './standard/main.js';

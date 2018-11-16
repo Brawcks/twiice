@@ -28,6 +28,11 @@
                     "name": "Stacy",
                     "technical_name": "stacy",
                     "url": "http://localhost:3000/stacy"
+                },
+                "testing": {
+                    "name": "Testing",
+                    "technical_name": "testing",
+                    "url": "http://localhost:3000/testing"
                 }
             }
         }

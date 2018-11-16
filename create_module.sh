@@ -75,6 +75,23 @@ Template.$module_name.helpers({
     }
 });" > client/z-customer/$module_name/static/js/$module_name.js
 
+echo "
+Template.$module_name\SingleCollectionSample.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        var id = FlowRouter.getParam('_id');
+        self.subscribe('Collection_sample', id);
+    });
+});
+
+Template.$module_name\SingleCollectionSample.helpers({
+    collection_sample_single: () => {
+        var id = FlowRouter.getParam('_id');
+        return Collection_sample.findOne({_id: id});
+    }
+});
+" > client/z-customer/$module_name/static/js/$module_name\_single.js
+
 echo "<template name=\"$module_name\">
     <div class=\"col-12\">
         <table class=\"table table-hover\">
@@ -92,7 +109,7 @@ echo "<template name=\"$module_name\">
                     <th scope=\"row\">{{@index}}</th>
                     <td>{{name}}</td>
                     <td>{{desc}}</td>
-                    <td><a href=\"{{pathFor 'crm/pipeline' _id=_id}}\" title=\"{{name}}\">View Details</a></td>
+                    <td><a href=\"{{pathFor '$module_name/collection-sample-single' _id=_id}}\" title=\"{{name}}\">View Details</a></td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -108,9 +125,9 @@ echo "<template name=\"$module_name\">
 </template>
 
 <template name=\"$module_name\SingleCollectionSample\">
-        <div class=\"col-12\">
-            <h1>View Collection_sample</h1>
-        </div>
+    <h1>Collection</h1>
+    <hr>
+    <h3>{{collection_sample_single.name}}</h3>
 </template>
 
 <template name=\"sideNavbar$module_name\">
@@ -172,7 +189,7 @@ FlowRouter.route('/$module_name/new-collection-sample', {
 });
 
 FlowRouter.route('/$module_name/collection-sample/:_id', {
-    name: '$module_name/collection-sample',
+    name: '$module_name/collection-sample-single',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
         BlazeLayout.render('mainTemplate', {module: '$module_name\SingleCollectionSample', sidebar: 'sideNavbarcrm'});

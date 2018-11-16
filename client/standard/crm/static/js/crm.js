@@ -14,3 +14,10 @@ Template.crm.onCreated(function() {
         self.subscribe('Pipelines');
     });
 });
+
+// LOAD DATA ON TEMPLATES 
+Template.crm.helpers({
+    pipelines: () => {
+        return Pipelines.find({});
+    }
+});

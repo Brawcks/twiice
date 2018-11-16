@@ -4,6 +4,10 @@
             "name": "Dashboard",
             "url": "http://localhost:3000/crm"
         },
+        "new-pipelines": {
+            "name": "New Pipelines",
+            "url": "http://localhost:3000/crm/new-pipeline"
+        },
         "sub-module": {
             "name": "Sub-Module",
             "url": "http://localhost:3000/crm/sub-module"
@@ -11,10 +15,6 @@
         "settings": {
             "name": "Settings",
             "url": "http://localhost:3000/crm/settings"
-        },
-        "new-pipelines": {
-            "name": "New Pipelines",
-            "url": "http://localhost:3000/crm/new-pipeline"
         }
     }
 }

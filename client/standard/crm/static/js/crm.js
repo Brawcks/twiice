@@ -5,3 +5,12 @@ Template.sideNavbarcrm.helpers({
         return leftSidebarCustomer();
     },
 });
+
+
+// SUBSCRIBE TO PIPELINES PUBLICATIONS ON TEMPLATES
+Template.crm.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        self.subscribe('Pipelines');
+    });
+});

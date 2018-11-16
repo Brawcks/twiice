@@ -8,4 +8,4 @@ import './static/js/functions/functions.js';
 import './static/js/crm.js';
 
 // LOAD COLLECTIONS
-import './collections/crm.js';
+// import './collections/crm.js';

@@ -10,6 +10,9 @@ import './main.html';
 // LOAD LIBRARIES
 import '../lib/router/main.js'; // General file, importing all routes
 
+// LOAD COLLECTIONS
+import '../collections/main.js'; // General file, importing all routes
+
 // LOAD STANDARD MODULES (USE ALPHABETICAL ORDER)
 import './standard/main.js'; // General module
 

@@ -26,6 +26,10 @@ echo "{
             \"name\": \"Dashboard\",
             \"url\": \"http://localhost:3000/$module_name\"
         },
+        \"new-collection-sample\": {
+            \"name\": \"New Collection Sample\",
+            \"url\": \"http://localhost:3000/$module_name/new-collection-sample\"
+        },
         \"sub-module\": {
             \"name\": \"Sub-Module\",
             \"url\": \"http://localhost:3000/$module_name/sub-module\"
@@ -54,12 +58,59 @@ Template.sideNavbar$module_name.helpers({
     leftSidebar: () => {
         return leftSidebarCustomer();
     },
+});
+
+// SUBSCRIBE TO PIPELINES PUBLICATIONS ON TEMPLATES
+Template.$module_name.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        self.subscribe('Collection_sample');
+    });
+});
+
+// LOAD DATA ON TEMPLATES 
+Template.$module_name.helpers({
+    collection_sample: () => {
+        return Collection_sample.find({});
+    }
 });" > client/standard/$module_name/static/js/$module_name.js
 
 echo "<template name=\"$module_name\">
-    <div class=\"col-10\">
-        <h1>Hello</h1>
+    <div class=\"col-12\">
+        <table class=\"table table-hover\">
+            <thead>
+                <tr>
+                    <th scope=\"col\">#</th>
+                    <th scope=\"col\">Name</th>
+                    <th scope=\"col\">Description</th>
+                    <th scope=\"col\">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each collection_sample}}
+                <tr>
+                    <th scope=\"row\">{{@index}}</th>
+                    <td>{{name}}</td>
+                    <td>{{desc}}</td>
+                    <td><a href=\"{{pathFor 'crm/pipeline' _id=_id}}\" title=\"{{name}}\">View Details</a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </div>
+</template>
+
+<template name=\"newCollectionSample$module_name\">
+    <div class=\"col-12\">
+        <h1>New Collection sample</h1>
+        {{> quickForm collection=\"Collection_sample\" id=\"insertCollection_sampleForm\" type=\"insert\" class=\"new-collection-sample-form\"}}
+    </div>
+</template>
+
+<template name=\"$module_name\SingleCollectionSample\">
+        <div class=\"col-12\">
+            <h1>View Collection_sample</h1>
+        </div>
 </template>
 
 <template name=\"sideNavbar$module_name\">
@@ -110,6 +161,22 @@ FlowRouter.route('/$module_name/settings', {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
         BlazeLayout.render('mainTemplate', {module: 'settings$module_name', sidebar: 'sideNavbar$module_name'});
     }
+});
+
+FlowRouter.route('/$module_name/new-collection-sample', {
+    name: '$module_name/new-collection-sample',
+    action() {
+        // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
+        BlazeLayout.render('mainTemplate', {module: 'newCollectionSample$module_name', sidebar: 'sideNavbar$module_name'});
+    }
+});
+
+FlowRouter.route('/$module_name/collection-sample/:_id', {
+    name: '$module_name/collection-sample',
+    action() {
+        // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
+        BlazeLayout.render('mainTemplate', {module: '$module_name\SingleCollectionSample', sidebar: 'sideNavbarcrm'});
+    }
 });" > lib/router/standard/$module_name/routes.js
 
 printf "\nimport './$module_name/routes.js';" >> lib/router/standard/main.js
@@ -122,6 +189,13 @@ echo "Meteor.startup(() => {
   // code to run on server at startup
 });" > server/standard/$module_name/main.js
 
+printf "\n
+// PUBLISH COLLECTION SAMPLE ON SERVER
+Meteor.publish('Collection_sample', function() {
+  return Collection_sample.find({})
+})
+" >> server/standard/$module_name/main.js
+
 printf "\nimport './$module_name/main.js';" >> server/standard/main.js
 
 # COLLECTIONS DIRECTORIES
@@ -129,6 +203,34 @@ printf "\nimport './$module_name/main.js';" >> server/standard/main.js
 mkdir collections/standard/$module_name
 
 touch collections/standard/$module_name/collection.js
+
+echo "
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
+import SimpleSchema from 'simpl-schema';
+
+Collection_sample = new Mongo.Collection('collection_sample');
+
+Collection_sample.allow({
+    insert: function(userId, doc) {
+        return !!userId;    
+    }
+});
+
+Collection_sampleSchema = new SimpleSchema ({
+    name: {
+        type: String,
+        label: \"Name\"
+    },
+    desc: {
+        type: String,
+        label: \"Description\"
+    }
+});
+
+Collection_sample.attachSchema(Collection_sampleSchema);
+" >> collections/standard/$module_name/collection.js
 
 printf "\nimport './$module_name/collection.js';" >> collections/standard/main.js
 

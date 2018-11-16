@@ -7,7 +7,6 @@ mkdir client/z-customer/$module_name
 mkdir client/z-customer/$module_name/templates
 mkdir client/z-customer/$module_name/templates/views
 mkdir client/z-customer/$module_name/static
-mkdir client/z-customer/$module_name/collections
 mkdir client/z-customer/$module_name/static/js
 mkdir client/z-customer/$module_name/static/js/data
 mkdir client/z-customer/$module_name/static/js/functions
@@ -124,3 +123,17 @@ echo "Meteor.startup(() => {
 });" > server/z-customer/$module_name/main.js
 
 printf "\nimport './$module_name/main.js';" >> server/z-customer/main.js
+
+# COLLECTIONS DIRECTORIES
+
+mkdir collections/z-customer/$module_name
+
+touch collections/z-customer/$module_name/collection.js
+
+printf "\nimport './$module_name/collection.js';" >> collections/z-customer/main.js
+
+echo "You module is now ready."
+echo "You can now create your collections in /collections/z-customer/$module_name/collection.js"
+echo "Don't forget to load them on the server side, in this file : /server/z-customer/$module_name/main.js"
+
+echo "This script was built by Vincent Coffin - Twiice Corp."

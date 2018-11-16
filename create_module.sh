@@ -134,6 +134,5 @@ printf "\nimport './$module_name/collection.js';" >> collections/z-customer/main
 
 echo "You module is now ready."
 echo "You can now create your collections in /collections/z-customer/$module_name/collection.js"
-echo "Don't forget to load them on the server side, in this file : /server/z-customer/$module_name/main.js"
 
 echo "This script was built by Vincent Coffin - Twiice Corp."

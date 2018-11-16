@@ -26,6 +26,10 @@ echo "{
             \"name\": \"Dashboard\",
             \"url\": \"http://localhost:3000/$module_name\"
         },
+        \"new-collection-sample\": {
+            \"name\": \"New Collection Sample\",
+            \"url\": \"http://localhost:3000/$module_name/new-collection-sample\"
+        },
         \"sub-module\": {
             \"name\": \"Sub-Module\",
             \"url\": \"http://localhost:3000/$module_name/sub-module\"
@@ -54,11 +58,52 @@ Template.sideNavbar$module_name.helpers({
     leftSidebar: () => {
         return leftSidebarCustomer();
     },
+});
+
+// SUBSCRIBE TO PIPELINES PUBLICATIONS ON TEMPLATES
+Template.$module_name.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        self.subscribe('Collection_sample');
+    });
+});
+
+// LOAD DATA ON TEMPLATES 
+Template.$module_name.helpers({
+    collection_sample: () => {
+        return Collection_sample.find({});
+    }
 });" > client/z-customer/$module_name/static/js/$module_name.js
 
 echo "<template name=\"$module_name\">
-    <div class=\"col-10\">
-        <h1>Hello</h1>
+    <div class=\"col-12\">
+        <table class=\"table table-hover\">
+            <thead>
+                <tr>
+                    <th scope=\"col\">#</th>
+                    <th scope=\"col\">First</th>
+                    <th scope=\"col\">Last</th>
+                    <th scope=\"col\">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each collection_sample}}
+                <tr>
+                    <th scope=\"row\">{{@index}}</th>
+                    <td>{{name}}</td>
+                    <td>{{desc}}</td>
+                    <td>{{desc}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<template name=\"newCollectionSample$module_name\">
+    <div class=\"col-12\">
+        <h1>New Collection sample</h1>
+        {{> quickForm collection=\"Collection_sample\" id=\"insertCollection_sampleForm\" type=\"insert\" class=\"new-collection-sample-form\"}}
     </div>
 </template>
 
@@ -110,6 +155,14 @@ FlowRouter.route('/$module_name/settings', {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
         BlazeLayout.render('mainTemplate', {module: 'settings$module_name', sidebar: 'sideNavbar$module_name'});
     }
+});
+
+FlowRouter.route('/$module_name/new-collection-sample', {
+    name: '$module_name/new-collection-sample',
+    action() {
+        // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
+        BlazeLayout.render('mainTemplate', {module: 'newCollectionSample$module_name', sidebar: 'sideNavbar$module_name'});
+    }
 });" > lib/router/z-customer/$module_name/routes.js
 
 printf "\nimport './$module_name/routes.js';" >> lib/router/z-customer/main.js
@@ -122,6 +175,13 @@ echo "Meteor.startup(() => {
   // code to run on server at startup
 });" > server/z-customer/$module_name/main.js
 
+printf "\n
+// PUBLISH COLLECTION SAMPLE ON SERVER
+Meteor.publish('Collection_sample', function() {
+  return Collection_sample.find({})
+})
+" >> server/z-customer/$module_name/main.js
+
 printf "\nimport './$module_name/main.js';" >> server/z-customer/main.js
 
 # COLLECTIONS DIRECTORIES
@@ -129,6 +189,34 @@ printf "\nimport './$module_name/main.js';" >> server/z-customer/main.js
 mkdir collections/z-customer/$module_name
 
 touch collections/z-customer/$module_name/collection.js
+
+echo "
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
+import SimpleSchema from 'simpl-schema';
+
+Collection_sample = new Mongo.Collection('collection_sample');
+
+Collection_sample.allow({
+    insert: function(userId, doc) {
+        return !!userId;    
+    }
+});
+
+Collection_sampleSchema = new SimpleSchema ({
+    name: {
+        type: String,
+        label: \"Name\"
+    },
+    desc: {
+        type: String,
+        label: \"Description\"
+    }
+});
+
+Collection_sample.attachSchema(Collection_sampleSchema);
+" >> collections/z-customer/$module_name/collection.js
 
 printf "\nimport './$module_name/collection.js';" >> collections/z-customer/main.js
 

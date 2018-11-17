@@ -80,6 +80,9 @@ Template.${module_name}TreeView.events({
         Meteor.call('${module_name}DeleteCollection_sample', this._id);
         swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
     },
+    'click .export-csv': function(events, template){
+        swal(\"Ooops !\", \"This function is not available yet !\", \"error\");
+    },
 });
 
 // CRM ADD TEMPLATE
@@ -137,7 +140,7 @@ echo "<template name=\"${module_name}\">
                 {{#each collection_sample}}
                 <tr>
                     <th scope=\"row\">{{@index}}</th>
-                    <td>{{name}}</td>
+                    <td><a href=\"{{pathFor '${module_name}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">{{name}}</a></td>
                     <td>{{desc}}</td>
                     <td>
                         <a href=\"{{pathFor '${module_name}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">View Details</a>
@@ -274,6 +277,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
 import SimpleSchema from 'simpl-schema';
+SimpleSchema.extendOptions(['autoform']);
 
 Collection_sample = new Mongo.Collection('collection_sample');
 

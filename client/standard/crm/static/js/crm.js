@@ -8,7 +8,7 @@ Template.sideNavbarcrm.helpers({
 
 
 // SUBSCRIBE TO PIPELINES PUBLICATIONS ON TEMPLATES
-Template.crm.onCreated(function() {
+Template.crmTreeView.onCreated(function() {
     var self = this;
     self.autorun(function() {
         self.subscribe('Pipelines');
@@ -16,13 +16,13 @@ Template.crm.onCreated(function() {
 });
 
 // LOAD DATA ON TEMPLATES 
-Template.crm.helpers({
+Template.crmTreeView.helpers({
     pipelines: () => {
         return Pipelines.find({});
     }
 });
 
-Template.crm.events({
+Template.crmTreeView.events({
     'click .btn-danger': function (){
         Meteor.call('crmDeletePipeline', this._id);
     },

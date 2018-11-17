@@ -100,6 +100,12 @@ Template.$module_name\SingleCollectionSample.helpers({
 
 echo "<template name=\"$module_name\">
     <div class=\"col-12\">
+        <h1>$module_name Dashboard</h1>
+    </div>
+</template>
+
+<template name=\"$module_name\TreeView\">
+    <div class=\"col-12 self-align-end\">
         <table class=\"table table-hover\">
             <thead>
                 <tr>
@@ -169,7 +175,7 @@ echo "FlowRouter.route('/$module_name', {
     name: '$module_name',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: '$module_name', sidebar: 'sideNavbar$module_name'});
+        BlazeLayout.render('mainTemplate', {module: '$module_name', sidebar: 'sideNavbar$module_name', view: $module_name\TreeView});
     }
 });
 

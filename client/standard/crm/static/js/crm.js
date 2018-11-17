@@ -21,3 +21,9 @@ Template.crm.helpers({
         return Pipelines.find({});
     }
 });
+
+Template.crm.events({
+    'click .btn-danger': function (){
+        Meteor.call('crmDeletePipeline', this._id);
+    },
+});

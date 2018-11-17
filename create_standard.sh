@@ -61,7 +61,7 @@ Template.sideNavbar${module_name}.helpers({
 });
 
 // SUBSCRIBE TO PIPELINES PUBLICATIONS ON TEMPLATES
-Template.${module_name}.onCreated(function() {
+Template.${module_name}TreeView.onCreated(function() {
     var self = this;
     self.autorun(function() {
         self.subscribe('Collection_sample');
@@ -69,13 +69,13 @@ Template.${module_name}.onCreated(function() {
 });
 
 // LOAD DATA ON TEMPLATES 
-Template.${module_name}.helpers({
+Template.${module_name}TreeView.helpers({
     collection_sample: () => {
         return Collection_sample.find({});
     }
 });
 
-Template.${module_name}.events({
+Template.${module_name}TreeView.events({
     'click .btn-danger': function (){
         Meteor.call('${module_name}DeleteCollection_sample', this._id);
     },

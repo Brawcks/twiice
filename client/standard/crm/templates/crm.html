@@ -20,7 +20,7 @@
                 {{#each pipelines}}
                 <tr>
                     <th scope="row">{{@index}}</th>
-                    <td>{{name}}</td>
+                    <td><a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">{{name}}</a></td>
                     <td>{{desc}}</td>
                     <td>
                         <a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">View Details</a>

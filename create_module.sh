@@ -140,7 +140,7 @@ echo "<template name=\"${module_name}\">
                 {{#each collection_sample}}
                 <tr>
                     <th scope=\"row\">{{@index}}</th>
-                    <td>{{name}}</td>
+                    <td><a href=\"{{pathFor '${module_name}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">{{name}}</a></td>
                     <td>{{desc}}</td>
                     <td>
                         <a href=\"{{pathFor '${module_name}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">View Details</a>

@@ -13,6 +13,13 @@ le wiki du projet, qui détaille certaines fonctionnalités et la façon de
 développer le projet :). Le sommaire du wiki est cliquable sur la gauche après 
 avoir **cliqué sur wiki**
 
+# Démarrer le projet
+
+Pour démarrer le projet, il est nécessaire d'actualiser l'environnement node avant chaque
+démarrage du projet via cette commande :
+
+`meteor npm install && meteor -s settings.json`
+
 ## Twiice - La gestion simplifiée
 
 **Twiice** est un projet né de la diffiulté à laquelle sont confrontée les petites 

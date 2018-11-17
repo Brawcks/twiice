@@ -23,11 +23,6 @@
                     "name": "Module test",
                     "technical_name": "module_test",
                     "url": "http://localhost:3000/module-test"
-                },
-                "stacy": {
-                    "name": "Stacy",
-                    "technical_name": "stacy",
-                    "url": "http://localhost:3000/stacy"
                 }
             }
         }

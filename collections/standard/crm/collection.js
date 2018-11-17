@@ -2,6 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
 import SimpleSchema from 'simpl-schema';
+SimpleSchema.extendOptions(['autoform']);
+
+const self = this.Meteor;
 
 Pipelines = new Mongo.Collection('pipelines');
 
@@ -15,13 +18,54 @@ Pipelines.allow({
 });
 
 PipelinesSchema = new SimpleSchema ({
-    name: {
+    label: {
         type: String,
-        label: "Name"
+        label: "Label"
     },
-    desc: {
+    expected_revenue: {
+        type: Number,
+        label: "Expected Revenue"
+    },
+    probability: {
+        type: SimpleSchema.Integer,
+        label: "Probability",
+        min: 0,
+        max: 100
+    },
+    customer: {
         type: String,
-        label: "Description"
+        label: "Customer"
+    },
+    expected_closing: {
+        type: Date,
+        label: "Expected Closing",
+        autoform: {
+            class: "crm-classes",
+        }
+    },
+    important: {
+        type: Boolean,
+        label: "Is it important ?"
+    },
+    author: {
+        type: String,
+        label: "Author",
+        autoValue: function () {
+            return self.userId();
+        },
+        autoform: {
+            type: "hidden",
+        }
+    },
+    createdAt: {
+        type: Date(),
+        label: "Created At",
+        autoValue: function () {
+            return new Date()
+        },
+        autoform: {
+            type: "hidden",
+        }
     }
 });
 

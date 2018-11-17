@@ -175,7 +175,7 @@ echo "FlowRouter.route('/${module_name}', {
     name: '${module_name}',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: '${module_name}', sidebar: 'sideNavbar${module_name}', view: ${module_name}TreeView});
+        BlazeLayout.render('mainTemplate', {module: '${module_name}', sidebar: 'sideNavbar${module_name}', view: '${module_name}TreeView'});
     }
 });
 

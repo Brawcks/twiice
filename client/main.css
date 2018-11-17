@@ -1,3 +1,17 @@
 #login-buttons {
     margin: 12px;
 }
+
+.fields-labels {
+    font-weight: bold;
+    color: #0050a7;
+}
+
+.fields-values {
+    font-weight: normal;
+    color: black;
+}
+
+.fields-title {
+    color: #004186;
+}

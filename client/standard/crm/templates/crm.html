@@ -11,8 +11,8 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Label</th>
+                    <th scope="col">Expected revenue</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -20,8 +20,8 @@
                 {{#each pipelines}}
                 <tr>
                     <th scope="row">{{@index}}</th>
-                    <td><a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">{{name}}</a></td>
-                    <td>{{desc}}</td>
+                    <td><a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">{{label}}</a></td>
+                    <td>{{expected_revenue}} €</td>
                     <td>
                         <a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">View Details</a>
                         <button type="button" class="btn btn-danger">Delete</button>

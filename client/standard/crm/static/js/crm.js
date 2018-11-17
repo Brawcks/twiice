@@ -28,3 +28,11 @@ Template.crmTreeView.events({
         swal("Deleted", "This record was properly deleted !", "success");
     },
 });
+
+// CRM ADD TEMPLATE
+
+Template.crmNewPipeline.events({
+    'click button[type="submit"]': function (){
+        swal("Hooray !", "This record was properly created !", "success");
+    },
+});

@@ -78,6 +78,15 @@ Template.${module_name}TreeView.helpers({
 Template.${module_name}TreeView.events({
     'click .btn-danger': function (){
         Meteor.call('${module_name}DeleteCollection_sample', this._id);
+        swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
+    },
+});
+
+// CRM ADD TEMPLATE
+
+Template.newCollectionSample${module_name}.events({
+    'click button[type=\"submit\"]': function (){
+        swal(\"Hooray !\", \"This record was properly created !\", \"success\");
     },
 });" > client/standard/${module_name}/static/js/${module_name}.js
 
@@ -102,6 +111,7 @@ Template.${module_name}SingleCollectionSample.events({
         var id = FlowRouter.getParam('_id');
         Meteor.call('${module_name}DeleteCollection_sample', this._id);
         FlowRouter.go('${module_name}');
+        swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
     },
 });
 " > client/standard/${module_name}/static/js/${module_name}_single.js

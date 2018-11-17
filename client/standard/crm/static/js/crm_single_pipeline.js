@@ -18,5 +18,6 @@ Template.crmSinglePipeline.events({
         var id = FlowRouter.getParam('_id');
         Meteor.call('crmDeletePipeline', id);
         FlowRouter.go('crm');
+        swal("Deleted", "This record was properly deleted !", "success");
     },
 });

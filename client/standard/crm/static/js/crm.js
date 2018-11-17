@@ -25,5 +25,6 @@ Template.crmTreeView.helpers({
 Template.crmTreeView.events({
     'click .btn-danger': function (){
         Meteor.call('crmDeletePipeline', this._id);
+        swal("Deleted", "This record was properly deleted !", "success");
     },
 });

@@ -27,6 +27,9 @@ Template.crmTreeView.events({
         Meteor.call('crmDeletePipeline', this._id);
         swal("Deleted", "This record was properly deleted !", "success");
     },
+    'click .export-csv': function(events, template){
+        swal("Ooops !", "This function is not available yet !", "info");
+    },
 });
 
 // CRM ADD TEMPLATE

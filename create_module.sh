@@ -80,6 +80,9 @@ Template.${module_name}TreeView.events({
         Meteor.call('${module_name}DeleteCollection_sample', this._id);
         swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
     },
+    'click .export-csv': function(events, template){
+        swal(\"Ooops !\", \"This function is not available yet !\", \"error\");
+    },
 });
 
 // CRM ADD TEMPLATE

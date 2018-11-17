@@ -78,6 +78,15 @@ Template.${module_name}TreeView.helpers({
 Template.${module_name}TreeView.events({
     'click .btn-danger': function (){
         Meteor.call('${module_name}DeleteCollection_sample', this._id);
+        swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
+    },
+});
+
+// CRM ADD TEMPLATE
+
+Template.newCollectionSample${module_name}.events({
+    'click button[type=\"submit\"]': function (){
+        swal(\"Hooray !\", \"This record was properly created !\", \"success\");
     },
 });" > client/z-customer/${module_name}/static/js/${module_name}.js
 
@@ -95,6 +104,15 @@ Template.${module_name}SingleCollectionSample.helpers({
         var id = FlowRouter.getParam('_id');
         return Collection_sample.findOne({_id: id});
     }
+});
+
+Template.${module_name}SingleCollectionSample.events({
+    'click .btn-danger': function (){
+        var id = FlowRouter.getParam('_id');
+        Meteor.call('${module_name}DeleteCollection_sample', this._id);
+        FlowRouter.go('${module_name}');
+        swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
+    },
 });
 " > client/z-customer/${module_name}/static/js/${module_name}_single.js
 
@@ -140,9 +158,24 @@ echo "<template name=\"${module_name}\">
 </template>
 
 <template name=\"${module_name}\SingleCollectionSample\">
-    <h1>Collection</h1>
+    <div class=\"row col-md-12\">
+        <div class=\"col-md-8\">
+            <h1>Collection</h1>
+        </div>
+        <div class=\"col-md-4\">
+            <div class=\"pull-right\">
+                <button type=\"button\" class=\"btn btn-danger\">Delete</button>
+                <button type=\"button\" class=\"btn btn-warning\">Edit</button>
+            </div>
+        </div>
+    </div>
     <hr>
-    <h3>{{collection_sample_single.name}}</h3>
+    <div class=\"row col-md-12\">
+        <div class=\"col-md-6\">
+            <h3>{{collection_sample_single.name}}</h3>
+            <p>{{collection_sample_single.desc}}</p>
+        </div>
+    </div>
 </template>
 
 <template name=\"sideNavbar${module_name}\">

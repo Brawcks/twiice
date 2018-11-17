@@ -41,5 +41,11 @@ export function leftSidebarStandard() {
 // GLOBAL FUNCTIONS FOR ALL MODULES SHOULD BE DEFINED HERE
 
 Meteor.methods({
-    
+    tw_field_decoration: function () {
+        // We here decorate bootstrap input depending on twiice special classes
+        $('form *').filter(':input').each(function(){
+            //your code here
+            console.log("a count");
+        });
+    },
 });

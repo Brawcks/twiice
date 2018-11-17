@@ -15,10 +15,17 @@ Template.crmTreeView.onCreated(function() {
     });
 });
 
+Template.crmNewPipeline.onCreated(function() {
+    var self = this;
+
+    Meteor.call('tw_field_decoration', 'new-pipelines-form'); // To Use later
+
+});
+
 // LOAD DATA ON TEMPLATES 
 Template.crmTreeView.helpers({
     pipelines: () => {
-        return Pipelines.find({});
+        return Pipelines.find({}, {limit: 10});
     }
 });
 

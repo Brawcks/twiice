@@ -20,32 +20,54 @@ Pipelines.allow({
 PipelinesSchema = new SimpleSchema ({
     label: {
         type: String,
-        label: "Label"
+        label: "Label",
+        autoform: {
+            placeholder: "Name this opportunity",
+        }
+    },
+    opportunity_qualification: {
+        type: String,
+        label: "Opportunity qualification",
+        allowedValues: ['Low', 'Medium', 'High']
     },
     expected_revenue: {
         type: Number,
-        label: "Expected Revenue"
+        label: "Expected Revenue",
+        optional: true,
+        autoform: {
+            placeholder: "How much could you earn ?",
+            class: "tw-field-currency"
+        }
     },
     probability: {
         type: SimpleSchema.Integer,
         label: "Probability",
         min: 0,
-        max: 100
+        max: 100,
+        optional: true,
+        autoform: {
+            placeholder: "What probability to win this opportunity ?",
+        }
     },
     customer: {
         type: String,
-        label: "Customer"
+        label: "Customer",
+        optional: true,
+        autoform: {
+            placeholder: "Who's your customer ?",
+        }
     },
     expected_closing: {
         type: Date,
         label: "Expected Closing",
+        optional: true,
         autoform: {
             class: "crm-classes",
         }
     },
     important: {
         type: Boolean,
-        label: "Is it important ?"
+        label: "Is it important ?",
     },
     author: {
         type: String,

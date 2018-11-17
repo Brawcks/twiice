@@ -22,4 +22,10 @@ PipelinesSchema = new SimpleSchema ({
     }
 });
 
+Meteor.methods({
+    crmDeletePipeline: function(id) {
+        Pipelines.remove(id)
+    },
+});
+
 Pipelines.attachSchema(PipelinesSchema);

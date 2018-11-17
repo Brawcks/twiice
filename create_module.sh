@@ -73,6 +73,12 @@ Template.$module_name.helpers({
     collection_sample: () => {
         return Collection_sample.find({});
     }
+});
+
+Template.$module_name.events({
+    'click .btn-danger': function (){
+        Meteor.call('$module_name\DeleteCollection_sample', this._id);
+    },
 });" > client/z-customer/$module_name/static/js/$module_name.js
 
 echo "
@@ -109,7 +115,10 @@ echo "<template name=\"$module_name\">
                     <th scope=\"row\">{{@index}}</th>
                     <td>{{name}}</td>
                     <td>{{desc}}</td>
-                    <td><a href=\"{{pathFor '$module_name/collection-sample-single' _id=_id}}\" title=\"{{name}}\">View Details</a></td>
+                    <td>
+                        <a href=\"{{pathFor '$module_name/collection-sample-single' _id=_id}}\" title=\"{{name}}\">View Details</a>
+                        <button type=\"button\" class=\"btn btn-danger\">Delete</button>
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -244,6 +253,12 @@ Collection_sampleSchema = new SimpleSchema ({
         type: String,
         label: \"Description\"
     }
+});
+
+Meteor.methods({
+    $module_name\DeleteCollection_sample: function(id) {
+        Collection_sample.remove(id)
+    },
 });
 
 Collection_sample.attachSchema(Collection_sampleSchema);

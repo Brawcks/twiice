@@ -73,7 +73,30 @@ Template.$module_name.helpers({
     collection_sample: () => {
         return Collection_sample.find({});
     }
+});
+
+Template.$module_name.events({
+    'click .btn-danger': function (){
+        Meteor.call('$module_name\DeleteCollection_sample', this._id);
+    },
 });" > client/standard/$module_name/static/js/$module_name.js
+
+echo "
+Template.$module_name\SingleCollectionSample.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        var id = FlowRouter.getParam('_id');
+        self.subscribe('Collection_sample', id);
+    });
+});
+
+Template.$module_name\SingleCollectionSample.helpers({
+    collection_sample_single: () => {
+        var id = FlowRouter.getParam('_id');
+        return Collection_sample.findOne({_id: id});
+    }
+});
+" > client/standard/$module_name/static/js/$module_name\_single.js
 
 echo "<template name=\"$module_name\">
     <div class=\"col-12\">
@@ -92,7 +115,10 @@ echo "<template name=\"$module_name\">
                     <th scope=\"row\">{{@index}}</th>
                     <td>{{name}}</td>
                     <td>{{desc}}</td>
-                    <td><a href=\"{{pathFor 'crm/pipeline' _id=_id}}\" title=\"{{name}}\">View Details</a></td>
+                    <td>
+                        <a href=\"{{pathFor '$module_name/collection-sample-single' _id=_id}}\" title=\"{{name}}\">View Details</a>
+                        <button type=\"button\" class=\"btn btn-danger\">Delete</button>
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -108,9 +134,9 @@ echo "<template name=\"$module_name\">
 </template>
 
 <template name=\"$module_name\SingleCollectionSample\">
-        <div class=\"col-12\">
-            <h1>View Collection_sample</h1>
-        </div>
+    <h1>Collection</h1>
+    <hr>
+    <h3>{{collection_sample_single.name}}</h3>
 </template>
 
 <template name=\"sideNavbar$module_name\">
@@ -172,7 +198,7 @@ FlowRouter.route('/$module_name/new-collection-sample', {
 });
 
 FlowRouter.route('/$module_name/collection-sample/:_id', {
-    name: '$module_name/collection-sample',
+    name: '$module_name/collection-sample-single',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
         BlazeLayout.render('mainTemplate', {module: '$module_name\SingleCollectionSample', sidebar: 'sideNavbarcrm'});
@@ -229,6 +255,12 @@ Collection_sampleSchema = new SimpleSchema ({
     }
 });
 
+Meteor.methods({
+    $module_name\DeleteCollection_sample: function(id) {
+        Collection_sample.remove(id)
+    },
+});
+
 Collection_sample.attachSchema(Collection_sampleSchema);
 " >> collections/standard/$module_name/collection.js
 
@@ -237,4 +269,4 @@ printf "\nimport './$module_name/collection.js';" >> collections/standard/main.j
 echo "You module is now ready."
 echo "You can now create your collections in /collections/standard/$module_name/collection.js"
 
-echo "This script was built by Vincent Coffin - Twiice Corp."
+echo "This script was built by Vincent Coffin - Twiice Corporation."

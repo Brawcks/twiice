@@ -12,3 +12,11 @@ Template.crmSinglePipeline.helpers({
         return Pipelines.findOne({_id: id});
     }
 });
+
+Template.crmSinglePipeline.events({
+    'click .btn-danger': function (){
+        var id = FlowRouter.getParam('_id');
+        Meteor.call('crmDeletePipeline', id);
+        FlowRouter.go('crm');
+    },
+});

@@ -277,6 +277,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
 import SimpleSchema from 'simpl-schema';
+SimpleSchema.extendOptions(['autoform']);
 
 Collection_sample = new Mongo.Collection('collection_sample');
 

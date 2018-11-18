@@ -1,5 +1,7 @@
 import { leftSidebarCustomer } from './functions/functions.js';
 
+var publicSettings = Meteor.settings.public;
+
 Template.sideNavbarcrm.helpers({
     leftSidebar: () => {
         return leftSidebarCustomer();
@@ -13,6 +15,10 @@ Template.crmTreeView.onCreated(function () {
     self.autorun(function () {
         self.subscribe('Pipelines');
     });
+    if (FlowRouter.getParam('page')) {
+        var page = FlowRouter.getParam('page');
+        console.log(publicSettings.modules.displayOptions.pagination.treeViewLength);
+    }
 });
 
 Template.crmNewPipeline.onCreated(function () {

@@ -20,5 +20,5 @@ import './standard/main.js'; // General module
 import './z-customer/main.js'; // General module
 
 // LAST LOADER (PUT HERE EVERYTHING THAT NEEDS TO BE LOADED AT THE END)
-
+import '../lib/i18n/main.js';
 

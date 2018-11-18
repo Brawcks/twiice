@@ -24,6 +24,11 @@
                     "technical_name": "module_test",
                     "url": "http://localhost:3000/module-test"
                 }
+            },
+            "displayOptions": {
+                "pagination": {
+                    "treeViewLength": 1
+                }
             }
         }
     },

@@ -82,7 +82,10 @@ Template.${module_name}TreeView.events({
         swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
     },
     'click .export-csv': function(events, template){
-        swal(\"Ooops !\", \"This function is not available yet !\", \"error\");
+        var data = Papa.unparse(Collection_sample.find({}, { limit: 10 }).fetch());
+        var date = new Date().toISOString().slice(0, 10);
+        Meteor.call('download_csv', data, '${module_name}_'+date+'.csv', 'text/csv;encoding:utf-8');
+        swal(\"Yeah !\", \"Your CSV document is available !\", \"success\");
     },
 });
 

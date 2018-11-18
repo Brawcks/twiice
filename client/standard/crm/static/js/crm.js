@@ -35,7 +35,9 @@ Template.crmTreeView.events({
         swal("Deleted", "This record was properly deleted !", "success");
     },
     'click .export-csv': function(events, template){
-        swal("Ooops !", "This function is not available yet !", "info");
+        var data = Papa.unparse(Pipelines.find({}, {limit: 10}).fetch());
+        Meteor.call('download_csv', data, 'dowload.csv', 'text/csv;encoding:utf-8');
+        // swal("Ooops !", "This function is not available yet !", "info");
     },
 });
 

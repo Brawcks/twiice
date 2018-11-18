@@ -18,6 +18,7 @@ import './templates/views/settings.html';
 
 // LOAD ALL JS FILES
 import './static/js/functions/functions.js';
+import './static/js/${module_name}_single.js
 import './static/js/${module_name}.js';" > client/z-customer/${module_name}/main.js
 
 echo "{
@@ -112,7 +113,7 @@ Template.${module_name}SingleCollectionSample.helpers({
 Template.${module_name}SingleCollectionSample.events({
     'click .btn-danger': function (){
         var id = FlowRouter.getParam('_id');
-        Meteor.call('${module_name}DeleteCollection_sample', this._id);
+        Meteor.call('${module_name}DeleteCollection_sample', id);
         FlowRouter.go('${module_name}');
         swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
     },
@@ -160,7 +161,7 @@ echo "<template name=\"${module_name}\">
     </div>
 </template>
 
-<template name=\"${module_name}\SingleCollectionSample\">
+<template name=\"${module_name}SingleCollectionSample\">
     <div class=\"row col-md-12\">
         <div class=\"col-md-8\">
             <h1>Collection</h1>
@@ -243,7 +244,7 @@ FlowRouter.route('/${module_name}/collection-sample/:_id', {
     name: '${module_name}/collection-sample-single',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: '${module_name}SingleCollectionSample', sidebar: 'sideNavbarcrm'});
+        BlazeLayout.render('mainTemplate', {module: '${module_name}SingleCollectionSample', sidebar: 'sideNavbar${module_name}'});
     }
 });" > lib/router/z-customer/${module_name}/routes.js
 

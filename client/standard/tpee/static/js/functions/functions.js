@@ -72,5 +72,8 @@ Meteor.methods({
             location.href = 'data:application/octet-stream,' + encodeURIComponent(content); // only this mime type is supported
         }
         // download(csvContent, 'dowload.csv', 'text/csv;encoding:utf-8');
-    }
+    },
+
+    // USEFULL FUNCTIONS
+
 });

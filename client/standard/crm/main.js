@@ -8,6 +8,7 @@ import './templates/views/settings.html';
 import './static/js/functions/functions.js';
 import './static/js/crm.js';
 import './static/js/crm_single_pipeline.js';
+import './static/js/crm_settings.js';
 
 // LOAD COLLECTIONS
 // import './collections/crm.js';

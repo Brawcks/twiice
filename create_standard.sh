@@ -18,7 +18,7 @@ import './templates/views/settings.html';
 
 // LOAD ALL JS FILES
 import './static/js/functions/functions.js';
-import './static/js/${module_name}_single.js
+import './static/js/${module_name}_single.js';
 import './static/js/${module_name}.js';" > client/standard/${module_name}/main.js
 
 echo "{

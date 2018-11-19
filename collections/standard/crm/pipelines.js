@@ -69,6 +69,12 @@ PipelinesSchema = new SimpleSchema ({
         type: Boolean,
         label: "Is it important ?",
     },
+    crm_steps: {
+        type: String,
+        optional: true,
+        label: "Pipeline step",
+        allowedValues: ['Proposal', 'Qualified', 'Won', 'Loss']
+    },
     author: {
         type: String,
         label: "Author",

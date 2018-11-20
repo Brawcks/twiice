@@ -131,6 +131,9 @@ echo "<template name=\"${module_name}\">
 
 <template name=\"${module_name}TreeView\">
     <div class=\"col-12 self-align-end\">
+        <button type=\"button\" class=\"btn btn-success export-csv pull-right\">{{_ \"Export to csv\"}}</button>
+        <button type=\"button\" class=\"btn btn-info import-csv pull-right\">{{_ \"Import csv\"}}</button>
+        <input id=\"file\" type=\"file\" class=\"btn btn-info import-csv-file pull-right d-none\"/>
         <table class=\"table table-hover\">
             <thead>
                 <tr>

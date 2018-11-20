@@ -1,3 +1,19 @@
 {
-    "Expected Revenue": "Revenu espéré"
+    "Expected revenue": "Revenu espéré",
+    "CRM Dashboard": "Tableau de bord CRM",
+    "Export to csv": "Exporter en CSV",
+    "Import csv": "Importer CSV",
+    "Label": "Label",
+    "Actions": "Actions",
+    "View Details": "Voir les détails",
+    "Delete": "Supprimer",
+    "Edit": "Editer",
+    "Expected probability": "Probabilité estimée",
+    "Opportunity qualification": "Qualification",
+    "Customer": "Client",
+    "Expected closing date": "Dâte de conversion espérée",
+    "Document created": "Document créé le",
+    "Document author": "Auteur du document",
+    "Dashboard": "Tableau de bord"
+
 }

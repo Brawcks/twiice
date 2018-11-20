@@ -5,8 +5,8 @@
         </div>
         <div class="col-md-4">
             <div class="pull-right">
-                <button type="button" class="btn btn-danger">Delete</button>
-                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
+                <button type="button" class="btn btn-warning">{{_ "Edit"}}</button>
             </div>
         </div>
     </div>
@@ -18,18 +18,18 @@
     <div class="row col-md-12">
         <div class="row col-md-12">
             <div class="col-md-6">
-                <h5 class="fields-labels">{{_ "Expected Revenue"}} : <span class="fields-values">{{pipeline.expected_revenue}} €</span></h5>
-                <h5 class="fields-labels">Expected probability : <span class="fields-values">{{pipeline.probability}} %</span></h5>
-                <h5 class="fields-labels">Opportunity qualification : <span class="fields-values">{{pipeline.opportunity_qualification}}</span></h5>
+                <h5 class="fields-labels">{{_ "Expected revenue"}} : <span class="fields-values">{{pipeline.expected_revenue}} €</span></h5>
+                <h5 class="fields-labels">{{_ "Expected probability"}} : <span class="fields-values">{{pipeline.probability}} %</span></h5>
+                <h5 class="fields-labels">{{_ "Opportunity qualification"}} : <span class="fields-values">{{pipeline.opportunity_qualification}}</span></h5>
             </div>
             <div class="col-md-6">
-                <h5 class="fields-labels">Customer : <span class="fields-values">{{pipeline.customer}}</span></h5>
-                <h5 class="fields-labels">Expected closing date : <span class="fields-values">{{pipeline.expected_closing}} %</span></h5>
+                <h5 class="fields-labels">{{_ "Customer"}} : <span class="fields-values">{{pipeline.customer}}</span></h5>
+                <h5 class="fields-labels">{{_ "Expected closing date"}} : <span class="fields-values">{{pipeline.expected_closing}} %</span></h5>
             </div>
             <hr>
             <div class="row col-md-12 mt-4">
-                <h5 class="fields-labels">Document created : <span class="fields-values">{{pipeline.createdAt}}</span></h5>
-                <h5 class="fields-labels">Document author : <span class="fields-values">{{pipeline.author}}</span></h5>
+                <h5 class="fields-labels">{{_ "Document created"}} : <span class="fields-values">{{pipeline.createdAt}}</span></h5>
+                <h5 class="fields-labels">{{_ "Document author"}} : <span class="fields-values">{{pipeline.author}}</span></h5>
             </div>
         </div>
     </div>

@@ -1,21 +1,21 @@
 <template name="crm">
     <div class="col-12">
-        <h1>CRM Dashboard</h1>
+        <h1>{{_ "CRM Dashboard"}}</h1>
     </div>
 </template>
 
 <template name="crmTreeView">
     <div class="col-12 self-align-end">
-        <button type="button" class="btn btn-success export-csv pull-right">Export to csv</button>
-        <button type="button" class="btn btn-info import-csv pull-right">Import csv</button>
+        <button type="button" class="btn btn-success export-csv pull-right">{{_ "Export to csv"}}</button>
+        <button type="button" class="btn btn-info import-csv pull-right">{{_ "Import csv"}}</button>
         <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none"/>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Label</th>
-                    <th scope="col">Expected revenue</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">{{_ "Label"}}</th>
+                    <th scope="col">{{_ "Expected revenue"}}</th>
+                    <th scope="col">{{_ "Actions"}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,8 +25,8 @@
                     <td><a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">{{label}}</a></td>
                     <td>{{expected_revenue}} €</td>
                     <td>
-                        <a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">View Details</a>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">{{_ "View Details"}}</a>
+                        <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
                     </td>
                 </tr>
                 {{/each}}

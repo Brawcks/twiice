@@ -1,0 +1,8 @@
+build:
+  pre:
+    - curl https://install.meteor.com/ -sSf | sh -s -- -y
+release:
+  command:
+    - meteor npm install
+run:
+  web: meteor npm install && meteor -s settings.json

@@ -13,17 +13,18 @@ test_stage:
     - rm package-lock.json
     - ./create_module.sh testing_module
     - meteor npm install
-    - meteor -s settings.json
+    - meteor -s settings.json --allow-superuser & sleep 180; kill -INT %+
+    - exit 0
   tags:
     - linux
 
-deploy_stage:
+heroku_deploy:
   stage: deploy
-  environment: Production
-  script: 
-    - cd /builds/tpee/tpee
-    - pwd && ls -lArth
-    - rm package-lock.json
-    - meteor npm install && meteor -s settings.json --allow-superuser
+  environment: Heroku Deployment
+  script:
+    - apt-get update -qy
+    - apt-get install -yqq ruby ruby-dev nodejs --silent
+    - gem install dpl
+    - dpl --provider=heroku --app=twiice-production --api-key=$HEROKU_STAGING_API_KEY
   tags:
     - linux

@@ -11,7 +11,9 @@ test_stage:
   environment: Testing
   script:
     - rm package-lock.json
+    - ./create_module.sh testing_module
     - meteor npm install
+    - meteor -s settings.json
   tags:
     - linux
 

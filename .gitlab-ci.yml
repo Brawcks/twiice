@@ -1,0 +1,27 @@
+before_script:
+  - apt-get update && curl https://install.meteor.com/ | sh
+  - apt-get install sudo curl wget -y
+
+stages:
+  - test
+  - deploy
+
+test_stage:
+  stage: test
+  environment: Testing
+  script:
+    - rm package-lock.json
+    - meteor npm install
+  tags:
+    - linux
+
+deploy_stage:
+  stage: deploy
+  environment: Production
+  script: 
+    - cd /builds/tpee/tpee
+    - pwd && ls -lArth
+    - rm package-lock.json
+    - meteor npm install && meteor -s settings.json --allow-superuser
+  tags:
+    - linux

@@ -1,46 +1,51 @@
 #!/bin/bash
 
-echo "You are about to create a new module. Follow the instructions to finalize it !"
-read -p "Module name : (Set a technical name, like : my_module) : " module_name
+if [ $1 ]
+then
+    echo "Starting script... "
+else
+    echo "You have to set an extra argument ! : ./create_module module_name"
+    exit 1
+fi
 
-mkdir client/z-customer/${module_name}
-mkdir client/z-customer/${module_name}/templates
-mkdir client/z-customer/${module_name}/templates/views
-mkdir client/z-customer/${module_name}/static
-mkdir client/z-customer/${module_name}/static/js
-mkdir client/z-customer/${module_name}/static/js/data
-mkdir client/z-customer/${module_name}/static/js/functions
+mkdir client/z-customer/${1}
+mkdir client/z-customer/${1}/templates
+mkdir client/z-customer/${1}/templates/views
+mkdir client/z-customer/${1}/static
+mkdir client/z-customer/${1}/static/js
+mkdir client/z-customer/${1}/static/js/data
+mkdir client/z-customer/${1}/static/js/functions
 
 echo "// LOAD ALL TEMPLATES FIRST
-import './templates/${module_name}.html';
+import './templates/${1}.html';
 import './templates/views/sub_module.html';
 import './templates/views/settings.html';
 
 // LOAD ALL JS FILES
 import './static/js/functions/functions.js';
-import './static/js/${module_name}_single.js';
-import './static/js/${module_name}.js';" > client/z-customer/${module_name}/main.js
+import './static/js/${1}_single.js';
+import './static/js/${1}.js';" > client/z-customer/${1}/main.js
 
 echo "{
     \"sidebar\": {
         \"dashboard\": {
             \"name\": \"Dashboard\",
-            \"url\": \"http://localhost:3000/${module_name}\"
+            \"url\": \"http://localhost:3000/${1}\"
         },
         \"new-collection-sample\": {
             \"name\": \"New Collection Sample\",
-            \"url\": \"http://localhost:3000/${module_name}/new-collection-sample\"
+            \"url\": \"http://localhost:3000/${1}/new-collection-sample\"
         },
         \"sub-module\": {
             \"name\": \"Sub-Module\",
-            \"url\": \"http://localhost:3000/${module_name}/sub-module\"
+            \"url\": \"http://localhost:3000/${1}/sub-module\"
         },
         \"settings\": {
             \"name\": \"Settings\",
-            \"url\": \"http://localhost:3000/${module_name}/settings\"
+            \"url\": \"http://localhost:3000/${1}/settings\"
         }
     }
-}" > client/z-customer/${module_name}/static/js/data/sidebar.json
+}" > client/z-customer/${1}/static/js/data/sidebar.json
 
 echo "export function leftSidebarCustomer() {
     // SIDEBAR
@@ -51,18 +56,18 @@ echo "export function leftSidebarCustomer() {
         leftSidebar += '<a class=\"nav-link\" id=\"v-pills-home-tab\" data-toggle=\"pill\" href=\"'+item.url+'\" role=\"tab\" aria-controls=\"v-pills-home\" aria-selected=\"true\">'+item.name+'</a>';
     });
     return leftSidebar;
-}" > client/z-customer/${module_name}/static/js/functions/functions.js
+}" > client/z-customer/${1}/static/js/functions/functions.js
 
 echo "import { leftSidebarCustomer } from './functions/functions.js';
 
-Template.sideNavbar${module_name}.helpers({
+Template.sideNavbar${1}.helpers({
     leftSidebar: () => {
         return leftSidebarCustomer();
     },
 });
 
 // SUBSCRIBE TO PIPELINES PUBLICATIONS ON TEMPLATES
-Template.${module_name}TreeView.onCreated(function() {
+Template.${1}TreeView.onCreated(function() {
     var self = this;
     self.autorun(function() {
         self.subscribe('Collection_sample');
@@ -70,35 +75,35 @@ Template.${module_name}TreeView.onCreated(function() {
 });
 
 // LOAD DATA ON TEMPLATES 
-Template.${module_name}TreeView.helpers({
+Template.${1}TreeView.helpers({
     collection_sample: () => {
         return Collection_sample.find({});
     }
 });
 
-Template.${module_name}TreeView.events({
+Template.${1}TreeView.events({
     'click .btn-danger': function (){
-        Meteor.call('${module_name}DeleteCollection_sample', this._id);
+        Meteor.call('${1}DeleteCollection_sample', this._id);
         swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
     },
     'click .export-csv': function(events, template){
         var data = Papa.unparse(Collection_sample.find({}, { limit: 10 }).fetch());
         var date = new Date().toISOString().slice(0, 10);
-        Meteor.call('download_csv', data, '${module_name}_'+date+'.csv', 'text/csv;encoding:utf-8');
+        Meteor.call('download_csv', data, '${1}_'+date+'.csv', 'text/csv;encoding:utf-8');
         swal(\"Yeah !\", \"Your CSV document is available !\", \"success\");
     },
 });
 
 // CRM ADD TEMPLATE
 
-Template.newCollectionSample${module_name}.events({
+Template.newCollectionSample${1}.events({
     'click button[type=\"submit\"]': function (){
         swal(\"Hooray !\", \"This record was properly created !\", \"success\");
     },
-});" > client/z-customer/${module_name}/static/js/${module_name}.js
+});" > client/z-customer/${1}/static/js/${1}.js
 
 echo "
-Template.${module_name}SingleCollectionSample.onCreated(function() {
+Template.${1}SingleCollectionSample.onCreated(function() {
     var self = this;
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
@@ -106,30 +111,30 @@ Template.${module_name}SingleCollectionSample.onCreated(function() {
     });
 });
 
-Template.${module_name}SingleCollectionSample.helpers({
+Template.${1}SingleCollectionSample.helpers({
     collection_sample_single: () => {
         var id = FlowRouter.getParam('_id');
         return Collection_sample.findOne({_id: id});
     }
 });
 
-Template.${module_name}SingleCollectionSample.events({
+Template.${1}SingleCollectionSample.events({
     'click .btn-danger': function (){
         var id = FlowRouter.getParam('_id');
-        Meteor.call('${module_name}DeleteCollection_sample', id);
-        FlowRouter.go('${module_name}');
+        Meteor.call('${1}DeleteCollection_sample', id);
+        FlowRouter.go('${1}');
         swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
     },
 });
-" > client/z-customer/${module_name}/static/js/${module_name}_single.js
+" > client/z-customer/${1}/static/js/${1}_single.js
 
-echo "<template name=\"${module_name}\">
+echo "<template name=\"${1}\">
     <div class=\"col-12\">
-        <h1>${module_name} Dashboard</h1>
+        <h1>${1} Dashboard</h1>
     </div>
 </template>
 
-<template name=\"${module_name}TreeView\">
+<template name=\"${1}TreeView\">
     <div class=\"col-12 self-align-end\">
         <button type=\"button\" class=\"btn btn-success export-csv pull-right\">{{_ \"Export to csv\"}}</button>
         <button type=\"button\" class=\"btn btn-info import-csv pull-right\">{{_ \"Import csv\"}}</button>
@@ -147,10 +152,10 @@ echo "<template name=\"${module_name}\">
                 {{#each collection_sample}}
                 <tr>
                     <th scope=\"row\">{{@index}}</th>
-                    <td><a href=\"{{pathFor '${module_name}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">{{name}}</a></td>
+                    <td><a href=\"{{pathFor '${1}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">{{name}}</a></td>
                     <td>{{desc}}</td>
                     <td>
-                        <a href=\"{{pathFor '${module_name}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">View Details</a>
+                        <a href=\"{{pathFor '${1}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">View Details</a>
                         <button type=\"button\" class=\"btn btn-danger\">Delete</button>
                     </td>
                 </tr>
@@ -160,14 +165,14 @@ echo "<template name=\"${module_name}\">
     </div>
 </template>
 
-<template name=\"newCollectionSample${module_name}\">
+<template name=\"newCollectionSample${1}\">
     <div class=\"col-12\">
         <h1>New Collection sample</h1>
         {{> quickForm collection=\"Collection_sample\" id=\"insertCollection_sampleForm\" type=\"insert\" class=\"new-collection-sample-form\"}}
     </div>
 </template>
 
-<template name=\"${module_name}SingleCollectionSample\">
+<template name=\"${1}SingleCollectionSample\">
     <div class=\"row col-md-12\">
         <div class=\"col-md-8\">
             <h1>Collection</h1>
@@ -188,96 +193,96 @@ echo "<template name=\"${module_name}\">
     </div>
 </template>
 
-<template name=\"sideNavbar${module_name}\">
+<template name=\"sideNavbar${1}\">
     <div class=\"col\">
         <div class=\"nav flex-column nav-pills\" id=\"v-pills-tab\" role=\"tablist\" aria-orientation=\"vertical\">
             {{{leftSidebar}}}
         </div>
     </div>
-</template>" > client/z-customer/${module_name}/templates/${module_name}.html
+</template>" > client/z-customer/${1}/templates/${1}.html
 
-echo "<template name=\"settings${module_name}\">
+echo "<template name=\"settings${1}\">
     <div class=\"col-10\">
         <h1>Settings</h1>
     </div>
-</template>" > client/z-customer/${module_name}/templates/views/settings.html
+</template>" > client/z-customer/${1}/templates/views/settings.html
 
-echo "<template name=\"subModule${module_name}\">
+echo "<template name=\"subModule${1}\">
     <div class=\"col-10\">
         <h1>Sub-Module</h1>
     </div>
-</template>" > client/z-customer/${module_name}/templates/views/sub_module.html
+</template>" > client/z-customer/${1}/templates/views/sub_module.html
 
-printf "\nimport './${module_name}/main.js';" >> client/z-customer/main.js
+printf "\nimport './${1}/main.js';" >> client/z-customer/main.js
 
 # ROUTING PART
 
-mkdir lib/router/z-customer/${module_name}
+mkdir lib/router/z-customer/${1}
 
-echo "FlowRouter.route('/${module_name}', {
-    name: '${module_name}',
+echo "FlowRouter.route('/${1}', {
+    name: '${1}',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: '${module_name}', sidebar: 'sideNavbar${module_name}', view: '${module_name}TreeView'});
+        BlazeLayout.render('mainTemplate', {module: '${1}', sidebar: 'sideNavbar${1}', view: '${1}TreeView'});
     }
 });
 
-FlowRouter.route('/${module_name}/sub-module', {
-    name: '${module_name}/sub-module',
+FlowRouter.route('/${1}/sub-module', {
+    name: '${1}/sub-module',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: 'subModule${module_name}', sidebar: 'sideNavbar${module_name}'});
+        BlazeLayout.render('mainTemplate', {module: 'subModule${1}', sidebar: 'sideNavbar${1}'});
     }
 });
 
-FlowRouter.route('/${module_name}/settings', {
-    name: '${module_name}/settings',
+FlowRouter.route('/${1}/settings', {
+    name: '${1}/settings',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: 'settings${module_name}', sidebar: 'sideNavbar${module_name}'});
+        BlazeLayout.render('mainTemplate', {module: 'settings${1}', sidebar: 'sideNavbar${1}'});
     }
 });
 
-FlowRouter.route('/${module_name}/new-collection-sample', {
-    name: '${module_name}/new-collection-sample',
+FlowRouter.route('/${1}/new-collection-sample', {
+    name: '${1}/new-collection-sample',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: 'newCollectionSample${module_name}', sidebar: 'sideNavbar${module_name}'});
+        BlazeLayout.render('mainTemplate', {module: 'newCollectionSample${1}', sidebar: 'sideNavbar${1}'});
     }
 });
 
-FlowRouter.route('/${module_name}/collection-sample/:_id', {
-    name: '${module_name}/collection-sample-single',
+FlowRouter.route('/${1}/collection-sample/:_id', {
+    name: '${1}/collection-sample-single',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
-        BlazeLayout.render('mainTemplate', {module: '${module_name}SingleCollectionSample', sidebar: 'sideNavbar${module_name}'});
+        BlazeLayout.render('mainTemplate', {module: '${1}SingleCollectionSample', sidebar: 'sideNavbar${1}'});
     }
-});" > lib/router/z-customer/${module_name}/routes.js
+});" > lib/router/z-customer/${1}/routes.js
 
-printf "\nimport './${module_name}/routes.js';" >> lib/router/z-customer/main.js
+printf "\nimport './${1}/routes.js';" >> lib/router/z-customer/main.js
 
 # SERVER SIDE COMPONENTS
 
-mkdir server/z-customer/${module_name}
+mkdir server/z-customer/${1}
 
 echo "Meteor.startup(() => {
   // code to run on server at startup
-});" > server/z-customer/${module_name}/main.js
+});" > server/z-customer/${1}/main.js
 
 printf "\n
 // PUBLISH COLLECTION SAMPLE ON SERVER
 Meteor.publish('Collection_sample', function() {
   return Collection_sample.find({})
 })
-" >> server/z-customer/${module_name}/main.js
+" >> server/z-customer/${1}/main.js
 
-printf "\nimport './${module_name}/main.js';" >> server/z-customer/main.js
+printf "\nimport './${1}/main.js';" >> server/z-customer/main.js
 
 # COLLECTIONS DIRECTORIES
 
-mkdir collections/z-customer/${module_name}
+mkdir collections/z-customer/${1}
 
-touch collections/z-customer/${module_name}/collection.js
+touch collections/z-customer/${1}/collection.js
 
 echo "
 import { Meteor } from 'meteor/meteor';
@@ -306,17 +311,17 @@ Collection_sampleSchema = new SimpleSchema ({
 });
 
 Meteor.methods({
-    ${module_name}DeleteCollection_sample: function(id) {
+    ${1}DeleteCollection_sample: function(id) {
         Collection_sample.remove(id)
     },
 });
 
 Collection_sample.attachSchema(Collection_sampleSchema);
-" >> collections/z-customer/${module_name}/collection.js
+" >> collections/z-customer/${1}/collection.js
 
-printf "\nimport './${module_name}/collection.js';" >> collections/z-customer/main.js
+printf "\nimport './${1}/collection.js';" >> collections/z-customer/main.js
 
 echo "You module is now ready."
-echo "You can now create your collections in /collections/z-customer/${module_name}/collection.js"
+echo "You can now create your collections in /collections/z-customer/${1}/collection.js"
 
 echo "This script was built by Vincent Coffin - Twiice Corporation."

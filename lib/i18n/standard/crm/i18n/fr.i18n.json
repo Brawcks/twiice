@@ -8,12 +8,19 @@
     "View Details": "Voir les détails",
     "Delete": "Supprimer",
     "Edit": "Editer",
-    "Expected probability": "Probabilité estimée",
+    "Probability": "Probabilité",
     "Opportunity qualification": "Qualification",
     "Customer": "Client",
     "Expected closing date": "Dâte de conversion espérée",
     "Document created": "Document créé le",
     "Document author": "Auteur du document",
-    "Dashboard": "Tableau de bord"
+    "Dashboard": "Tableau de bord",
+    "Equal to": "Egal à",
+    "Is different from": "Est différent de",
+    "Contain": "Contient",
+    "Do not contain": "Ne contient pas",
+    "Is set": "Est défini",
+    "Validate": "Valider",
+    "Is not set": "N'est pas défini"
 
 }

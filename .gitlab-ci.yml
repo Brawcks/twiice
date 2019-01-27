@@ -18,13 +18,13 @@ test_stage:
   tags:
     - linux
 
-heroku_deploy:
-  stage: deploy
-  environment: Heroku Deployment
-  script:
-    - apt-get update -qy
-    - apt-get install -yqq ruby ruby-dev nodejs --silent
-    - gem install dpl
-    - dpl --provider=heroku --app=twiice-production --api-key=$HEROKU_STAGING_API_KEY
-  tags:
-    - linux
+# heroku_deploy:
+#   stage: deploy
+#   environment: Heroku Deployment
+#   script:
+#     - apt-get update -qy
+#     - apt-get install -yqq ruby ruby-dev nodejs --silent
+#     - gem install dpl
+#     - dpl --provider=heroku --app=twiice-production --api-key=$HEROKU_STAGING_API_KEY
+#   tags:
+#     - linux

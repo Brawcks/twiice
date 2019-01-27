@@ -14,16 +14,20 @@ Template.crmTreeView.onCreated(function () {
     var self = this;
     self.autorun(function () {
         self.subscribe('Pipelines');
+        var filters = [];
+        for (var key in Pipelines.findOne({})) {
+            // console.log(key);
+            filters.push(key);
+        }
+        console.log(filters);
     });
     if (FlowRouter.getParam('page')) {
         var page = FlowRouter.getParam('page');
-        console.log(publicSettings.modules.displayOptions.pagination.treeViewLength);
     }
 });
 
 Template.crmNewPipeline.onCreated(function () {
     var self = this;
-
     // Meteor.call('tw_field_decoration', 'new-pipelines-form'); // To Use later
 
 });
@@ -32,6 +36,13 @@ Template.crmNewPipeline.onCreated(function () {
 Template.crmTreeView.helpers({
     pipelines: () => {
         return Pipelines.find({}, { limit: 10 });
+    },
+    collection_key: () => {
+        var filters = [];
+        for (var key in Pipelines.findOne({})) {
+            filters.push(key);
+        }
+        return filters;
     }
 });
 

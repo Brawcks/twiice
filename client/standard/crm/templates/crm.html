@@ -6,13 +6,25 @@
 
 <template name="crmTreeView">
     <div class="col-12 self-align-end">
+        <div class="row justify-content-end">
+            {{#if collection_key}}
+                <select name="crmFilterSelect" id="crmFilterSelect">
+                    {{#each collection_key}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            {{/if}}
+            <input type="text" placeholder="Filter by ..." class="col-6 tw-filter-input">
+            <button class="btn btn-primary tw-filter-submit" type="submit">Valider</button>
+        </div>
+        <hr>
         <button type="button" class="btn btn-success export-csv pull-right">{{_ "Export to csv"}}</button>
         <button type="button" class="btn btn-info import-csv pull-right">{{_ "Import csv"}}</button>
         <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none"/>
-        <table class="table table-hover">
+        <table class="table table-hover mt-3">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">{{_ "#ID"}}</th>
                     <th scope="col">{{_ "Label"}}</th>
                     <th scope="col">{{_ "Expected revenue"}}</th>
                     <th scope="col">{{_ "Actions"}}</th>

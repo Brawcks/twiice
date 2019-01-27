@@ -5,6 +5,11 @@ contribution disponible à la racine du projet.
 
 **Twiice** est content de vous compter dans ses rangs :D
 
+# Créateurs
+
+Le projet est actuellement porté par **Vincent COFFIN et Antoine LE TROADEC**. Le code du projet est disponible sous 
+license **GNU GPL V3**.
+
 # Documentation du projet
 
 La documentation du projet est disponible dans la sidebar de gauche de votre 
@@ -20,6 +25,9 @@ démarrage du projet via cette commande :
 
 `meteor npm install && meteor -s settings.json`
 
+Il est aussi possible de lancer le script de lancement du projet, en vous positionnant à la racine du projet, puis en
+lançant la commande : `./start.sh` .
+
 ## Twiice - La gestion simplifiée
 
 **Twiice** est un projet né de la diffiulté à laquelle sont confrontée les petites 
@@ -32,6 +40,27 @@ s'adapter facilement aux problématiques métier de toute TPE.
 
 **Twiice** se rapproche de ce que sait faire un ERP, tout en étant modulaire
 et facilement paramétrable.
+
+### Un projet Open-Source
+
+Twiice est un projet dont les sources sont ouvertes afin de vous permettre d'apporter votre contribution.
+Toute contribution est la bienvenue, tant qu'elle contribue à l'amélioration continue du projet initial. Le but est
+de profiter des compétences de tous afin de fournir un outil qualitatif. 
+
+Dans le but de contribuer, il est nécessaire de suivre les guidelines de développement et de s'adapter à la structure
+du projet.
+
+### Créez vos propre modules
+
+**Twiice** vous offre de nombreuses possibilitées, mais vous laisse aussi le droit de créer vos propres solutions. 
+Vous avez besoin de votre propre **CRM** ? Twiice vous permet de le créer. Vous voulez créer un **CMS** spécifique ?
+Twiice vous apporte les éléments essentiels. Un **module standard** ne vous convient pas ? Adaptez le sans écraser le
+code principal du projet. 
+
+**Twiice** s'articule autour du framework [Meteor](https://www.meteor.com/), afin que tout le monde puisse contribuer
+et créer simplement ses **propres modules**. N'hésitez pas à nous contacter directement pour toute suggestion
+d'amélioration.
+
 
 ## Installation du projet
 

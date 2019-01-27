@@ -70,6 +70,9 @@ Template.crmTreeView.events({
         //     console.log(Papa.parse(reader.result, {delimiter: ";"}));
         // });
     },
+    'click .coming-soon': function (events, template) {
+        swal("Ooops !", "This function is not available yet !", "info");
+    },
 });
 
 // CRM ADD TEMPLATE

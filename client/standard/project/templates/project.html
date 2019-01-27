@@ -1,0 +1,96 @@
+<template name="project">
+    <div class="col-12">
+        <h1>project Dashboard</h1>
+    </div>
+</template>
+
+<template name="projectTreeView">
+    <div class="col-12 self-align-end">
+        <button type="button" class="btn btn-success export-csv pull-right">{{_ "Export to csv"}}</button>
+        <button type="button" class="btn btn-info import-csv pull-right">{{_ "Import csv"}}</button>
+        <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none"/>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each collection_sample}}
+                <tr>
+                    <th scope="row">{{@index}}</th>
+                    <td><a href="{{pathFor 'project/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a></td>
+                    <td>{{desc}}</td>
+                    <td>
+                        <a href="{{pathFor 'project/collection-sample-single' _id=_id}}" title="{{name}}">View Details</a>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<template name="projectKanbanView">
+    <div class="container float-left" data-sortable=".project-card">
+        <div class="row">
+            {{#each collection_sample}}
+                <div class="project col-3">
+                    {{> projectKanbanCardView}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="projectKanbanCardView">
+    <div class="project-card" data-position="" data-id="{{_id}}" draggable="true">
+        <h2><a href="{{pathFor 'project/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a></h2>
+        <div>{{desc}}</div>
+        <button type="button" class="btn btn-danger">Delete</button>
+    </div>
+</template>
+
+<template name="newCollectionSampleproject">
+    <div class="col-12">
+        <h1>New Collection sample</h1>
+        {{> quickForm collection="Collection_sample" id="insertCollection_sampleForm" type="insert" class="new-collection-sample-form"}}
+    </div>
+</template>
+
+<template name="projectSingleCollectionSample">
+    <div class="row col-md-12">
+        <div class="col-md-8">
+            <h1>Collection</h1>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-warning">Edit</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {{#if editMode}}
+    {{> quickForm collection="Collection_sample" doc=collection_sample_single id=updateCollectionSampleId type="update" class="edit edit-collection-form"}}
+    {{else}}
+    <div class="row col-md-12">
+        <div class="col-md-6">
+            <h3>{{collection_sample_single.name}}</h3>
+            <p>{{collection_sample_single.desc}}</p>
+        </div>
+    </div>
+    {{/if}}
+</template>
+
+<template name="sideNavbarproject">
+    <div class="col">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            {{{leftSidebar}}}
+        </div>
+    </div>
+</template>

@@ -1,6 +1,6 @@
 // LOAD ALL TEMPLATES FIRST
 import './templates/crm.html';
-import './templates/crm_single_pipeline.html';
+import './templates/views/crm_single_pipeline.html';
 import './templates/views/sub_module.html';
 import './templates/views/settings.html';
 

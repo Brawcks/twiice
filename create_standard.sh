@@ -109,13 +109,25 @@ Template.${1}SingleCollectionSample.onCreated(function() {
         var id = FlowRouter.getParam('_id');
         self.subscribe('Collection_sample', id);
     });
+    var self = this;
+    this.editMode = new ReactiveVar(false);
+    self.autorun(function() {
+        var id = FlowRouter.getParam('_id');
+        self.subscribe('Collection_sample', id);
+    });
 });
 
 Template.${1}SingleCollectionSample.helpers({
     collection_sample_single: () => {
         var id = FlowRouter.getParam('_id');
         return Collection_sample.findOne({_id: id});
-    }
+    },
+    updateCollectionSampleId: function() {
+        return FlowRouter.getParam('_id');
+    },
+    editMode: function () {
+        return Template.instance().editMode.get();
+    },
 });
 
 Template.${1}SingleCollectionSample.events({
@@ -124,6 +136,9 @@ Template.${1}SingleCollectionSample.events({
         Meteor.call('${1}DeleteCollection_sample', id);
         FlowRouter.go('${1}');
         swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
+    },
+    'click .btn-warning': function (event, template){
+        template.editMode.set(!template.editMode.get());
     },
 });
 " > client/standard/${1}/static/js/${1}_single.js
@@ -185,12 +200,16 @@ echo "<template name=\"${1}\">
         </div>
     </div>
     <hr>
+    {{#if editMode}}
+    {{> quickForm collection=\"Collection_sample\" doc=collection_sample_single id=updateCollectionSampleId type=\"update\" class=\"edit edit-collection-form\"}}
+    {{else}}
     <div class=\"row col-md-12\">
         <div class=\"col-md-6\">
             <h3>{{collection_sample_single.name}}</h3>
             <p>{{collection_sample_single.desc}}</p>
         </div>
     </div>
+    {{/if}}
 </template>
 
 <template name=\"sideNavbar${1}\">

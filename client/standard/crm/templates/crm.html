@@ -10,12 +10,20 @@
             {{#if collection_key}}
                 <select name="crmFilterSelect" id="crmFilterSelect">
                     {{#each collection_key}}
-                        <option value="{{this}}">{{this}}</option>
+                        <option value="{{this}}">{{_ this}}</option>
                     {{/each}}
                 </select>
             {{/if}}
+            <select name="crmFilterSelectExpr" id="crmFilterSelectExpr">
+                <option value="equalTo">{{_ "Equal to"}}</option>
+                <option value="isDifferentFrom">{{_ "Is different from"}}</option>
+                <option value="contain">{{_ "Contain"}}</option>
+                <option value="doNotContain">{{_ "Do not contain"}}</option>
+                <option value="isSet">{{_ "Is set"}}</option>
+                <option value="isNotSet">{{_ "Is not set"}}</option>
+            </select>
             <input type="text" placeholder="Filter by ..." class="col-6 tw-filter-input">
-            <button class="btn btn-primary tw-filter-submit" type="submit">Valider</button>
+            <button class="btn btn-primary tw-filter-submit" type="submit">{{_ "Validate"}}</button>
         </div>
         <hr>
         <button type="button" class="btn btn-success export-csv pull-right">{{_ "Export to csv"}}</button>

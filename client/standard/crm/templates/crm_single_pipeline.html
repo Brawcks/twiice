@@ -12,7 +12,7 @@
     </div>
     <hr>
     {{#if editMode}}
-    {{> quickForm collection="Pipelines" doc=this id="updatePipelineId" type="update" class="new-pipelines-form"
+    {{> quickForm collection="Pipelines" doc=pipeline id=updatePipelineId type="update" class="new-pipelines-form"
     autosave=true}}
     {{else}}
     <div class="row col-md-12">

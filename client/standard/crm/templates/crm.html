@@ -23,7 +23,7 @@
                 <option value="isNotSet">{{_ "Is not set"}}</option>
             </select>
             <input type="text" placeholder="Filter by ..." class="col-6 tw-filter-input">
-            <button class="btn btn-primary tw-filter-submit" type="submit">{{_ "Validate"}}</button>
+            <button class="btn btn-primary tw-filter-submit coming-soon" type="submit">{{_ "Validate"}}</button>
         </div>
         <hr>
         <button type="button" class="btn btn-success export-csv pull-right">{{_ "Export to csv"}}</button>
@@ -33,8 +33,9 @@
             <thead>
                 <tr>
                     <th scope="col">{{_ "#ID"}}</th>
-                    <th scope="col">{{_ "Label"}}</th>
-                    <th scope="col">{{_ "Expected revenue"}}</th>
+                    <th scope="col" title="Field name : label">{{_ "Label"}}</th>
+                    <th scope="col" title="Field name : expected_revenue">{{_ "Expected revenue"}}</th>
+                    <th scope="col" title="Field name : crm_steps">{{_ "Step"}}</th>
                     <th scope="col">{{_ "Actions"}}</th>
                 </tr>
             </thead>
@@ -44,6 +45,7 @@
                     <th scope="row">{{@index}}</th>
                     <td><a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">{{label}}</a></td>
                     <td>{{expected_revenue}} €</td>
+                    <td>{{crm_steps}}</td>
                     <td>
                         <a href="{{pathFor 'crm/pipeline' _id=_id}}" title="{{name}}">{{_ "View Details"}}</a>
                         <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>

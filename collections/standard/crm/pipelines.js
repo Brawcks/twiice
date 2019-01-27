@@ -22,6 +22,10 @@ PipelinesSchema = new SimpleSchema ({
         type: String,
         label: "Label",
         autoform: {
+            // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
+            'data-toggle': "tooltip",
+            'data-placement': "top",
+            title: "Field name : label",
             placeholder: "Name this opportunity",
         }
     },

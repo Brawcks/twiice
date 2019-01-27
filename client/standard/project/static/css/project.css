@@ -1,0 +1,9 @@
+.project {
+    margin: 10px 0px 10px 0px;
+    position:relative;
+}
+.project-card {
+    position:relative;
+    padding: 10px;
+    border: 2px solid grey;
+}

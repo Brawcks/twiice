@@ -1,6 +1,6 @@
 <template name="project">
-    <div class="col-12">
-        <h1>Project Dashboard</h1>
+    <div class="col-6 d-flex">
+        <h1 class="float-left">Project Dashboard</h1>
     </div>
 </template>
 
@@ -36,18 +36,43 @@
 </template>
 
 <template name="projectKanbanView">
-<div class="container">
-    {{#each collection_sample}}
-    <div class="col-4 project">
-        {{> project_card}}
+<div class="container float-left">
+    <div class="flex-row d-flex col-12">
+        <div class="container col-4">
+            <h2>To do</h2>
+            {{#each collection_todo}}
+            <div class="project">
+                {{> project_card}}
+            </div>
+            {{/each}}
+        </div>
+        <div class="container col-4">
+            <h2>Doing</h2>
+            {{#each collection_doing}}
+            <div class="project">
+                {{> project_card}}
+            </div>
+            {{/each}}
+        </div>
+        <div class="container col-4">
+            <h2>Done</h2>
+            {{#each collection_done}}
+            <div class="project">
+                {{> project_card}}
+            </div>
+            {{/each}}
+        </div>
     </div>
-    {{/each}}
 </div>
 </template>
 
 <template name="project_card">
-    <a href="{{pathFor 'project/collection-sample-single' _id=_id}}">{{name}}</a>
-    <div>{{desc}}</div>
+    <div class="project-card">
+        <div class="container">
+            <a href="{{pathFor 'project/collection-sample-single' _id=_id}}">{{name}}</a>
+            <div>{{desc}}</div>
+        </div>
+    </div>
 </template>
 
 <template name="newCollectionSampleproject">

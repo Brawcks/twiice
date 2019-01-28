@@ -1,4 +1,3 @@
-
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
@@ -21,6 +20,11 @@ Collection_sampleSchema = new SimpleSchema ({
     desc: {
         type: String,
         label: "Description"
+    },
+    state: {
+        type: String,
+        label: "State",
+        allowedValues: ['To do', 'Doing', 'Done']
     }
 });
 
@@ -31,4 +35,3 @@ Meteor.methods({
 });
 
 Collection_sample.attachSchema(Collection_sampleSchema);
-

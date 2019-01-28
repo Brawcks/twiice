@@ -78,6 +78,13 @@ Template.${1}TreeView.onCreated(function() {
 Template.${1}TreeView.helpers({
     collection_sample: () => {
         return Collection_sample.find({});
+    },
+    collection_key: () => {
+        var filters_${1} = [];
+        for (var key in Collection_sample.findOne({})) {
+            filters_${1}.push(key);
+        }
+        return filters_${1};
     }
 });
 
@@ -146,10 +153,30 @@ echo "<template name=\"${1}\">
 
 <template name=\"${1}TreeView\">
     <div class=\"col-12 self-align-end\">
+        <div class=\"row justify-content-end\">
+            {{#if collection_key}}
+                <select name=\"crmFilterSelect\" id=\"crmFilterSelect\">
+                    {{#each collection_key}}
+                        <option value=\"{{this}}\">{{_ this}}</option>
+                    {{/each}}
+                </select>
+            {{/if}}
+            <select name=\"crmFilterSelectExpr\" id=\"crmFilterSelectExpr\">
+                <option value=\"equalTo\">{{_ \"Equal to\"}}</option>
+                <option value=\"isDifferentFrom\">{{_ \"Is different from\"}}</option>
+                <option value=\"contain\">{{_ \"Contain\"}}</option>
+                <option value=\"doNotContain\">{{_ \"Do not contain\"}}</option>
+                <option value=\"isSet\">{{_ \"Is set\"}}</option>
+                <option value=\"isNotSet\">{{_ \"Is not set\"}}</option>
+            </select>
+            <input type=\"text\" placeholder=\"Filter by ...\" class=\"col-6 tw-filter-input\">
+            <button class=\"btn btn-primary tw-filter-submit coming-soon\" type=\"submit\">{{_ \"Validate\"}}</button>
+        </div>
+        <hr>
         <button type=\"button\" class=\"btn btn-success export-csv pull-right\">{{_ \"Export to csv\"}}</button>
         <button type=\"button\" class=\"btn btn-info import-csv pull-right\">{{_ \"Import csv\"}}</button>
         <input id=\"file\" type=\"file\" class=\"btn btn-info import-csv-file pull-right d-none\"/>
-        <table class=\"table table-hover\">
+        <table class=\"table table-hover mt-3\">
             <thead>
                 <tr>
                     <th scope=\"col\">#</th>

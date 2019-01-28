@@ -28,7 +28,7 @@ démarrage du projet via cette commande :
 Il est aussi possible de lancer le script de lancement du projet, en vous positionnant à la racine du projet, puis en
 lançant la commande : `./start.sh` .
 
-## Twiice - La gestion simplifiée
+# Twiice - La gestion simplifiée
 
 **Twiice** est un projet né de la diffiulté à laquelle sont confrontée les petites 
 entrerises à se gérer au quotidien. De nombreux outils de gestion existent
@@ -40,6 +40,36 @@ s'adapter facilement aux problématiques métier de toute TPE.
 
 **Twiice** se rapproche de ce que sait faire un ERP, tout en étant modulaire
 et facilement paramétrable.
+
+## Ouvertures et possibilités
+
+**Twiice** est un projet ouvert. Cela signifie qu'il tend à vouloir s'adapter à tout besoin formulé par une TPE (Dans un premier temps).
+
+Voici les points pouvant être couverts par Twiice, hypothétiquement de la création des modules : 
+
+*  Gestion de projet
+*  Gestion CRM (Customer Relationship Management)
+*  Mise en place CMS (Création d'un CMS complet)
+*  Gestion d'inventaire
+*  Gestion de factures
+*  Gestion de devis, bons de commande ...
+*  Toute gestion spécifique voulue par vous ou votre entreprise !
+
+
+**Twiice**, c'est le besoin réel formulé par les entreprise de trouver un outil adaptable à leurs spécificités métier. Au stade actuel, 
+il s'apparente à un **Framework ++** de mise en place d'une solution de gestion de données diverses.
+
+## Comment faire ?
+
+Dans un premier temps, **Twiice** se destine au petites entreprises du numérique, ou petites entreprises extérieures à cette bulle métier,
+accompagnées par une personne maîtrisant le domaine du web et du développement. A partir de là, il est possible d'apprendre à développer et comprendre
+le projet Twiice, par le biais de notre **WIKI** ainsi que de nos scripts automatisés.
+
+**Et après ?**
+
+Twiice veut voir plus loin. Etant encore un projet jeune, il se limite à des besoins techniques légers pour développer son propre logiciel de gestion de données.
+Cependant, dans un futur proche, **Twiice** veut se rendre disponible tout public, et proposer via une interface graphique simple, d'automatiser les développements
+en passant par du développement "Graphique" directement dans le logiciel. **Il ne sera plus nécessaire de coder !**.
 
 ### Un projet Open-Source
 

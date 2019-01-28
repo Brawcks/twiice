@@ -15,3 +15,4 @@ import './users/main.js';
 // }); 
 
 import './crm/main.js';
+import './project/main.js';

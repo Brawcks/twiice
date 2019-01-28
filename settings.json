@@ -16,6 +16,11 @@
                     "name": "CRM",
                     "technical_name": "crm",
                     "url": "http://localhost:3000/crm"
+                },
+                "project": {
+                    "name": "Project",
+                    "technical_name": "project",
+                    "url": "http://localhost:3000/project"
                 }
             },
             "customer": {

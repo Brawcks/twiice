@@ -14,21 +14,8 @@ Template.projectTreeView.onCreated(function() {
     });
 });
 
-Template.projectKanbanView.onCreated(function() {
-    var self = this;
-    self.autorun(function() {
-        self.subscribe('Collection_sample');
-    });
-});
-
 // LOAD DATA ON TEMPLATES 
 Template.projectTreeView.helpers({
-    collection_sample: () => {
-        return Collection_sample.find({});
-    }
-});
-
-Template.projectKanbanView.helpers({
     collection_sample: () => {
         return Collection_sample.find({});
     }
@@ -45,12 +32,6 @@ Template.projectTreeView.events({
         Meteor.call('download_csv', data, 'project_'+date+'.csv', 'text/csv;encoding:utf-8');
         swal("Yeah !", "Your CSV document is available !", "success");
     },
-});
-Template.projectKanbanView.events({
-    'click .btn-danger': function (){
-        Meteor.call('projectDeleteCollection_sample', this._id);
-        swal("Deleted", "This record was properly deleted !", "success");
-    }
 });
 
 // CRM ADD TEMPLATE

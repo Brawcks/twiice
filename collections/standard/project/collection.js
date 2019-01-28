@@ -10,9 +10,6 @@ Collection_sample = new Mongo.Collection('collection_sample');
 Collection_sample.allow({
     insert: function(userId, doc) {
         return !!userId;    
-    },
-    update: function (userId, doc) {
-        return !!userId;
     }
 });
 

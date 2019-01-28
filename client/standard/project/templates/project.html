@@ -36,23 +36,7 @@
 </template>
 
 <template name="projectKanbanView">
-    <div class="container float-left" data-sortable=".project-card">
-        <div class="row">
-            {{#each collection_sample}}
-                <div class="project col-3">
-                    {{> projectKanbanCardView}}
-                </div>
-            {{/each}}
-        </div>
-    </div>
-</template>
-
-<template name="projectKanbanCardView">
-    <div class="project-card" data-position="" data-id="{{_id}}" draggable="true">
-        <h2><a href="{{pathFor 'project/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a></h2>
-        <div>{{desc}}</div>
-        <button type="button" class="btn btn-danger">Delete</button>
-    </div>
+    
 </template>
 
 <template name="newCollectionSampleproject">

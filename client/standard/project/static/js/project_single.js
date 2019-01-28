@@ -1,11 +1,6 @@
 
 Template.projectSingleCollectionSample.onCreated(function() {
     var self = this;
-    self.autorun(function() {
-        var id = FlowRouter.getParam('_id');
-        self.subscribe('Collection_sample', id);
-    });
-    var self = this;
     this.editMode = new ReactiveVar(false);
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');

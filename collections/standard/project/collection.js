@@ -4,15 +4,18 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
 
-Collection_sample = new Mongo.Collection('collection_sample');
+Project = new Mongo.Collection('project');
 
-Collection_sample.allow({
+Project.allow({
     insert: function(userId, doc) {
         return !!userId;    
+    },
+    update: function (userId, doc) {
+        return !!userId;
     }
 });
 
-Collection_sampleSchema = new SimpleSchema ({
+Project_Schema = new SimpleSchema ({
     name: {
         type: String,
         label: "Name"
@@ -29,9 +32,9 @@ Collection_sampleSchema = new SimpleSchema ({
 });
 
 Meteor.methods({
-    projectDeleteCollection_sample: function(id) {
-        Collection_sample.remove(id)
+    projectDelete: function(id) {
+        Project.remove(id)
     },
 });
 
-Collection_sample.attachSchema(Collection_sampleSchema);
+Project.attachSchema(Project_Schema);

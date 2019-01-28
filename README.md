@@ -72,3 +72,11 @@ chaine de commandes suivante :
 Cette commande va dans un premier installer les paquets node requis par le 
 projet pour fonctionner, puis lancer l'instance en chargeant les modules
 définis dans le fichier `settings.json` à la racine du projet. 
+
+
+## Products Owner 
+
+Cette section définit les personnes responsables du développement de chaque module standard implémenté dans **Twiice**.
+
+**Project** : Antoine LE TROADEC
+**CRM** : Vincent COFFIN

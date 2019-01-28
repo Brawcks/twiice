@@ -4,6 +4,6 @@ Meteor.startup(() => {
 
 
 // PUBLISH COLLECTION SAMPLE ON SERVER
-Meteor.publish('Collection_sample', function() {
-  return Collection_sample.find({})
+Meteor.publish('Project', function() {
+  return Project.find({})
 })

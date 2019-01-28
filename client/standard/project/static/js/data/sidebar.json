@@ -6,7 +6,7 @@
         },
         "new-collection-sample": {
             "name": "New Collection Sample",
-            "url": "http://localhost:3000/project/new-collection-sample"
+            "url": "http://localhost:3000/project/newproject"
         },
         "sub-module": {
             "name": "Sub-Module",

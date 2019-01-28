@@ -1,6 +1,6 @@
 <template name="project">
     <div class="col-6 d-flex">
-        <h1 class="float-left">Project Dashboard</h1>
+        <h1 class="float-left">{{_ "Project Dashboard"}}</h1>
     </div>
 </template>
 
@@ -13,9 +13,9 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">{{_ "Name"}}</th>
+                    <th scope="col">{{_ "Description"}}</th>
+                    <th scope="col">{{_ "Actions"}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,27 +40,27 @@
     <div class="flex-row d-flex col-12">
         <div class="container col-4">
             <h2>To do</h2>
-            {{#each collection_todo}}
-            <div class="project">
-                {{> project_card}}
-            </div>
-            {{/each}}
+                {{#each project_todo}}
+                    <div class="project">
+                        {{> project_card}}
+                    </div>
+                {{/each}}
         </div>
         <div class="container col-4">
             <h2>Doing</h2>
-            {{#each collection_doing}}
-            <div class="project">
-                {{> project_card}}
-            </div>
-            {{/each}}
+                {{#each project_doing}}
+                    <div class="project">
+                        {{> project_card}}
+                    </div>
+                {{/each}}
         </div>
         <div class="container col-4">
             <h2>Done</h2>
-            {{#each collection_done}}
-            <div class="project">
-                {{> project_card}}
-            </div>
-            {{/each}}
+                {{#each project_done}}
+                    <div class="project">
+                        {{> project_card}}
+                    </div>
+                {{/each}}
         </div>
     </div>
 </div>
@@ -75,10 +75,10 @@
     </div>
 </template>
 
-<template name="newCollectionSampleproject">
+<template name="newProject">
     <div class="col-12">
-        <h1>New Collection sample</h1>
-        {{> quickForm collection="Collection_sample" id="insertCollection_sampleForm" type="insert" class="new-collection-sample-form"}}
+        <h1>{{_ "New Project"}}</h1>
+        {{> quickForm collection="Project" id="insertProjectForm" type="insert" class="new-collection-sample-form"}}
     </div>
 </template>
 

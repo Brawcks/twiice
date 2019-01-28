@@ -1,6 +1,6 @@
 <template name="project">
     <div class="col-12">
-        <h1>project Dashboard</h1>
+        <h1>Project Dashboard</h1>
     </div>
 </template>
 
@@ -36,7 +36,18 @@
 </template>
 
 <template name="projectKanbanView">
-    
+<div class="container">
+    {{#each collection_sample}}
+    <div class="col-4 project">
+        {{> project_card}}
+    </div>
+    {{/each}}
+</div>
+</template>
+
+<template name="project_card">
+    <a href="{{pathFor 'project/collection-sample-single' _id=_id}}">{{name}}</a>
+    <div>{{desc}}</div>
 </template>
 
 <template name="newCollectionSampleproject">

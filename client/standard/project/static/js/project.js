@@ -13,9 +13,20 @@ Template.projectTreeView.onCreated(function() {
         self.subscribe('Collection_sample');
     });
 });
+Template.projectKanbanView.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        self.subscribe('Collection_sample');
+    });
+});
 
 // LOAD DATA ON TEMPLATES 
 Template.projectTreeView.helpers({
+    collection_sample: () => {
+        return Collection_sample.find({});
+    }
+});
+Template.projectKanbanView.helpers({
     collection_sample: () => {
         return Collection_sample.find({});
     }

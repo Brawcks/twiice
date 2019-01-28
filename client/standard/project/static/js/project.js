@@ -27,8 +27,14 @@ Template.projectTreeView.helpers({
     }
 });
 Template.projectKanbanView.helpers({
-    collection_sample: () => {
-        return Collection_sample.find({});
+    collection_todo: () => {
+        return Collection_sample.find({ state: "To do" });
+    },
+    collection_doing: () => {
+        return Collection_sample.find({ state: "Doing" });
+    },
+    collection_done: () => {
+        return Collection_sample.find({ state: "Done" });
     }
 });
 
@@ -42,13 +48,17 @@ Template.projectTreeView.events({
         var date = new Date().toISOString().slice(0, 10);
         Meteor.call('download_csv', data, 'project_'+date+'.csv', 'text/csv;encoding:utf-8');
         swal("Yeah !", "Your CSV document is available !", "success");
-    },
+    }
 });
 
 // CRM ADD TEMPLATE
 
 Template.newCollectionSampleproject.events({
     'click button[type="submit"]': function (){
-        swal("Hooray !", "This record was properly created !", "success");
+        if(state === ""){
+            swal('Oops...', 'You forget something!', 'error');
+        }else{
+            swal("Hooray !", "This record was properly created !", "success");
+        };
     },
 });

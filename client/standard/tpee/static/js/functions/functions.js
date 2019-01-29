@@ -75,5 +75,35 @@ Meteor.methods({
     },
 
     // USEFULL FUNCTIONS
+    // The function below find out which mongo operator is needed (depends on the selected field for the search)
+    filter_operator: function (operator, filter, val) {
+        // console.log('hello fucking world : ' + operator);
+        var complete_filter = {};
+        switch (operator) {
+            case "equalTo":
+                complete_filter = {[filter]: { $eq: val}};
+                break;
+            case "isDifferentFrom":
+                complete_filter = {[filter]: { $ne: val}};
+                break
+            case "contain":
+                complete_filter = {[filter]: { $regex: '.*' + val + '.*' }};
+                break
+            case "doNotContain":
+                complete_filter = {[filter]: { $eq: val}};
+                break
+            case "isSet":
+                complete_filter = {[filter]: { $eq: val}};
+                break
+            case "isNotSet":
+                complete_filter = {[filter]: { $eq: val}};
+                break
+            default:
+                break;
+        }
+        console.log(operator);
+        console.log(complete_filter);
+        return complete_filter;
+    },
 
 });

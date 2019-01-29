@@ -10,7 +10,6 @@ export function leftSidebarCustomer() {
 }
 
 export function filter_operator(operator, filter, val) {
-    // console.log('hello fucking world : ' + operator);
     var complete_filter = {};
     switch (operator) {
         case "equalTo":
@@ -34,7 +33,5 @@ export function filter_operator(operator, filter, val) {
         default:
             break;
     }
-    // console.log(operator);
-    console.log(complete_filter);
     return complete_filter;
 }

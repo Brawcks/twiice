@@ -1,4 +1,5 @@
 import { leftSidebarCustomer } from './functions/functions.js';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 var publicSettings = Meteor.settings.public;
 
@@ -24,6 +25,8 @@ Template.crmTreeView.onCreated(function () {
     if (FlowRouter.getParam('page')) {
         var page = FlowRouter.getParam('page');
     }
+    const instance = this;
+    instance.filtersVar = new ReactiveVar({});
 });
 
 Template.crmNewPipeline.onCreated(function () {
@@ -35,7 +38,7 @@ Template.crmNewPipeline.onCreated(function () {
 // LOAD DATA ON TEMPLATES 
 Template.crmTreeView.helpers({
     pipelines: () => {
-        return Pipelines.find({}, { limit: 10 });
+        return Pipelines.find(Template.instance().filtersVar.get(), { limit: 10 });
     },
     collection_key: () => {
         var filters = [];
@@ -70,8 +73,12 @@ Template.crmTreeView.events({
         //     console.log(Papa.parse(reader.result, {delimiter: ";"}));
         // });
     },
-    'click .coming-soon': function (events, template) {
-        swal("Ooops !", "This function is not available yet !", "info");
+    'click .tw-filter-submit': function (events, template) {
+        // swal("Ooops !", "This function is not available yet !", "info");
+        selectFilter = $("#crmFilterSelect").val();
+        filterVal = $(".tw-filter-input").val();
+        Template.instance().filtersVar.set({ [selectFilter]: filterVal })
+        console.log(Template.instance().filtersVar.get());
     },
 });
 

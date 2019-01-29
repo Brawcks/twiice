@@ -22,10 +22,14 @@ Template.crmTreeView.onCreated(function () {
         }
         console.log(filters);
     });
+
     if (FlowRouter.getParam('page')) {
         var page = FlowRouter.getParam('page');
     }
+
+    // Here we build the instance to set variables
     const instance = this;
+    // This var will allow us to use filters on collection, with events and helpers
     instance.filtersVar = new ReactiveVar({});
 });
 
@@ -38,6 +42,8 @@ Template.crmNewPipeline.onCreated(function () {
 // LOAD DATA ON TEMPLATES 
 Template.crmTreeView.helpers({
     pipelines: () => {
+        // here we return data according on our filters. If no filter, filtersVar is an empty object
+        // so we will get all the data
         return Pipelines.find(Template.instance().filtersVar.get(), { limit: 10 });
     },
     collection_key: () => {
@@ -75,13 +81,17 @@ Template.crmTreeView.events({
     },
     'click .tw-filter-submit': function (events, template) {
         // swal("Ooops !", "This function is not available yet !", "info");
-        selectFilter = $("#crmFilterSelect").val();
-        filterVal = $(".tw-filter-input").val();
-        Template.instance().filtersVar.set({ [selectFilter]: filterVal })
+        var filterOperator = $('#crmFilterOperator').val();
+        var selectFilter = $("#crmFilterSelect").val();
+        var filterVal = $(".tw-filter-input").val();
+        Template.instance().filtersVar.set(Meteor.call('filter_operator', filterOperator, selectFilter, filterVal))
     },
     'click .tw-filter-remove': function (events, template) {
-        // swal("Ooops !", "This function is not available yet !", "info");
-        Template.instance().filtersVar.set({})
+        Template.instance().filtersVar.set({});
+        var filterOperator = $('#crmFilterOperator').val();
+        var selectFilter = $("#crmFilterSelect").val();
+        var filterVal = $(".tw-filter-input").val();
+        Meteor.call('filter_operator', filterOperator, selectFilter, filterVal);
     },
 });
 

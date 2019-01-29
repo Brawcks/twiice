@@ -56,9 +56,37 @@ echo "export function leftSidebarCustomer() {
         leftSidebar += '<a class=\"nav-link\" id=\"v-pills-home-tab\" data-toggle=\"pill\" href=\"'+item.url+'\" role=\"tab\" aria-controls=\"v-pills-home\" aria-selected=\"true\">'+item.name+'</a>';
     });
     return leftSidebar;
+}
+
+export function filter_operator(operator, filter, val) {
+    var complete_filter = {};
+    switch (operator) {
+        case \"equalTo\":
+            complete_filter = {[filter]: { \$eq: val } };
+            break;
+        case \"isDifferentFrom\":
+            complete_filter = {[filter]: { \$ne: val } };
+            break
+        case \"contain\":
+            complete_filter = {[filter]: { \$regex: '.*' + val + '.*' }};
+            break
+        case \"doNotContain\":
+            complete_filter = {[filter]: { \$not: { \$regex: val } } };
+            break
+        case \"isSet\":
+            complete_filter = {[filter]: { \$exists: true } };
+            break
+        case \"isNotSet\":
+            complete_filter = {[filter]: { \$exists: false } };
+            break
+        default:
+            break;
+    }
+    return complete_filter;
 }" > client/standard/${1}/static/js/functions/functions.js
 
-echo "import { leftSidebarCustomer } from './functions/functions.js';
+echo "import { leftSidebarCustomer, filter_operator } from './functions/functions.js';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 Template.sideNavbar${1}.helpers({
     leftSidebar: () => {
@@ -72,12 +100,16 @@ Template.${1}TreeView.onCreated(function() {
     self.autorun(function() {
         self.subscribe('Collection_sample');
     });
+    // Here we build the instance to set variables
+    const instance = this;
+    // This var will allow us to use filters on collection, with events and helpers
+    instance.filtersVar = new ReactiveVar({});
 });
 
 // LOAD DATA ON TEMPLATES 
 Template.${1}TreeView.helpers({
     collection_sample: () => {
-        return Collection_sample.find({});
+        return Collection_sample.find(Template.instance().filtersVar.get(), { limit: 10 });
     },
     collection_key: () => {
         var filters_${1} = [];
@@ -98,6 +130,29 @@ Template.${1}TreeView.events({
         var date = new Date().toISOString().slice(0, 10);
         Meteor.call('download_csv', data, '${1}_'+date+'.csv', 'text/csv;encoding:utf-8');
         swal(\"Yeah !\", \"Your CSV document is available !\", \"success\");
+    },
+    'click .import-csv': function (events, template) {
+        swal(\"Ooops !\", \"This function is not available yet !\", \"info\");
+        // \$(\".import-csv-file\").click();
+        // \$(\".import-csv-file\").change(function () {
+        //     var fileInput = document.querySelector('.import-csv-file');
+        //     var reader = new FileReader();
+        //     reader.addEventListener('load', function () {
+        //         alert('Contenu du fichier \"' + fileInput.files[0].name + '\" :\n\n' + reader.result);
+        //     });
+        //     reader.readAsText(fileInput.files[0]);
+        //     console.log(Papa.parse(reader.result, {delimiter: \";\"}));
+        // });
+    },
+    'click .tw-filter-submit': function (events, template) {
+        // swal(\"Ooops !\", \"This function is not available yet !\", \"info\");
+        var filterOperator = \$('${1}FilterOperator').val();
+        var selectFilter = \$('#${1}FilterSelect').val();
+        var filterVal = \$('.tw-filter-input').val();
+        Template.instance().filtersVar.set(filter_operator(filterOperator, selectFilter, filterVal))
+    },
+    'click .tw-filter-remove': function (events, template) {
+        Template.instance().filtersVar.set({});
     },
 });
 
@@ -155,13 +210,13 @@ echo "<template name=\"${1}\">
     <div class=\"col-12 self-align-end\">
         <div class=\"row justify-content-end\">
             {{#if collection_key}}
-                <select name=\"crmFilterSelect\" id=\"crmFilterSelect\">
+                <select name=\"${1}FilterSelect\" id=\"crmFilterSelect\">
                     {{#each collection_key}}
                         <option value=\"{{this}}\">{{_ this}}</option>
                     {{/each}}
                 </select>
             {{/if}}
-            <select name=\"crmFilterSelectExpr\" id=\"crmFilterSelectExpr\">
+            <select name=\"${1}FilterSelectExpr\" id=\"${1}FilterOperator\">
                 <option value=\"equalTo\">{{_ \"Equal to\"}}</option>
                 <option value=\"isDifferentFrom\">{{_ \"Is different from\"}}</option>
                 <option value=\"contain\">{{_ \"Contain\"}}</option>
@@ -170,7 +225,7 @@ echo "<template name=\"${1}\">
                 <option value=\"isNotSet\">{{_ \"Is not set\"}}</option>
             </select>
             <input type=\"text\" placeholder=\"Filter by ...\" class=\"col-6 tw-filter-input\">
-            <button class=\"btn btn-primary tw-filter-submit coming-soon\" type=\"submit\">{{_ \"Validate\"}}</button>
+            <button class=\"btn btn-primary tw-filter-submit\" type=\"submit\">{{_ \"Validate\"}}</button>
         </div>
         <hr>
         <button type=\"button\" class=\"btn btn-success export-csv pull-right\">{{_ \"Export to csv\"}}</button>

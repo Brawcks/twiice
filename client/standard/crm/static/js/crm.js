@@ -78,7 +78,10 @@ Template.crmTreeView.events({
         selectFilter = $("#crmFilterSelect").val();
         filterVal = $(".tw-filter-input").val();
         Template.instance().filtersVar.set({ [selectFilter]: filterVal })
-        console.log(Template.instance().filtersVar.get());
+    },
+    'click .tw-filter-remove': function (events, template) {
+        // swal("Ooops !", "This function is not available yet !", "info");
+        Template.instance().filtersVar.set({})
     },
 });
 

@@ -1,4 +1,4 @@
-import { leftSidebarCustomer } from './functions/functions.js';
+import { leftSidebarCustomer, filter_operator } from './functions/functions.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 var publicSettings = Meteor.settings.public;
@@ -84,14 +84,10 @@ Template.crmTreeView.events({
         var filterOperator = $('#crmFilterOperator').val();
         var selectFilter = $("#crmFilterSelect").val();
         var filterVal = $(".tw-filter-input").val();
-        Template.instance().filtersVar.set(Meteor.call('filter_operator', filterOperator, selectFilter, filterVal))
+        Template.instance().filtersVar.set(filter_operator(filterOperator, selectFilter, filterVal))
     },
     'click .tw-filter-remove': function (events, template) {
         Template.instance().filtersVar.set({});
-        var filterOperator = $('#crmFilterOperator').val();
-        var selectFilter = $("#crmFilterSelect").val();
-        var filterVal = $(".tw-filter-input").val();
-        Meteor.call('filter_operator', filterOperator, selectFilter, filterVal);
     },
 });
 

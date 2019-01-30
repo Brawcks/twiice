@@ -1,5 +1,6 @@
 import { leftSidebarCustomer } from './functions/functions.js';
 
+
 Template.sideNavbarproject.helpers({
     leftSidebar: () => {
         return leftSidebarCustomer();
@@ -49,6 +50,12 @@ Template.projectTreeView.events({
         Meteor.call('download_csv', data, 'project_'+date+'.csv', 'text/csv;encoding:utf-8');
         swal("Yeah !", "Your CSV document is available !", "success");
     }
+});
+Template.projectKanbanView.events({
+    'click .btn-danger': function(){
+        Meteor.call('projectDelete', this._id);
+        swal("Deleted", "This record was properly deleted !", "success");
+    },
 });
 
 // PROJECT ADD TEMPLATE

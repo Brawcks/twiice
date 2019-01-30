@@ -41,7 +41,7 @@
         <div class="container col-4">
             <h2>To do</h2>
                 {{#each project_todo}}
-                    <div class="project">
+                    <div class="card" id="project">
                         {{> project_card}}
                     </div>
                 {{/each}}
@@ -49,7 +49,7 @@
         <div class="container col-4">
             <h2>Doing</h2>
                 {{#each project_doing}}
-                    <div class="project">
+                    <div class="card" id="project">
                         {{> project_card}}
                     </div>
                 {{/each}}
@@ -57,7 +57,7 @@
         <div class="container col-4">
             <h2>Done</h2>
                 {{#each project_done}}
-                    <div class="project">
+                    <div class="card" id="project">
                         {{> project_card}}
                     </div>
                 {{/each}}
@@ -67,10 +67,22 @@
 </template>
 
 <template name="project_card">
-    <div class="project-card">
+    <div class="card-body">
         <div class="container">
-            <a href="{{pathFor 'project/collection-sample-single' _id=_id}}">{{name}}</a>
-            <div>{{desc}}</div>
+                <a class="card-title" href="{{pathFor 'project/collection-sample-single' _id=_id}}">{{name}}</a>
+            <div class="container d-flex">
+                    <span><i>made by {{owner}}</i></span>
+                    <span class="card-subtitle">{{subtitle}}</span>
+            </div>
+            <div class="card-text">
+                <div class="desc">{{desc}}</div>
+                <span>{{priority}}</span>
+                <div class="container">
+                    <div>{{dateBegin}}</div>
+                    <div>{{dateEnd}}</div>
+                </div>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
         </div>
     </div>
 </template>

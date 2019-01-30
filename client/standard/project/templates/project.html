@@ -70,13 +70,13 @@
     <div class="card-body">
         <div class="container">
                 <a class="card-title" href="{{pathFor 'project/collection-sample-single' _id=_id}}">{{name}}</a>
-            <div class="container d-flex">
+            <div class="d-flex flex-column">
                     <span><i>made by {{owner}}</i></span>
                     <span class="card-subtitle">{{subtitle}}</span>
             </div>
             <div class="card-text">
                 <div class="desc">{{desc}}</div>
-                <span>{{priority}}</span>
+                <span>{{priority}} priority</span>
                 <div class="container">
                     <div>{{dateBegin}}</div>
                     <div>{{dateEnd}}</div>

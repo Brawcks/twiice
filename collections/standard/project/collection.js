@@ -20,6 +20,10 @@ Project_Schema = new SimpleSchema ({
         type: String,
         label: "Name"
     },
+    subtitle: {
+        type: String,
+        label: "Subtitle"
+    },
     desc: {
         type: String,
         label: "Description"
@@ -28,7 +32,25 @@ Project_Schema = new SimpleSchema ({
         type: String,
         label: "State",
         allowedValues: ['To do', 'Doing', 'Done']
+    },
+    datebegin: {
+        type: Date,
+        label: "Project beginning"
+    },
+    dateend: {
+        type: Date,
+        label: "Project Ending"
+    },
+    priority: {
+        type: String,
+        label: "Priority",
+        allowedValues: ['Faible', 'Normale', 'Élevée']
+    },
+    ower: {
+        type: String,
+        label: "Owner"
     }
+
 });
 
 Meteor.methods({

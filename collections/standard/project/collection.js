@@ -12,7 +12,8 @@ Project.allow({
     },
     update: function (userId, doc) {
         return !!userId;
-    }
+    },
+    
 });
 
 Project_Schema = new SimpleSchema ({
@@ -49,6 +50,11 @@ Project_Schema = new SimpleSchema ({
     owner: {
         type: String,
         label: "Owner"
+    },
+    title: {
+        type: String,
+        label: "Title",
+        optional: true
     }
 
 });

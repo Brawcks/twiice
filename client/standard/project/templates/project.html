@@ -97,7 +97,7 @@
 <template name="projectSingleCollectionSample">
     <div class="row col-md-12">
         <div class="col-md-8">
-            <h1>Collection</h1>
+            <h1>{{project.name}}</h1>
         </div>
         <div class="col-md-4">
             <div class="pull-right">
@@ -108,12 +108,18 @@
     </div>
     <hr>
     {{#if editMode}}
-    {{> quickForm collection="Collection_sample" doc=collection_sample_single id=updateCollectionSampleId type="update" class="edit edit-collection-form"}}
+    {{> quickForm collection="Project" doc=Project id=updateCollectionSampleId type="update" class="edit edit-collection-form"}}
     {{else}}
     <div class="row col-md-12">
         <div class="col-md-6">
-            <h3>{{collection_sample_single.name}}</h3>
-            <p>{{collection_sample_single.desc}}</p>
+            <h3>{{project.name}}</h3>
+            <p>{{project.subtitle}}</p>
+            <p>{{project.desc}}</p>
+            <p>{{project.state}}</p>
+            <p>{{project.priority}} priority</p>
+            <p>{{project.dateBegin}}</p>
+            <p>{{project.dateEnd}}</p>
+            <h4>{{project.owner}}</h4>
         </div>
     </div>
     {{/if}}

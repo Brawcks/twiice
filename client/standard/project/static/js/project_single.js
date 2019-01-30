@@ -4,14 +4,14 @@ Template.projectSingleCollectionSample.onCreated(function() {
     this.editMode = new ReactiveVar(false);
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
-        self.subscribe('Collection_sample', id);
+        self.subscribe('Project', id);
     });
 });
 
 Template.projectSingleCollectionSample.helpers({
-    collection_sample_single: () => {
+    project: () => {
         var id = FlowRouter.getParam('_id');
-        return Collection_sample.findOne({_id: id});
+        return Project.findOne({_id: id});
     },
     updateCollectionSampleId: function() {
         return FlowRouter.getParam('_id');

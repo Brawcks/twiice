@@ -33,20 +33,20 @@ Project_Schema = new SimpleSchema ({
         label: "State",
         allowedValues: ['To do', 'Doing', 'Done']
     },
-    datebegin: {
+    dateBegin: {
         type: Date,
         label: "Project beginning"
     },
-    dateend: {
+    dateEnd: {
         type: Date,
         label: "Project Ending"
     },
     priority: {
         type: String,
         label: "Priority",
-        allowedValues: ['Faible', 'Normale', 'Élevée']
+        allowedValues: ['Low', 'Normal', 'High']
     },
-    ower: {
+    owner: {
         type: String,
         label: "Owner"
     }

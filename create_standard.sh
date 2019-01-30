@@ -226,6 +226,7 @@ echo "<template name=\"${1}\">
             </select>
             <input type=\"text\" placeholder=\"Filter by ...\" class=\"col-6 tw-filter-input\">
             <button class=\"btn btn-primary tw-filter-submit\" type=\"submit\">{{_ \"Validate\"}}</button>
+            <button class=\"btn btn-warning tw-filter-remove\" type=\"submit\">{{_ \"Remove filters\"}}</button>
         </div>
         <hr>
         <button type=\"button\" class=\"btn btn-success export-csv pull-right\">{{_ \"Export to csv\"}}</button>

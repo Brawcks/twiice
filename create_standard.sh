@@ -146,7 +146,7 @@ Template.${1}TreeView.events({
     },
     'click .tw-filter-submit': function (events, template) {
         // swal(\"Ooops !\", \"This function is not available yet !\", \"info\");
-        var filterOperator = \$('${1}FilterOperator').val();
+        var filterOperator = \$('#${1}FilterOperator').val();
         var selectFilter = \$('#${1}FilterSelect').val();
         var filterVal = \$('.tw-filter-input').val();
         Template.instance().filtersVar.set(filter_operator(filterOperator, selectFilter, filterVal))
@@ -210,13 +210,13 @@ echo "<template name=\"${1}\">
     <div class=\"col-12 self-align-end\">
         <div class=\"row justify-content-end\">
             {{#if collection_key}}
-                <select name=\"${1}FilterSelect\" id=\"crmFilterSelect\">
+                <select name=\"${1}FilterSelect\" id=\"${1}FilterSelect\">
                     {{#each collection_key}}
                         <option value=\"{{this}}\">{{_ this}}</option>
                     {{/each}}
                 </select>
             {{/if}}
-            <select name=\"${1}FilterSelectExpr\" id=\"${1}FilterOperator\">
+            <select name=\"${1}FilterOperator\" id=\"${1}FilterOperator\">
                 <option value=\"equalTo\">{{_ \"Equal to\"}}</option>
                 <option value=\"isDifferentFrom\">{{_ \"Is different from\"}}</option>
                 <option value=\"contain\">{{_ \"Contain\"}}</option>

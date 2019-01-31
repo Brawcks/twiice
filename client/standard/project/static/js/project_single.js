@@ -1,5 +1,5 @@
 
-Template.projectSingleCollectionSample.onCreated(function() {
+Template.projectSingle.onCreated(function() {
     var self = this;
     this.editMode = new ReactiveVar(false);
     self.autorun(function() {
@@ -8,8 +8,8 @@ Template.projectSingleCollectionSample.onCreated(function() {
     });
 });
 
-Template.projectSingleCollectionSample.helpers({
-    project: () => {
+Template.projectSingle.helpers({
+    projectSingle: () => {
         var id = FlowRouter.getParam('_id');
         return Project.findOne({_id: id});
     },
@@ -21,10 +21,10 @@ Template.projectSingleCollectionSample.helpers({
     },
 });
 
-Template.projectSingleCollectionSample.events({
+Template.projectSingle.events({
     'click .btn-danger': function (){
         var id = FlowRouter.getParam('_id');
-        Meteor.call('projectDeleteCollection_sample', id);
+        Meteor.call('projectDelete', id);
         FlowRouter.go('project');
         swal("Deleted", "This record was properly deleted !", "success");
     },

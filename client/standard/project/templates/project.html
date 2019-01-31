@@ -41,7 +41,7 @@
         <div class="container col-4">
             <h2>To do</h2>
                 {{#each project_todo}}
-                    <div class="project">
+                    <div class="card" id="project">
                         {{> project_card}}
                     </div>
                 {{/each}}
@@ -49,7 +49,7 @@
         <div class="container col-4">
             <h2>Doing</h2>
                 {{#each project_doing}}
-                    <div class="project">
+                    <div class="card" id="project">
                         {{> project_card}}
                     </div>
                 {{/each}}
@@ -57,7 +57,7 @@
         <div class="container col-4">
             <h2>Done</h2>
                 {{#each project_done}}
-                    <div class="project">
+                    <div class="card" id="project">
                         {{> project_card}}
                     </div>
                 {{/each}}
@@ -67,10 +67,22 @@
 </template>
 
 <template name="project_card">
-    <div class="project-card">
+    <div class="card-body">
         <div class="container">
-            <a href="{{pathFor 'project/collection-sample-single' _id=_id}}">{{name}}</a>
-            <div>{{desc}}</div>
+                <a class="card-title" href="{{pathFor 'project/projectsingle' _id=_id}}">{{name}}</a>
+            <div class="d-flex flex-column">
+                    <span><i>Made by {{owner}}</i></span>
+                    <span class="card-subtitle">{{subtitle}}</span>
+            </div>
+            <div class="card-text">
+                <div class="desc">{{desc}}</div>
+                <span>{{priority}} priority</span>
+                <div class="container">
+                    <div>{{dateBegin}}</div>
+                    <div>{{dateEnd}}</div>
+                </div>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
         </div>
     </div>
 </template>
@@ -82,10 +94,10 @@
     </div>
 </template>
 
-<template name="projectSingleCollectionSample">
+<template name="projectSingle">
     <div class="row col-md-12">
         <div class="col-md-8">
-            <h1>Collection</h1>
+            <h1>{{projectSingle.name}}</h1>
         </div>
         <div class="col-md-4">
             <div class="pull-right">
@@ -96,12 +108,18 @@
     </div>
     <hr>
     {{#if editMode}}
-    {{> quickForm collection="Collection_sample" doc=collection_sample_single id=updateCollectionSampleId type="update" class="edit edit-collection-form"}}
+    {{> quickForm collection="Project" doc=projectSingle id="updateId" type="update" class="edit edit-project-form"}}
     {{else}}
     <div class="row col-md-12">
         <div class="col-md-6">
-            <h3>{{collection_sample_single.name}}</h3>
-            <p>{{collection_sample_single.desc}}</p>
+            <h3>{{projectSingle.name}}</h3>
+            <p>{{projectSingle.subtitle}}</p>
+            <p>{{projectSingle.desc}}</p>
+            <p>{{projectSingle.state}}</p>
+            <p>{{projectSingle.priority}} priority</p>
+            <p>{{projectSingle.dateBegin}}</p>
+            <p>{{projectSingle.dateEnd}}</p>
+            <h4>{{projectSingle.owner}}</h4>
         </div>
     </div>
     {{/if}}

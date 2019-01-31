@@ -12,13 +12,18 @@ Project.allow({
     },
     update: function (userId, doc) {
         return !!userId;
-    }
+    },
+    
 });
 
 Project_Schema = new SimpleSchema ({
     name: {
         type: String,
         label: "Name"
+    },
+    subtitle: {
+        type: String,
+        label: "Subtitle"
     },
     desc: {
         type: String,
@@ -28,7 +33,30 @@ Project_Schema = new SimpleSchema ({
         type: String,
         label: "State",
         allowedValues: ['To do', 'Doing', 'Done']
+    },
+    dateBegin: {
+        type: Date,
+        label: "Project beginning"
+    },
+    dateEnd: {
+        type: Date,
+        label: "Project Ending"
+    },
+    priority: {
+        type: String,
+        label: "Priority",
+        allowedValues: ['Low', 'Normal', 'High']
+    },
+    owner: {
+        type: String,
+        label: "Owner"
+    },
+    title: {
+        type: String,
+        label: "Title",
+        optional: true
     }
+
 });
 
 Meteor.methods({

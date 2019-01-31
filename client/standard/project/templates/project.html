@@ -69,7 +69,7 @@
 <template name="project_card">
     <div class="card-body">
         <div class="container">
-                <a class="card-title" href="{{pathFor 'project/collection-sample-single' _id=_id}}">{{name}}</a>
+                <a class="card-title" href="{{pathFor 'project/projectsingle' _id=_id}}">{{name}}</a>
             <div class="d-flex flex-column">
                     <span><i>Made by {{owner}}</i></span>
                     <span class="card-subtitle">{{subtitle}}</span>
@@ -108,7 +108,7 @@
     </div>
     <hr>
     {{#if editMode}}
-    {{> quickForm collection="projectSingle" doc=projectSingle id=updateId type="update" class="edit edit-collection-form"}}
+    {{> quickForm collection="Project" doc=projectSingle id="updateId" type="update" class="edit edit-project-form"}}
     {{else}}
     <div class="row col-md-12">
         <div class="col-md-6">

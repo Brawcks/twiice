@@ -16,6 +16,9 @@ Project.allow({
     
 });
 
+// LOAD HERE OTHE COLLECTIONS
+partnersLoad = Partners.find({}).fetch();
+
 Project_Schema = new SimpleSchema ({
     name: {
         type: String,
@@ -29,6 +32,15 @@ Project_Schema = new SimpleSchema ({
         type: String,
         label: "Description",
         optional: true
+    },
+    client: {
+        type: Array,
+        optional: true
+    },
+    "client.$": {
+        type: String,
+        label: "Client name",
+        allowedValues: Partners
     },
     state: {
         type: String,

@@ -26,6 +26,11 @@
                     "name": "Project",
                     "technical_name": "project",
                     "url": "http://twiice.eu.meteorapp.com:3000/project"
+                },
+                "partners": {
+                    "name": "Partners",
+                    "technical_name": "partners",
+                    "url": "http://twiice.eu.meteorapp.com:3000/partners"
                 }
             },
             "customer": {

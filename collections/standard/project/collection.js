@@ -19,37 +19,40 @@ Project.allow({
 Project_Schema = new SimpleSchema ({
     name: {
         type: String,
-        label: "Name"
+        label: "Name *"
     },
     subtitle: {
         type: String,
-        label: "Subtitle"
+        label: "Subtitle *"
     },
     desc: {
         type: String,
-        label: "Description"
+        label: "Description",
+        optional: true
     },
     state: {
         type: String,
-        label: "State",
+        label: "State *",
         allowedValues: ['To do', 'Doing', 'Done']
     },
     dateBegin: {
         type: Date,
-        label: "Project beginning"
+        label: "Project beginning",
+        optional: true
     },
     dateEnd: {
         type: Date,
-        label: "Project Ending"
+        label: "Project Ending",
+        optional: true
     },
     priority: {
         type: String,
-        label: "Priority",
+        label: "Priority *",
         allowedValues: ['Low', 'Normal', 'High']
     },
     owner: {
         type: String,
-        label: "Owner"
+        label: "Owner *"
     },
     title: {
         type: String,

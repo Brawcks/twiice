@@ -30,19 +30,19 @@ echo "{
     \"sidebar\": {
         \"dashboard\": {
             \"name\": \"Dashboard\",
-            \"url\": \"http://twiice.eu.meteorapp.com:3000/${1}\"
+            \"url\": \"http://localhost:3000/${1}\"
         },
         \"new-collection-sample\": {
             \"name\": \"New Collection Sample\",
-            \"url\": \"http://twiice.eu.meteorapp.com:3000/${1}/new-collection-sample\"
+            \"url\": \"http://localhost:3000/${1}/new-collection-sample\"
         },
         \"sub-module\": {
             \"name\": \"Sub-Module\",
-            \"url\": \"http://twiice.eu.meteorapp.com:3000/${1}/sub-module\"
+            \"url\": \"http://localhost:3000/${1}/sub-module\"
         },
         \"settings\": {
             \"name\": \"Settings\",
-            \"url\": \"http://twiice.eu.meteorapp.com:3000/${1}/settings\"
+            \"url\": \"http://localhost:3000/${1}/settings\"
         }
     }
 }" > client/standard/${1}/static/js/data/sidebar.json

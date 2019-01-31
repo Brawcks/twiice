@@ -1,0 +1,20 @@
+{
+    "sidebar": {
+        "dashboard": {
+            "name": "Dashboard",
+            "url": "http://twiice.eu.meteorapp.com:3000/partners"
+        },
+        "new-collection-sample": {
+            "name": "New Collection Sample",
+            "url": "http://twiice.eu.meteorapp.com:3000/partners/new-collection-sample"
+        },
+        "sub-module": {
+            "name": "Sub-Module",
+            "url": "http://twiice.eu.meteorapp.com:3000/partners/sub-module"
+        },
+        "settings": {
+            "name": "Settings",
+            "url": "http://twiice.eu.meteorapp.com:3000/partners/settings"
+        }
+    }
+}

@@ -1,0 +1,96 @@
+<template name="partners">
+    <div class="col-12">
+        <h1>partners Dashboard</h1>
+    </div>
+</template>
+
+<template name="partnersTreeView">
+    <div class="col-12 self-align-end">
+        <div class="row justify-content-end">
+            {{#if collection_key}}
+                <select name="partnersFilterSelect" id="partnersFilterSelect">
+                    {{#each collection_key}}
+                        <option value="{{this}}">{{_ this}}</option>
+                    {{/each}}
+                </select>
+            {{/if}}
+            <select name="partnersFilterOperator" id="partnersFilterOperator">
+                <option value="equalTo">{{_ "Equal to"}}</option>
+                <option value="isDifferentFrom">{{_ "Is different from"}}</option>
+                <option value="contain">{{_ "Contain"}}</option>
+                <option value="doNotContain">{{_ "Do not contain"}}</option>
+                <option value="isSet">{{_ "Is set"}}</option>
+                <option value="isNotSet">{{_ "Is not set"}}</option>
+            </select>
+            <input type="text" placeholder="Filter by ..." class="col-6 tw-filter-input">
+            <button class="btn btn-primary tw-filter-submit" type="submit">{{_ "Validate"}}</button>
+            <button class="btn btn-warning tw-filter-remove" type="submit">{{_ "Remove filters"}}</button>
+        </div>
+        <hr>
+        <button type="button" class="btn btn-success export-csv pull-right">{{_ "Export to csv"}}</button>
+        <button type="button" class="btn btn-info import-csv pull-right">{{_ "Import csv"}}</button>
+        <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none"/>
+        <table class="table table-hover mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each partners}}
+                <tr>
+                    <th scope="row">{{@index}}</th>
+                    <td><a href="{{pathFor 'partners/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a></td>
+                    <td>{{surname}}</td>
+                    <td>
+                        <a href="{{pathFor 'partners/collection-sample-single' _id=_id}}" title="{{name}}">View Details</a>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<template name="newCollectionSamplepartners">
+    <div class="col-12">
+        <h1>New Collection sample</h1>
+        {{> quickForm collection="Partners" id="insertCollection_sampleForm" type="insert" class="new-collection-sample-form"}}
+    </div>
+</template>
+
+<template name="partnersSingleCollectionSample">
+    <div class="row col-md-12">
+        <div class="col-md-8">
+            <h1>Collection</h1>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-warning">Edit</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {{#if editMode}}
+    {{> quickForm collection="Partners" doc=partner_single id=updateCollectionSampleId type="update" class="edit edit-collection-form"}}
+    {{else}}
+    <div class="row col-md-12">
+        <div class="col-md-6">
+            <h3>Partner name : {{partner_single.name}} {{partner_single.surname}}</h3>
+        </div>
+    </div>
+    {{/if}}
+</template>
+
+<template name="sideNavbarpartners">
+    <div class="col">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            {{{leftSidebar}}}
+        </div>
+    </div>
+</template>

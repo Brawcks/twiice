@@ -71,16 +71,17 @@
         <div class="container">
                 <a class="card-title" href="{{pathFor 'project/projectsingle' _id=_id}}">{{name}}</a>
             <div class="d-flex flex-column">
-                    <span><i>Made by {{owner}}</i></span>
-                    <span class="card-subtitle">{{subtitle}}</span>
+                <span class="card-subtitle">{{subtitle}}</span>
             </div>
             <div class="card-text">
                 <div class="desc">{{desc}}</div>
                 <span>{{priority}} priority</span>
+                <span><i>Created by {{owner}}</i></span>
                 <!-- <div class="container">
                     <div>{{dateBegin}}</div>
                     <div>{{dateEnd}}</div>
                 </div> -->
+                <br>
                 <button type="button" class="btn btn-danger">Delete</button>
             </div>
         </div>
@@ -89,7 +90,7 @@
 
 <template name="newProject">
     <div class="col-12">
-        <h1>{{_ "New Project"}}</h1>
+        <h1>{{_ "New Task"}}</h1>
         {{> quickForm collection="Project" id="insertProjectForm" type="insert" class="new-collection-sample-form"}}
     </div>
 </template>
@@ -110,17 +111,16 @@
     {{#if editMode}}
         {{> quickForm collection="Project" doc=projectSingle id="updateId" type="update" class="edit edit-project-form"}}
     {{else}}
-    <div class="row col-md-12">
-        <div class="col-md-6">
-            <h3>Task : {{projectSingle.name}}</h3>
-            <p>Task Subtitle : {{projectSingle.subtitle}}</p>
-            <p>Task description{{projectSingle.desc}}</p>
-            <p>Task state : {{projectSingle.state}}</p>
-            <p>Priority : {{projectSingle.priority}}</p>
-            <p>Begin date :{{projectSingle.dateBegin}}</p>
-            <p>End date : {{projectSingle.dateEnd}}</p>
-            <h4>Created by : {{projectSingle.owner}}</h4>
-        </div>
+    <div class="col-md-12">
+        <h3>Task : {{projectSingle.name}}</h3>
+        <p>Task Subtitle : {{projectSingle.subtitle}}</p>
+        <h5>Client : {{projectSingle.client}}</h5>
+        <p>Task description{{projectSingle.desc}}</p>
+        <p>Task state : {{projectSingle.state}}</p>
+        <p>Priority : {{projectSingle.priority}}</p>
+        <p>Begin date :{{projectSingle.dateBegin}}</p>
+        <p>End date : {{projectSingle.dateEnd}}</p>
+        <h4>Created by : {{projectSingle.owner}}</h4>
     </div>
     {{/if}}
 </template>

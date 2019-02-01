@@ -2,15 +2,15 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "http://localhost:3000/module-test"
+            "url": "http://twiice.eu.meteorapp.com:3000/module-test"
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "http://localhost:3000/module-test/sub-module"
+            "url": "http://twiice.eu.meteorapp.com:3000/module-test/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "http://localhost:3000/module-test/settings"
+            "url": "http://twiice.eu.meteorapp.com:3000/module-test/settings"
         }
     }
 }

@@ -21,6 +21,27 @@ PartnersSchema = new SimpleSchema ({
     surname: {
         type: String,
         label: "Partner surname"
+    },
+    address: {
+        type: Object,
+        label: "Partner address informations"
+    },
+    'address.street1': {
+        type: String,
+        label: "Address street 1"
+    },
+    'address.street2': {
+        type: String,
+        optional: true,
+        label: "Address street 2"
+    },
+    'address.city': {
+        type: String,
+        label: "City"
+    },
+    'address.zip': {
+        type: String,
+        label: "ZIP Code"
     }
 });
 

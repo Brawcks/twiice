@@ -13,7 +13,6 @@ Template.partnersTreeView.onCreated(function() {
     self.autorun(function() {
         self.subscribe('Partners');
     });
-    console.log(Partners.find({}).map( function(u) { console.log( "user: " + u.name ); } ));
     // Here we build the instance to set variables
     const instance = this;
     // This var will allow us to use filters on collection, with events and helpers
@@ -67,6 +66,7 @@ Template.partnersTreeView.events({
     },
     'click .tw-filter-remove': function (events, template) {
         Template.instance().filtersVar.set({});
+        console.log(Partners.find({}).map(s => s._id));
     },
 });
 

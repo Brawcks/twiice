@@ -14,6 +14,15 @@ Template.projectTreeView.onCreated(function() {
         self.subscribe('Project');
     });
 });
+
+Template.newProject.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        // Subscribe to many to one collection relation.
+        self.subscribe('Partners');
+    });
+});
+
 Template.projectKanbanView.onCreated(function() {
     var self = this;
     self.autorun(function() {

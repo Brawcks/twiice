@@ -59,14 +59,14 @@ Project_Schema = new SimpleSchema ({
     },
     owner: {
         type: String,
-        label: "Owner *"
-    },
-    title: {
-        type: String,
-        label: "Title",
-        optional: true
+        label: "Owner *",
+        autoValue() {
+            return Meteor.user().emails[0].address;
+        },
+        autoform: {
+            type: "hidden",
+        }
     }
-
 });
 
 Meteor.methods({

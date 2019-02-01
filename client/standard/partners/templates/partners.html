@@ -84,6 +84,14 @@
     <div class="row col-md-12">
         <div class="col-md-6">
             <h3>Partner name : {{partner_single.name}} {{partner_single.surname}}</h3>
+            <hr>
+            <div class="bg-light tw-display-partnerInfo">
+                <h3>Partner address</h3>
+                <h5>Street 1 : {{partner_single.address.street1}}</h5>
+                <h5>Street 2 : {{partner_single.address.street2}}</h5>
+                <h5>City : {{partner_single.address.city}}</h5>
+                <h5>ZIP : {{partner_single.address.zip}}</h5>
+            </div>
         </div>
     </div>
     {{/if}}

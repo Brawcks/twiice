@@ -66,7 +66,7 @@ Template.partnersTreeView.events({
     },
     'click .tw-filter-remove': function (events, template) {
         Template.instance().filtersVar.set({});
-        console.log(Partners.find({}).map(s => s._id));
+        console.log(Meteor.user());
     },
 });
 

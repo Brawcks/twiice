@@ -5,6 +5,7 @@ Template.projectSingle.onCreated(function() {
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
         self.subscribe('Project', id);
+        self.subscribe('Partners');
     });
 });
 

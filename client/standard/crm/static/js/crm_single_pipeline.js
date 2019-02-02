@@ -4,6 +4,7 @@ Template.crmSinglePipeline.onCreated(function() {
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
         self.subscribe('Pipelines', id);
+        self.subscribe('Partners');
     });
 });
 

@@ -23,7 +23,8 @@ Project_Schema = new SimpleSchema ({
     },
     subtitle: {
         type: String,
-        label: "Subtitle *"
+        optional: true,
+        label: "Subtitle"
     },
     desc: {
         type: String,
@@ -33,8 +34,9 @@ Project_Schema = new SimpleSchema ({
     client: {
         type: String,
         label: "Client name",
+        optional: true,
         allowedValues() {
-            return Partners.find({}).map(s => s.name + ' ' + s.surname);
+            return Partners.find({'partner_details.is_customer': true}).map(s => s.name + ' ' + s.surname);
         }
     },
     state: {

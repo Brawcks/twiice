@@ -35,6 +35,7 @@ Template.crmTreeView.onCreated(function () {
 
 Template.crmNewPipeline.onCreated(function () {
     var self = this;
+    self.subscribe('Partners');
     // Meteor.call('tw_field_decoration', 'new-pipelines-form'); // To Use later
 
 });

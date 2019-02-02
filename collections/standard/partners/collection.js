@@ -24,10 +24,12 @@ PartnersSchema = new SimpleSchema ({
     },
     address: {
         type: Object,
+        optional: true,
         label: "Partner address informations"
     },
     'address.street1': {
         type: String,
+        optional: true,
         label: "Address street 1"
     },
     'address.street2': {
@@ -37,11 +39,22 @@ PartnersSchema = new SimpleSchema ({
     },
     'address.city': {
         type: String,
+        optional: true,
         label: "City"
     },
     'address.zip': {
         type: String,
+        optional: true,
         label: "ZIP Code"
+    },
+    partner_details: {
+        type: Object,
+        label: "Partner details"
+    },
+    'partner_details.is_customer': {
+        type: Boolean,
+        optional: true,
+        label: "Is a customer ?"
     }
 });
 

@@ -30,19 +30,19 @@ echo "{
     \"sidebar\": {
         \"dashboard\": {
             \"name\": \"Dashboard\",
-            \"url\": \"http://twiice.eu.meteorapp.com:3000/${1}\"
+            \"url\": \"http://localhost:3000/${1}\"
         },
         \"new-collection-sample\": {
             \"name\": \"New Collection Sample\",
-            \"url\": \"http://twiice.eu.meteorapp.com:3000/${1}/new-collection-sample\"
+            \"url\": \"http://localhost:3000/${1}/new-collection-sample\"
         },
         \"sub-module\": {
             \"name\": \"Sub-Module\",
-            \"url\": \"http://twiice.eu.meteorapp.com:3000/${1}/sub-module\"
+            \"url\": \"http://localhost:3000/${1}/sub-module\"
         },
         \"settings\": {
             \"name\": \"Settings\",
-            \"url\": \"http://twiice.eu.meteorapp.com:3000/${1}/settings\"
+            \"url\": \"http://localhost:3000/${1}/settings\"
         }
     }
 }" > client/standard/${1}/static/js/data/sidebar.json
@@ -104,6 +104,13 @@ Template.${1}TreeView.onCreated(function() {
     const instance = this;
     // This var will allow us to use filters on collection, with events and helpers
     instance.filtersVar = new ReactiveVar({});
+});
+
+Template.newCollectionSample${1}.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        self.subscribe('Collection_sample');
+    });
 });
 
 // LOAD DATA ON TEMPLATES 
@@ -236,9 +243,9 @@ echo "<template name=\"${1}\">
             <thead>
                 <tr>
                     <th scope=\"col\">#</th>
-                    <th scope=\"col\">Name</th>
-                    <th scope=\"col\">Description</th>
-                    <th scope=\"col\">Actions</th>
+                    <th scope=\"col\">{{_ \"Name\"}}</th>
+                    <th scope=\"col\">{{_ \"Description\"}}</th>
+                    <th scope=\"col\">{{_ \"Actions\"}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -248,8 +255,8 @@ echo "<template name=\"${1}\">
                     <td><a href=\"{{pathFor '${1}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">{{name}}</a></td>
                     <td>{{desc}}</td>
                     <td>
-                        <a href=\"{{pathFor '${1}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">View Details</a>
-                        <button type=\"button\" class=\"btn btn-danger\">Delete</button>
+                        <a href=\"{{pathFor '${1}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">{{_ \"View Details\"}}</a>
+                        <button type=\"button\" class=\"btn btn-danger\">{{_ \"Delete\"}}</button>
                     </td>
                 </tr>
                 {{/each}}
@@ -272,8 +279,8 @@ echo "<template name=\"${1}\">
         </div>
         <div class=\"col-md-4\">
             <div class=\"pull-right\">
-                <button type=\"button\" class=\"btn btn-danger\">Delete</button>
-                <button type=\"button\" class=\"btn btn-warning\">Edit</button>
+                <button type=\"button\" class=\"btn btn-danger\">{{_ \"Delete\"}}</button>
+                <button type=\"button\" class=\"btn btn-warning\">{{_ \"Edit\"}}</button>
             </div>
         </div>
     </div>
@@ -357,6 +364,14 @@ FlowRouter.route('/${1}/collection-sample/:_id', {
 });" > lib/router/standard/${1}/routes.js
 
 printf "\nimport './${1}/routes.js';" >> lib/router/standard/main.js
+
+mkdir -p lib/i18n/standard/${1}/i18n
+
+touch lib/i18n/standard/${1}/i18n/fr.i18n.json
+
+echo "import './i18n/fr.i18n.json'" > lib/i18n/standard/${1}/main.js
+
+printf "\nimport './${1}/main.js';" >> lib/i18n/standard/main.js
 
 # SERVER SIDE COMPONENTS
 

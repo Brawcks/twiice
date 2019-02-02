@@ -10,34 +10,34 @@
                 "tpee": {
                     "name": "Tpee",
                     "technical_name": "tpee",
-                    "url": "http://twiice.eu.meteorapp.com:3000"
+                    "url": "http://localhost:3000"
                 },
                 "users": {
                     "name": "Users",
                     "technical_name": "users",
-                    "url": "http://twiice.eu.meteorapp.com:3000/users"
+                    "url": "http://localhost:3000/users"
                 },
                 "crm": {
                     "name": "CRM",
                     "technical_name": "crm",
-                    "url": "http://twiice.eu.meteorapp.com:3000/crm"
+                    "url": "http://localhost:3000/crm"
                 },
                 "project": {
                     "name": "Project",
                     "technical_name": "project",
-                    "url": "http://twiice.eu.meteorapp.com:3000/project"
+                    "url": "http://localhost:3000/project"
                 },
                 "partners": {
                     "name": "Partners",
                     "technical_name": "partners",
-                    "url": "http://twiice.eu.meteorapp.com:3000/partners"
+                    "url": "http://localhost:3000/partners"
                 }
             },
             "customer": {
                 "module_test": {
                     "name": "Module test",
                     "technical_name": "module_test",
-                    "url": "http://twiice.eu.meteorapp.com:3000/module-test"
+                    "url": "http://localhost:3000/module-test"
                 }
             },
             "displayOptions": {

@@ -17,12 +17,52 @@ Template.partnersTreeView.onCreated(function() {
     const instance = this;
     // This var will allow us to use filters on collection, with events and helpers
     instance.filtersVar = new ReactiveVar({});
+    
+    // Here we will build pagination
+    instance.page = new ReactiveVar({});
+    instance.computedSkip = new ReactiveVar({});
+    // Use the value below to define how many result you want to display
+    instance.resultPerPage = 3;
+
+
+    if (FlowRouter.getParam('page')) {
+        instance.page.set(FlowRouter.getParam('page'));
+        instance.computedSkip.set((instance.resultPerPage * instance.page.get()) - instance.resultPerPage);
+    } else {
+        instance.computedSkip.set(0);
+        instance.page.set(0);
+
+    }
 });
 
 // LOAD DATA ON TEMPLATES 
 Template.partnersTreeView.helpers({
     partners: () => {
-        return Partners.find(Template.instance().filtersVar.get(), { limit: 10 });
+        return Partners.find(Template.instance().filtersVar.get(), { 
+            limit: Template.instance().resultPerPage, 
+            skip: Template.instance().computedSkip.get()
+        });
+    },
+    pagination: () => {
+        var totalRecords = Partners.find().count();
+        var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage);
+        var lastRecords = totalRecords % Template.instance().resultPerPage;
+        switch (lastRecords) {
+            case 0:
+                break;
+            default:
+                pagesNumber += 1;
+                break;
+        };
+        var displayPages = "";
+        if (pagesNumber > 1) {
+            displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() - 1)+'" href="/'+FlowRouter.getRouteName()+'/'+(Template.instance().page.get() - 1)+'">Previous</a></li>';
+            for (let index = 1; index <= pagesNumber; index++) {
+                displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+index+'" href="/'+FlowRouter.getRouteName()+'/'+index+'">'+index+'</a></li>';
+            };
+            displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() + 1)+'" href="/'+FlowRouter.getRouteName()+'/'+(Template.instance().page.get() + 1)+'">Next</a></li>';
+        }
+        return displayPages;
     },
     collection_key: () => {
         var filters_partners = [];
@@ -66,7 +106,10 @@ Template.partnersTreeView.events({
     },
     'click .tw-filter-remove': function (events, template) {
         Template.instance().filtersVar.set({});
-        console.log(Meteor.user());
+    },
+    'click .tw-paginate-button': function (events, template) {
+        console.log(event.target.id);
+        Template.instance().computedSkip.set((Template.instance().resultPerPage * event.target.id) - Template.instance().resultPerPage)
     },
 });
 

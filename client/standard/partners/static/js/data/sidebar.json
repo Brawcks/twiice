@@ -5,8 +5,8 @@
             "url": "http://localhost:3000/partners"
         },
         "new-collection-sample": {
-            "name": "New Collection Sample",
-            "url": "http://localhost:3000/partners/new-collection-sample"
+            "name": "New partner",
+            "url": "http://localhost:3000/partners/new-partner"
         },
         "sub-module": {
             "name": "Sub-Module",

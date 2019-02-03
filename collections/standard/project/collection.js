@@ -66,7 +66,7 @@ Project_Schema = new SimpleSchema ({
             return Meteor.user().emails[0].address;
         },
         autoform: {
-            type: "hidden",
+            type: "hidden"
         }
     }
 });

@@ -77,10 +77,9 @@
                 <div class="desc">{{desc}}</div>
                 <span>{{priority}} priority</span>
                 <span><i>Created by {{owner}}</i></span>
-                <!-- <div class="container">
-                    <div>{{dateBegin}}</div>
-                    <div>{{dateEnd}}</div>
-                </div> -->
+                <div class="container">
+                    <div>{{date_rest}}</div>
+                </div> 
                 <br>
                 <button type="button" class="btn btn-danger">Delete</button>
             </div>
@@ -118,8 +117,7 @@
         <p>Task description{{projectSingle.desc}}</p>
         <p>Task state : {{projectSingle.state}}</p>
         <p>Priority : {{projectSingle.priority}}</p>
-        <p>Begin date :{{projectSingle.dateBegin}}</p>
-        <p>End date : {{projectSingle.dateEnd}}</p>
+        <p>Time left : {{date_rest}}</p>
         <h4>Created by : {{projectSingle.owner}}</h4>
     </div>
     {{/if}}

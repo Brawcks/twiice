@@ -1,9 +1,11 @@
+import { Meteor } from "meteor/meteor";
+
 // TREE VIEW TEMPLATE
 
 Template.usersTreeView.onCreated(function() {
     var self = this;
     self.autorun(function() {
-        self.subscribe('userList');
+        // self.subscribe('users');
     })
 });
 
@@ -12,5 +14,3 @@ Template.usersTreeView.helpers({
         return Meteor.users.find({});
     }
 });
-
-console.log(Meteor.users.find({}));

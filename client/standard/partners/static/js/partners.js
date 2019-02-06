@@ -22,12 +22,13 @@ Template.partnersTreeView.onCreated(function() {
     instance.page = new ReactiveVar({});
     instance.computedSkip = new ReactiveVar({});
     // Use the value below to define how many result you want to display
-    instance.resultPerPage = 3;
+    instance.resultPerPage = new ReactiveVar({});
+    instance.resultPerPage.set(3);
 
 
     if (FlowRouter.getParam('page')) {
         instance.page.set(FlowRouter.getParam('page'));
-        instance.computedSkip.set((instance.resultPerPage * instance.page.get()) - instance.resultPerPage);
+        instance.computedSkip.set((instance.resultPerPage.get() * instance.page.get()) - instance.resultPerPage.get());
     } else {
         instance.computedSkip.set(0);
         instance.page.set(0);
@@ -39,14 +40,14 @@ Template.partnersTreeView.onCreated(function() {
 Template.partnersTreeView.helpers({
     partners: () => {
         return Partners.find(Template.instance().filtersVar.get(), { 
-            limit: Template.instance().resultPerPage, 
+            limit: Template.instance().resultPerPage.get(), 
             skip: Template.instance().computedSkip.get()
         });
     },
     pagination: () => {
         var totalRecords = Partners.find().count();
-        var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage);
-        var lastRecords = totalRecords % Template.instance().resultPerPage;
+        var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage.get());
+        var lastRecords = totalRecords % Template.instance().resultPerPage.get();
         switch (lastRecords) {
             case 0:
                 break;
@@ -82,7 +83,10 @@ Template.partnersTreeView.events({
         swal("Deleted", "This record was properly deleted !", "success");
     },
     'click .export-csv': function(events, template){
-        var data = Papa.unparse(Partners.find({}, { limit: 10 }).fetch());
+        var data = Papa.unparse(Partners.find(Template.instance().filtersVar.get(), { 
+            limit: Template.instance().resultPerPage.get(), 
+            skip: Template.instance().computedSkip.get()
+        }).fetch());
         var date = new Date().toISOString().slice(0, 10);
         Meteor.call('download_csv', data, 'partners_'+date+'.csv', 'text/csv;encoding:utf-8');
         swal("Yeah !", "Your CSV document is available !", "success");
@@ -111,10 +115,14 @@ Template.partnersTreeView.events({
         Template.instance().filtersVar.set({});
     },
     'click .tw-paginate-button': function (events, template) {
-        console.log(event.target.id);
         Template.instance().page.set(event.target.id)
-        Template.instance().computedSkip.set((Template.instance().resultPerPage * event.target.id) - Template.instance().resultPerPage)
+        Template.instance().computedSkip.set((Template.instance().resultPerPage.get() * event.target.id) - Template.instance().resultPerPage.get())
     },
+    'click .tw-btn-results-number': function (events, template) {
+        var resultsNumber = $('#resultsNumber').val();
+        Template.instance().resultPerPage.set(parseFloat(resultsNumber));
+        console.log(Template.instance().resultPerPage.get());
+    }
 });
 
 // CRM ADD TEMPLATE

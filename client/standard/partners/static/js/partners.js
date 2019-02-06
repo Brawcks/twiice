@@ -1,5 +1,6 @@
-import { leftSidebarCustomer, filter_operator } from './functions/functions.js';
+import { leftSidebarCustomer } from './functions/functions.js';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { isEmptyObject, filter_operator } from '../../../tpee/static/js/functions/functions.js';
 
 Template.sideNavbarpartners.helpers({
     leftSidebar: () => {
@@ -80,6 +81,7 @@ Template.partnersTreeView.events({
     'click .btn-danger': function (){
         Meteor.call('partnersDeletePartners', this._id);
         swal("Deleted", "This record was properly deleted !", "success");
+        filter_operator
     },
     'click .export-csv': function(events, template){
         var data = Papa.unparse(Partners.find(Template.instance().filtersVar.get(), { 
@@ -105,6 +107,11 @@ Template.partnersTreeView.events({
     },
     'click .tw-filter-submit': function (events, template) {
         // swal("Ooops !", "This function is not available yet !", "info");
+        var concatFilters = Template.instance().filtersVar.get();
+        // Code below check if object is empty
+        if (isEmptyObject(concatFilters)) {
+            console.log("mdr");
+        }
         var filterOperator = $('#partnersFilterOperator').val();
         var selectFilter = $('#partnersFilterSelect').val();
         var filterVal = $('.tw-filter-input').val();

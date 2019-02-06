@@ -104,6 +104,21 @@ Template.${1}TreeView.onCreated(function() {
     const instance = this;
     // This var will allow us to use filters on collection, with events and helpers
     instance.filtersVar = new ReactiveVar({});
+    
+    // Here we will build pagination
+    instance.page = new ReactiveVar({});
+    instance.computedSkip = new ReactiveVar({});
+    // Use the value below to define how many result you want to display
+    instance.resultPerPage = new ReactiveVar({});
+    instance.resultPerPage.set(3);
+
+    if (FlowRouter.getParam('page')) {
+        instance.page.set(FlowRouter.getParam('page'));
+        instance.computedSkip.set((instance.resultPerPage.get() * instance.page.get()) - instance.resultPerPage.get());
+    } else {
+        instance.computedSkip.set(0);
+        instance.page.set(0);
+    }
 });
 
 Template.newCollectionSample${1}.onCreated(function() {
@@ -116,7 +131,34 @@ Template.newCollectionSample${1}.onCreated(function() {
 // LOAD DATA ON TEMPLATES 
 Template.${1}TreeView.helpers({
     collection_sample: () => {
-        return Collection_sample.find(Template.instance().filtersVar.get(), { limit: 10 });
+        return Collection_sample.find(Template.instance().filtersVar.get(), { 
+            limit: Template.instance().resultPerPage.get(), 
+            skip: Template.instance().computedSkip.get()
+        });
+    },
+    pagination: () => {
+        var totalRecords = Partners.find().count();
+        var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage.get());
+        var lastRecords = totalRecords % Template.instance().resultPerPage.get();
+        switch (lastRecords) {
+            case 0:
+                break;
+            default:
+                pagesNumber += 1;
+                break;
+        };
+        var displayPages = \"\";
+        if (pagesNumber > 1) {
+            displayPages = '<li class=\"page-item tw-paginate-button\"><a class=\"page-link\" id=\"'+(Template.instance().page.get() - 1)+'\" href=\"'+FlowRouter.path('${1}/page')+'/'+(Template.instance().page.get() - 1)+'\">Previous</a></li>';
+            if (Template.instance().page.get() == 0) {
+                displayPages = '<li class=\"page-item tw-paginate-button\"><a class=\"page-link\" id=\"'+(Template.instance().page.get() + 1)+'\" href=\"'+FlowRouter.path('${1}/page')+'/'+(Template.instance().page.get() + 1)+'\">Previous</a></li>';
+            } 
+            for (let index = 1; index <= pagesNumber; index++) {
+                displayPages += '<li class=\"page-item tw-paginate-button\"><a class=\"page-link\" id=\"'+index+'\" href=\"'+FlowRouter.path('${1}/page')+'/'+index+'\">'+index+'</a></li>';
+            };
+            displayPages += '<li class=\"page-item tw-paginate-button\"><a class=\"page-link\" id=\"'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'\" href=\"'+FlowRouter.path('${1}/page')+'/'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'\">Next</a></li>';
+        }
+        return displayPages;
     },
     collection_key: () => {
         var filters_${1} = [];
@@ -161,6 +203,14 @@ Template.${1}TreeView.events({
     'click .tw-filter-remove': function (events, template) {
         Template.instance().filtersVar.set({});
     },
+    'click .tw-paginate-button': function (events, template) {
+        Template.instance().page.set(event.target.id)
+        Template.instance().computedSkip.set((Template.instance().resultPerPage.get() * event.target.id) - Template.instance().resultPerPage.get())
+    },
+    'keyup #resultsNumber': function (events, template) {
+        var resultsNumber = \$('#resultsNumber').val();
+        Template.instance().resultPerPage.set(parseFloat(resultsNumber));
+    }
 });
 
 // CRM ADD TEMPLATE
@@ -234,6 +284,11 @@ echo "<template name=\"${1}\">
             <input type=\"text\" placeholder=\"Filter by ...\" class=\"col-6 tw-filter-input\">
             <button class=\"btn btn-primary tw-filter-submit\" type=\"submit\">{{_ \"Validate\"}}</button>
             <button class=\"btn btn-warning tw-filter-remove\" type=\"submit\">{{_ \"Remove filters\"}}</button>
+            <div class=\"row col-2 align-self-end mt-4\">
+                <div class=\"col\">
+                    <input type=\"text\" class=\"form-control\" placeholder=\"Number of results\" id=\"resultsNumber\">
+                </div>
+            </div>
         </div>
         <hr>
         <button type=\"button\" class=\"btn btn-success export-csv pull-right\">{{_ \"Export to csv\"}}</button>
@@ -262,6 +317,11 @@ echo "<template name=\"${1}\">
                 {{/each}}
             </tbody>
         </table>
+        <nav aria-label=\"Page navigation example\">
+            <ul class=\"pagination\">
+                {{{pagination}}}
+            </ul>
+        </nav>
     </div>
 </template>
 
@@ -325,6 +385,14 @@ mkdir lib/router/standard/${1}
 
 echo "FlowRouter.route('/${1}', {
     name: '${1}',
+    action() {
+        // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
+        BlazeLayout.render('mainTemplate', {module: '${1}', sidebar: 'sideNavbar${1}', view: '${1}TreeView'});
+    }
+});
+
+FlowRouter.route('/${1}/page/:page', {
+    name: '${1}/page',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
         BlazeLayout.render('mainTemplate', {module: '${1}', sidebar: 'sideNavbar${1}', view: '${1}TreeView'});

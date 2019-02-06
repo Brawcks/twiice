@@ -137,7 +137,7 @@ Template.${1}TreeView.helpers({
         });
     },
     pagination: () => {
-        var totalRecords = Partners.find().count();
+        var totalRecords = Collection_sample.find().count();
         var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage.get());
         var lastRecords = totalRecords % Template.instance().resultPerPage.get();
         switch (lastRecords) {
@@ -284,6 +284,8 @@ echo "<template name=\"${1}\">
             <input type=\"text\" placeholder=\"Filter by ...\" class=\"col-6 tw-filter-input\">
             <button class=\"btn btn-primary tw-filter-submit\" type=\"submit\">{{_ \"Validate\"}}</button>
             <button class=\"btn btn-warning tw-filter-remove\" type=\"submit\">{{_ \"Remove filters\"}}</button>
+        </div>
+        <div class=\"row justify-content-end\">
             <div class=\"row col-2 align-self-end mt-4\">
                 <div class=\"col\">
                     <input type=\"text\" class=\"form-control\" placeholder=\"Number of results\" id=\"resultsNumber\">

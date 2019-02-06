@@ -32,7 +32,6 @@ Template.partnersTreeView.onCreated(function() {
     } else {
         instance.computedSkip.set(0);
         instance.page.set(0);
-
     }
 });
 
@@ -118,10 +117,9 @@ Template.partnersTreeView.events({
         Template.instance().page.set(event.target.id)
         Template.instance().computedSkip.set((Template.instance().resultPerPage.get() * event.target.id) - Template.instance().resultPerPage.get())
     },
-    'click .tw-btn-results-number': function (events, template) {
+    'keyup #resultsNumber': function (events, template) {
         var resultsNumber = $('#resultsNumber').val();
         Template.instance().resultPerPage.set(parseFloat(resultsNumber));
-        console.log(Template.instance().resultPerPage.get());
     }
 });
 

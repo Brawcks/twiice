@@ -56,11 +56,14 @@ Template.partnersTreeView.helpers({
         };
         var displayPages = "";
         if (pagesNumber > 1) {
-            displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() - 1)+'" href="/'+FlowRouter.getRouteName()+'/'+(Template.instance().page.get() - 1)+'">Previous</a></li>';
+            displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() - 1)+'" href="'+FlowRouter.path('partners/page')+'/'+(Template.instance().page.get() - 1)+'">Previous</a></li>';
+            if (Template.instance().page.get() == 0) {
+                displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() + 1)+'" href="'+FlowRouter.path('partners/page')+'/'+(Template.instance().page.get() + 1)+'">Previous</a></li>';
+            } 
             for (let index = 1; index <= pagesNumber; index++) {
-                displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+index+'" href="/'+FlowRouter.getRouteName()+'/'+index+'">'+index+'</a></li>';
+                displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+index+'" href="'+FlowRouter.path('partners/page')+'/'+index+'">'+index+'</a></li>';
             };
-            displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() + 1)+'" href="/'+FlowRouter.getRouteName()+'/'+(Template.instance().page.get() + 1)+'">Next</a></li>';
+            displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'" href="'+FlowRouter.path('partners/page')+'/'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'">Next</a></li>';
         }
         return displayPages;
     },
@@ -109,6 +112,7 @@ Template.partnersTreeView.events({
     },
     'click .tw-paginate-button': function (events, template) {
         console.log(event.target.id);
+        Template.instance().page.set(event.target.id)
         Template.instance().computedSkip.set((Template.instance().resultPerPage * event.target.id) - Template.instance().resultPerPage)
     },
 });

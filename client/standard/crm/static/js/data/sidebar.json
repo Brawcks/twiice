@@ -2,19 +2,19 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "http://twiice.eu.meteorapp.com:3000/crm"
+            "url": "http://localhost:3000/crm"
         },
         "new-pipelines": {
             "name": "New Pipelines",
-            "url": "http://twiice.eu.meteorapp.com:3000/crm/new-pipeline"
+            "url": "http://localhost:3000/crm/new-pipeline"
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "http://twiice.eu.meteorapp.com:3000/crm/sub-module"
+            "url": "http://localhost:3000/crm/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "http://twiice.eu.meteorapp.com:3000/crm/settings"
+            "url": "http://localhost:3000/crm/settings"
         }
     }
 }

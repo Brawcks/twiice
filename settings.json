@@ -31,6 +31,11 @@
                     "name": "Partners",
                     "technical_name": "partners",
                     "url": "http://localhost:3000/partners"
+                },
+                "recruitment": {
+                    "name": "recruitment",
+                    "technical_name": "recruitment",
+                    "url": "http://localhost:3000/recruitment"
                 }
             },
             "customer": {

@@ -1,3 +1,4 @@
+import { restTime } from './functions/functions.js';
 
 Template.projectSingle.onCreated(function() {
     var self = this;
@@ -5,6 +6,7 @@ Template.projectSingle.onCreated(function() {
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
         self.subscribe('Project', id);
+        self.subscribe('Partners');
     });
 });
 
@@ -19,6 +21,14 @@ Template.projectSingle.helpers({
     editMode: function () {
         return Template.instance().editMode.get();
     },
+    date_rest: function() {
+        var id = FlowRouter.getParam('_id');
+        var data = Project.findOne({_id: id});
+
+        var dateA = data.dateBegin;
+        var dateB = data.dateEnd;
+        return restTime(dateA,dateB);
+    }
 });
 
 Template.projectSingle.events({

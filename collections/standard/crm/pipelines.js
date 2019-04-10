@@ -54,8 +54,8 @@ PipelinesSchema = new SimpleSchema ({
         type: String,
         label: "Customer",
         optional: true,
-        autoform: {
-            placeholder: "Who's your customer ?",
+        allowedValues() {
+            return Partners.find({'partner_details.is_customer': true}).map(s => s.name + ' ' + s.surname)
         }
     },
     expected_closing: {

@@ -1,4 +1,4 @@
-import { leftSidebarCustomer } from './functions/functions.js';
+import { leftSidebarCustomer, restTime } from './functions/functions.js';
 
 
 Template.sideNavbarproject.helpers({
@@ -6,6 +6,16 @@ Template.sideNavbarproject.helpers({
         return leftSidebarCustomer();
     },
 });
+Template.project_card.helpers({
+    date_rest: function() {
+        var data = Project.findOne(this._id);
+
+        var dateA = data.dateBegin;
+        var dateB = data.dateEnd;
+        return restTime(dateA,dateB);
+    }
+});
+
 
 // SUBSCRIBE TO PIPELINES PUBLICATIONS ON TEMPLATES
 Template.projectTreeView.onCreated(function() {
@@ -14,6 +24,15 @@ Template.projectTreeView.onCreated(function() {
         self.subscribe('Project');
     });
 });
+
+Template.newProject.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        // Subscribe to many to one collection relation.
+        self.subscribe('Partners');
+    });
+});
+
 Template.projectKanbanView.onCreated(function() {
     var self = this;
     self.autorun(function() {

@@ -5,7 +5,7 @@
             "url": "http://localhost:3000/project"
         },
         "new-collection-sample": {
-            "name": "New Collection Sample",
+            "name": "New task",
             "url": "http://localhost:3000/project/newproject"
         },
         "sub-module": {

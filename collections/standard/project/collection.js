@@ -19,44 +19,56 @@ Project.allow({
 Project_Schema = new SimpleSchema ({
     name: {
         type: String,
-        label: "Name"
+        label: "Name *"
     },
     subtitle: {
         type: String,
+        optional: true,
         label: "Subtitle"
     },
     desc: {
         type: String,
-        label: "Description"
+        label: "Description",
+        optional: true
+    },
+    client: {
+        type: String,
+        label: "Client name",
+        optional: true,
+        allowedValues() {
+            return Partners.find({'partner_details.is_customer': true}).map(s => s.name + ' ' + s.surname);
+        }
     },
     state: {
         type: String,
-        label: "State",
+        label: "State *",
         allowedValues: ['To do', 'Doing', 'Done']
     },
     dateBegin: {
         type: Date,
-        label: "Project beginning"
+        label: "Project beginning",
+        optional: true
     },
     dateEnd: {
         type: Date,
-        label: "Project Ending"
+        label: "Project Ending",
+        optional: true
     },
     priority: {
         type: String,
-        label: "Priority",
+        label: "Priority *",
         allowedValues: ['Low', 'Normal', 'High']
     },
     owner: {
         type: String,
-        label: "Owner"
-    },
-    title: {
-        type: String,
-        label: "Title",
-        optional: true
+        label: "Owner *",
+        autoValue() {
+            return Meteor.user().emails[0].address;
+        },
+        autoform: {
+            type: "hidden"
+        }
     }
-
 });
 
 Meteor.methods({

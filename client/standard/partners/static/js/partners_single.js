@@ -1,19 +1,19 @@
-Template.crmSinglePipeline.onCreated(function() {
+
+Template.partnersSingleCollectionSample.onCreated(function() {
     var self = this;
     this.editMode = new ReactiveVar(false);
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
-        self.subscribe('Pipelines', id);
-        self.subscribe('Partners');
+        self.subscribe('Partners', id);
     });
 });
 
-Template.crmSinglePipeline.helpers({
-    pipeline: () => {
+Template.partnersSingleCollectionSample.helpers({
+    partner_single: () => {
         var id = FlowRouter.getParam('_id');
-        return Pipelines.findOne({_id: id});
+        return Partners.findOne({_id: id});
     },
-    updatePipelineId: function() {
+    updateCollectionSampleId: function() {
         return FlowRouter.getParam('_id');
     },
     editMode: function () {
@@ -21,15 +21,15 @@ Template.crmSinglePipeline.helpers({
     },
 });
 
-Template.crmSinglePipeline.events({
+Template.partnersSingleCollectionSample.events({
     'click .btn-danger': function (){
         var id = FlowRouter.getParam('_id');
-        Meteor.call('crmDeletePipeline', id);
-        FlowRouter.go('crm');
+        Meteor.call('partnersDeleteCollection_sample', id);
+        FlowRouter.go('partners');
         swal("Deleted", "This record was properly deleted !", "success");
     },
     'click .btn-warning': function (event, template){
         template.editMode.set(!template.editMode.get());
-        console.log(template.editMode.get());
     },
 });
+

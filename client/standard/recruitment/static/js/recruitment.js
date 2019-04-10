@@ -1,18 +1,18 @@
 import { leftSidebarCustomer } from './functions/functions.js';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { isEmptyObject, filter_operator } from '../../../tpee/static/js/functions/functions.js';
+import { ReactiveVar } from 'meteor/reactive-var';
 
-Template.sideNavbarpartners.helpers({
+Template.sideNavbarrecruitment.helpers({
     leftSidebar: () => {
         return leftSidebarCustomer();
     },
 });
 
 // SUBSCRIBE TO PIPELINES PUBLICATIONS ON TEMPLATES
-Template.partnersTreeView.onCreated(function() {
+Template.recruitmentTreeView.onCreated(function() {
     var self = this;
     self.autorun(function() {
-        self.subscribe('Partners');
+        self.subscribe('Collection_sample');
     });
     // Here we build the instance to set variables
     const instance = this;
@@ -26,7 +26,6 @@ Template.partnersTreeView.onCreated(function() {
     instance.resultPerPage = new ReactiveVar({});
     instance.resultPerPage.set(3);
 
-
     if (FlowRouter.getParam('page')) {
         instance.page.set(FlowRouter.getParam('page'));
         instance.computedSkip.set((instance.resultPerPage.get() * instance.page.get()) - instance.resultPerPage.get());
@@ -36,16 +35,23 @@ Template.partnersTreeView.onCreated(function() {
     }
 });
 
+Template.newCollectionSamplerecruitment.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        self.subscribe('Collection_sample');
+    });
+});
+
 // LOAD DATA ON TEMPLATES 
-Template.partnersTreeView.helpers({
-    partners: () => {
-        return Partners.find(Template.instance().filtersVar.get(), { 
+Template.recruitmentTreeView.helpers({
+    collection_sample: () => {
+        return Collection_sample.find(Template.instance().filtersVar.get(), { 
             limit: Template.instance().resultPerPage.get(), 
             skip: Template.instance().computedSkip.get()
         });
     },
     pagination: () => {
-        var totalRecords = Partners.find().count();
+        var totalRecords = Collection_sample.find().count();
         var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage.get());
         var lastRecords = totalRecords % Template.instance().resultPerPage.get();
         switch (lastRecords) {
@@ -57,39 +63,35 @@ Template.partnersTreeView.helpers({
         };
         var displayPages = "";
         if (pagesNumber > 1) {
-            displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() - 1)+'" href="'+FlowRouter.path('partners/page')+'/'+(Template.instance().page.get() - 1)+'">Previous</a></li>';
+            displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() - 1)+'" href="'+FlowRouter.path('recruitment/page')+'/'+(Template.instance().page.get() - 1)+'">Previous</a></li>';
             if (Template.instance().page.get() == 0) {
-                displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() + 1)+'" href="'+FlowRouter.path('partners/page')+'/'+(Template.instance().page.get() + 1)+'">Previous</a></li>';
+                displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() + 1)+'" href="'+FlowRouter.path('recruitment/page')+'/'+(Template.instance().page.get() + 1)+'">Previous</a></li>';
             } 
             for (let index = 1; index <= pagesNumber; index++) {
-                displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+index+'" href="'+FlowRouter.path('partners/page')+'/'+index+'">'+index+'</a></li>';
+                displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+index+'" href="'+FlowRouter.path('recruitment/page')+'/'+index+'">'+index+'</a></li>';
             };
-            displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'" href="'+FlowRouter.path('partners/page')+'/'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'">Next</a></li>';
+            displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'" href="'+FlowRouter.path('recruitment/page')+'/'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'">Next</a></li>';
         }
         return displayPages;
     },
     collection_key: () => {
-        var filters_partners = [];
-        for (var key in Partners.findOne({})) {
-            filters_partners.push(key);
+        var filters_recruitment = [];
+        for (var key in Collection_sample.findOne({})) {
+            filters_recruitment.push(key);
         }
-        return filters_partners;
+        return filters_recruitment;
     }
 });
 
-Template.partnersTreeView.events({
+Template.recruitmentTreeView.events({
     'click .btn-danger': function (){
-        Meteor.call('partnersDeletePartners', this._id);
+        Meteor.call('recruitmentDeleteCollection_sample', this._id);
         swal("Deleted", "This record was properly deleted !", "success");
-        filter_operator
     },
     'click .export-csv': function(events, template){
-        var data = Papa.unparse(Partners.find(Template.instance().filtersVar.get(), { 
-            limit: Template.instance().resultPerPage.get(), 
-            skip: Template.instance().computedSkip.get()
-        }).fetch());
+        var data = Papa.unparse(Collection_sample.find({}, { limit: 10 }).fetch());
         var date = new Date().toISOString().slice(0, 10);
-        Meteor.call('download_csv', data, 'partners_'+date+'.csv', 'text/csv;encoding:utf-8');
+        Meteor.call('download_csv', data, 'recruitment_'+date+'.csv', 'text/csv;encoding:utf-8');
         swal("Yeah !", "Your CSV document is available !", "success");
     },
     'click .import-csv': function (events, template) {
@@ -107,13 +109,8 @@ Template.partnersTreeView.events({
     },
     'click .tw-filter-submit': function (events, template) {
         // swal("Ooops !", "This function is not available yet !", "info");
-        var concatFilters = Template.instance().filtersVar.get();
-        // Code below check if object is empty
-        if (isEmptyObject(concatFilters)) {
-            console.log("mdr");
-        }
-        var filterOperator = $('#partnersFilterOperator').val();
-        var selectFilter = $('#partnersFilterSelect').val();
+        var filterOperator = $('#recruitmentFilterOperator').val();
+        var selectFilter = $('#recruitmentFilterSelect').val();
         var filterVal = $('.tw-filter-input').val();
         Template.instance().filtersVar.set(filter_operator(filterOperator, selectFilter, filterVal))
     },
@@ -132,7 +129,7 @@ Template.partnersTreeView.events({
 
 // CRM ADD TEMPLATE
 
-Template.newCollectionSamplepartners.events({
+Template.newCollectionSamplerecruitment.events({
     'click button[type="submit"]': function (){
         swal("Hooray !", "This record was properly created !", "success");
     },

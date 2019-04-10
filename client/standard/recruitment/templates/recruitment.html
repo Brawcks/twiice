@@ -1,20 +1,20 @@
-<template name="partners">
+<template name="recruitment">
     <div class="col-12">
-        <h1>{{_ "Partners Dashboard"}}</h1>
+        <h1>recruitment Dashboard</h1>
     </div>
 </template>
 
-<template name="partnersTreeView">
+<template name="recruitmentTreeView">
     <div class="col-12 self-align-end">
         <div class="row justify-content-end">
             {{#if collection_key}}
-                <select name="partnersFilterSelect" id="partnersFilterSelect">
+                <select name="recruitmentFilterSelect" id="recruitmentFilterSelect">
                     {{#each collection_key}}
                         <option value="{{this}}">{{_ this}}</option>
                     {{/each}}
                 </select>
             {{/if}}
-            <select name="partnersFilterOperator" id="partnersFilterOperator">
+            <select name="recruitmentFilterOperator" id="recruitmentFilterOperator">
                 <option value="equalTo">{{_ "Equal to"}}</option>
                 <option value="isDifferentFrom">{{_ "Is different from"}}</option>
                 <option value="contain">{{_ "Contain"}}</option>
@@ -42,20 +42,20 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">{{_ "Name"}}</th>
+                    <th scope="col">{{_ "Description"}}</th>
                     <th scope="col">{{_ "Surname"}}</th>
-                    <th scope="col">{{_ "Address"}}</th>
                     <th scope="col">{{_ "Actions"}}</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each partners}}
+                {{#each collection_sample}}
                 <tr>
                     <th scope="row">{{@index}}</th>
-                    <td><a href="{{pathFor 'partners/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a></td>
-                    <td><a href="{{pathFor 'partners/collection-sample-single' _id=_id}}" title="{{name}}">{{surname}}</a></td>
-                    <td>{{address.street1}}{{#if address.street2}},{{address.street2}}{{/if}} {{address.city}} - {{address.zip}}</td>
+                    <td><a href="{{pathFor 'recruitment/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a></td>
+                    <td>{{desc}}</td>
+                    <td>{{surname}}</td>
                     <td>
-                        <a href="{{pathFor 'partners/collection-sample-single' _id=_id}}" title="{{name}}">{{_ "View Details"}}</a>
+                        <a href="{{pathFor 'recruitment/collection-sample-single' _id=_id}}" title="{{name}}">{{_ "View Details"}}</a>
                         <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
                     </td>
                 </tr>
@@ -70,17 +70,17 @@
     </div>
 </template>
 
-<template name="newCollectionSamplepartners">
+<template name="newCollectionSamplerecruitment">
     <div class="col-12">
-        <h1>{{_ "New partner"}}</h1>
-        {{> quickForm collection="Partners" id="insertCollection_sampleForm" type="insert" class="new-collection-sample-form"}}
+        <h1>New Collection sample</h1>
+        {{> quickForm collection="Collection_sample" id="insertCollection_sampleForm" type="insert" class="new-collection-sample-form"}}
     </div>
 </template>
 
-<template name="partnersSingleCollectionSample">
+<template name="recruitmentSingleCollectionSample">
     <div class="row col-md-12">
         <div class="col-md-8">
-            <h1>{{_ "Partner"}}</h1>
+            <h1>Collection</h1>
         </div>
         <div class="col-md-4">
             <div class="pull-right">
@@ -91,32 +91,18 @@
     </div>
     <hr>
     {{#if editMode}}
-    {{> quickForm collection="Partners" doc=partner_single id=updateCollectionSampleId type="update" class="edit edit-collection-form"}}
+    {{> quickForm collection="Collection_sample" doc=collection_sample_single id=updateCollectionSampleId type="update" class="edit edit-collection-form"}}
     {{else}}
     <div class="row col-md-12">
         <div class="col-md-6">
-            <h3>{{_ "Partner name"}} : {{partner_single.name}} {{partner_single.surname}}</h3>
-            <hr>
-            <div class="bg-light tw-display-partnerInfo col-6">
-                <h3>{{_ "Partner address"}}</h3>
-                <h5>{{_ "Street 1"}} : {{partner_single.address.street1}}</h5>
-                <h5>{{_ "Street 2"}} : {{partner_single.address.street2}}</h5>
-                <h5>{{_ "City"}} : {{partner_single.address.city}}</h5>
-                <h5>{{_ "ZIP"}} : {{partner_single.address.zip}}</h5>
-            </div>
-            <div class="bg-light tw-display-partnerInfo col-6">
-                {{#if partner_single.partner_details.is_customer}}
-                    <h5>{{_ "This partner is a customer"}}</h5>
-                    {{else}}
-                    <h5>{{_ "This partner isn't a customer"}}</h5>
-                {{/if}}
-            </div>
+            <h3>{{collection_sample_single.name}}</h3>
+            <p>{{collection_sample_single.desc}}</p>
         </div>
     </div>
     {{/if}}
 </template>
 
-<template name="sideNavbarpartners">
+<template name="sideNavbarrecruitment">
     <div class="col">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             {{{leftSidebar}}}

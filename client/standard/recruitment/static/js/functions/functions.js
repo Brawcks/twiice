@@ -8,3 +8,4 @@ export function leftSidebarCustomer() {
     });
     return leftSidebar;
 }
+

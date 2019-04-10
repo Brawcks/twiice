@@ -1,0 +1,20 @@
+{
+    "sidebar": {
+        "dashboard": {
+            "name": "Dashboard",
+            "url": "http://localhost:3000/partners"
+        },
+        "new-collection-sample": {
+            "name": "New Collection Sample",
+            "url": "http://localhost:3000/partners/new-collection-sample"
+        },
+        "sub-module": {
+            "name": "Sub-Module",
+            "url": "http://localhost:3000/partners/sub-module"
+        },
+        "settings": {
+            "name": "Settings",
+            "url": "http://localhost:3000/partners/settings"
+        }
+    }
+}

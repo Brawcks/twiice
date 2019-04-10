@@ -26,6 +26,11 @@
                     "name": "Project",
                     "technical_name": "project",
                     "url": "http://localhost:3000/project"
+                },
+                "partners": {
+                    "name": "Partners",
+                    "technical_name": "partners",
+                    "url": "http://localhost:3000/partners"
                 }
             },
             "customer": {

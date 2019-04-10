@@ -17,3 +17,4 @@ import './users/main.js';
 import './crm/main.js';
 import './project/main.js';
 import './partners/main.js';
+import './recruitment/main.js';

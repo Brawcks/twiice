@@ -33,7 +33,7 @@
                     "url": "http://localhost:3000/partners"
                 },
                 "recruitment": {
-                    "name": "recruitment",
+                    "name": "Recruitment",
                     "technical_name": "recruitment",
                     "url": "http://localhost:3000/recruitment"
                 }

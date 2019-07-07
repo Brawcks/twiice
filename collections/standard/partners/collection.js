@@ -22,6 +22,10 @@ PartnersSchema = new SimpleSchema ({
         type: String,
         label: "Partner surname"
     },
+    email: {
+        type: String,
+        label: "Partner email"
+    },
     address: {
         type: Object,
         optional: true,

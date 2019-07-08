@@ -12,8 +12,8 @@
         "modules": {
             "standard": {
                 "tpee": {
-                    "name": "Tpee",
-                    "technical_name": "tpee",
+                    "name": "Twiice",
+                    "technical_name": "twiice",
                     "url": "/"
                 },
                 "users": {

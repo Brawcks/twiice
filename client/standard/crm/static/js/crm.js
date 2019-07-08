@@ -20,7 +20,6 @@ Template.crmTreeView.onCreated(function () {
             // console.log(key);
             filters.push(key);
         }
-        console.log(filters);
     });
 
     if (FlowRouter.getParam('page')) {

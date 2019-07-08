@@ -56,11 +56,20 @@ PipelinesSchema = new SimpleSchema ({
         optional: true,
         autoform: {
             type: 'select',
-            options: function() { return [{label:"2013",value:2013},{label:"2014",value:2014},{label:"2015",value:2015}]}
+            options: function() { 
+                let partners = [];
+                Partners.find({'partner_details.is_customer': true}).forEach((doc) => {
+                    object = {};
+                    object.label = doc['name'] + ' ' + doc['surname'];
+                    object.value = doc['_id'];
+                    partners.push(object);
+                });
+                return partners;
+            }
         }
-        allowedValues() {
-            return Partners.find({'partner_details.is_customer': true}).map(s => s.name + ' ' + s.surname + ' | ' + s._id)
-        }
+        // allowedValues() {
+        //     return Partners.find({'partner_details.is_customer': true}).map(s => s.name + ' ' + s.surname + ' | ' + s._id)
+        // }
     },
     expected_closing: {
         type: Date,

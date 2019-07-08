@@ -50,7 +50,7 @@ PipelinesSchema = new SimpleSchema ({
             placeholder: "What probability to win this opportunity ?",
         }
     },
-    customer: {
+    partners_id: {
         type: String,
         label: "Customer",
         optional: true,

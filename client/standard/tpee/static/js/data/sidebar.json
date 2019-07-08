@@ -2,15 +2,15 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "http://localhost:3000/"
+            "url": "/"
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "http://localhost:3000/tpee/sub-module"
+            "url": "/tpee/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "http://localhost:3000/tpee/settings"
+            "url": "/tpee/settings"
         }
     }
 }

@@ -54,8 +54,12 @@ PipelinesSchema = new SimpleSchema ({
         type: String,
         label: "Customer",
         optional: true,
+        autoform: {
+            type: 'select',
+            options: function() { return [{label:"2013",value:2013},{label:"2014",value:2014},{label:"2015",value:2015}]}
+        }
         allowedValues() {
-            return Partners.find({'partner_details.is_customer': true}).map(s => s.name + ' ' + s.surname)
+            return Partners.find({'partner_details.is_customer': true}).map(s => s.name + ' ' + s.surname + ' | ' + s._id)
         }
     },
     expected_closing: {

@@ -22,9 +22,7 @@
                 <h5 class="fields-labels" title="Field name : opportunity_qualification">{{_ "Opportunity qualification"}} : <span class="fields-values">{{pipeline.opportunity_qualification}}</span></h5>
             </div>
             <div class="col-md-6">
-                <a class="relationnal-link" href="{{pathFor 'partners/collection-sample-single' _id=customer._id}}">
-                    <h5 class="fields-labels" title="Field name : customer">{{_ "Customer"}} : <span class="fields-values">{{customer.name}} {{customer.surname}}</span></h5>
-                </a>
+                <h5 class="fields-labels" title="Field name : customer">{{_ "Customer"}} : <a class="relationnal-link" href="{{pathFor 'partners/collection-sample-single' _id=customer._id}}"><span class="fields-values">{{customer.name}} {{customer.surname}}</span></a></h5>
                 <h5 class="fields-labels" title="Field name : expected_closing">{{_ "Expected closing date"}} : <span class="fields-values">{{pipeline.expected_closing}} %</span></h5>
             </div>
             <hr>

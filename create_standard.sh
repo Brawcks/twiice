@@ -73,7 +73,7 @@ Template.sideNavbar${1}.helpers({
 Template.${1}TreeView.onCreated(function() {
     var self = this;
     self.autorun(function() {
-        self.subscribe('Collection_sample');
+        self.subscribe('${1}Collection_sample');
     });
     // Here we build the instance to set variables
     const instance = this;
@@ -99,20 +99,20 @@ Template.${1}TreeView.onCreated(function() {
 Template.newCollectionSample${1}.onCreated(function() {
     var self = this;
     self.autorun(function() {
-        self.subscribe('Collection_sample');
+        self.subscribe('${1}Collection_sample');
     });
 });
 
 // LOAD DATA ON TEMPLATES 
 Template.${1}TreeView.helpers({
-    collection_sample: () => {
-        return Collection_sample.find(Template.instance().filtersVar.get(), { 
+    ${1}Collection_sample: () => {
+        return ${1}Collection_sample.find(Template.instance().filtersVar.get(), { 
             limit: Template.instance().resultPerPage.get(), 
             skip: Template.instance().computedSkip.get()
         });
     },
     pagination: () => {
-        var totalRecords = Collection_sample.find().count();
+        var totalRecords = ${1}Collection_sample.find().count();
         var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage.get());
         var lastRecords = totalRecords % Template.instance().resultPerPage.get();
         switch (lastRecords) {
@@ -137,7 +137,7 @@ Template.${1}TreeView.helpers({
     },
     collection_key: () => {
         var filters_${1} = [];
-        for (var key in Collection_sample.findOne({})) {
+        for (var key in ${1}Collection_sample.findOne({})) {
             filters_${1}.push(key);
         }
         return filters_${1};
@@ -150,7 +150,7 @@ Template.${1}TreeView.events({
         swal(\"Deleted\", \"This record was properly deleted !\", \"success\");
     },
     'click .export-csv': function(events, template){
-        var data = Papa.unparse(Collection_sample.find({}, { limit: 10 }).fetch());
+        var data = Papa.unparse(${1}Collection_sample.find({}, { limit: 10 }).fetch());
         var date = new Date().toISOString().slice(0, 10);
         Meteor.call('download_csv', data, '${1}_'+date+'.csv', 'text/csv;encoding:utf-8');
         swal(\"Yeah !\", \"Your CSV document is available !\", \"success\");
@@ -202,14 +202,14 @@ Template.${1}SingleCollectionSample.onCreated(function() {
     this.editMode = new ReactiveVar(false);
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
-        self.subscribe('Collection_sample', id);
+        self.subscribe('${1}Collection_sample', id);
     });
 });
 
 Template.${1}SingleCollectionSample.helpers({
     collection_sample_single: () => {
         var id = FlowRouter.getParam('_id');
-        return Collection_sample.findOne({_id: id});
+        return ${1}Collection_sample.findOne({_id: id});
     },
     updateCollectionSampleId: function() {
         return FlowRouter.getParam('_id');
@@ -281,7 +281,7 @@ echo "<template name=\"${1}\">
                 </tr>
             </thead>
             <tbody>
-                {{#each collection_sample}}
+                {{#each ${1}Collection_sample}}
                 <tr>
                     <th scope=\"row\">{{@index}}</th>
                     <td><a href=\"{{pathFor '${1}/collection-sample-single' _id=_id}}\" title=\"{{name}}\">{{name}}</a></td>
@@ -305,7 +305,7 @@ echo "<template name=\"${1}\">
 <template name=\"newCollectionSample${1}\">
     <div class=\"col-12\">
         <h1>New Collection sample</h1>
-        {{> quickForm collection=\"Collection_sample\" id=\"insertCollection_sampleForm\" type=\"insert\" class=\"new-collection-sample-form\"}}
+        {{> quickForm collection=\"${1}Collection_sample\" id=\"insertCollection_sampleForm\" type=\"insert\" class=\"new-collection-sample-form\"}}
     </div>
 </template>
 
@@ -323,7 +323,7 @@ echo "<template name=\"${1}\">
     </div>
     <hr>
     {{#if editMode}}
-    {{> quickForm collection=\"Collection_sample\" doc=collection_sample_single id=updateCollectionSampleId type=\"update\" class=\"edit edit-collection-form\"}}
+    {{> quickForm collection=\"${1}Collection_sample\" doc=collection_sample_single id=updateCollectionSampleId type=\"update\" class=\"edit edit-collection-form\"}}
     {{else}}
     <div class=\"row col-md-12\">
         <div class=\"col-md-6\">
@@ -428,8 +428,8 @@ echo "Meteor.startup(() => {
 
 printf "\n
 // PUBLISH COLLECTION SAMPLE ON SERVER
-Meteor.publish('Collection_sample', function() {
-  return Collection_sample.find({})
+Meteor.publish('${1}Collection_sample', function() {
+  return ${1}Collection_sample.find({})
 })
 " >> server/standard/${1}/main.js
 
@@ -448,9 +448,9 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
 
-Collection_sample = new Mongo.Collection('collection_sample');
+${1}Collection_sample = new Mongo.Collection('${1}Collection_sample');
 
-Collection_sample.allow({
+${1}Collection_sample.allow({
     insert: function(userId, doc) {
         return !!userId;    
     }
@@ -469,11 +469,11 @@ Collection_sampleSchema = new SimpleSchema ({
 
 Meteor.methods({
     ${1}DeleteCollection_sample: function(id) {
-        Collection_sample.remove(id)
+        ${1}Collection_sample.remove(id)
     },
 });
 
-Collection_sample.attachSchema(Collection_sampleSchema);
+${1}Collection_sample.attachSchema(Collection_sampleSchema);
 " >> collections/standard/${1}/collection.js
 
 printf "\nimport './${1}/collection.js';" >> collections/standard/main.js

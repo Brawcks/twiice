@@ -4,7 +4,7 @@
 
 .fields-labels {
     font-weight: bold;
-    color: #0050a7;
+    color: #a70080;
 }
 
 .fields-values {
@@ -14,4 +14,8 @@
 
 .fields-title {
     color: #004186;
+}
+
+.relationnal-link .fields-values {
+    color: #0050a7;
 }

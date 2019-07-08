@@ -13,6 +13,10 @@ Template.crmSinglePipeline.helpers({
         var id = FlowRouter.getParam('_id');
         return Pipelines.findOne({_id: id});
     },
+    customer: () => {
+        var id = FlowRouter.getParam('_id');
+        return Partners.findOne({_id: Pipelines.findOne({_id: id}).partners_id});
+    },
     updatePipelineId: function() {
         return FlowRouter.getParam('_id');
     },

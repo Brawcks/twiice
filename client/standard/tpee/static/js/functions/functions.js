@@ -113,6 +113,11 @@ Meteor.methods({
         // download(csvContent, 'dowload.csv', 'text/csv;encoding:utf-8');
     },
 
+    // RELATIONNAL DATA MANAGEMENT
+    // get_relationnal_document: function (remoteCollection, currentCollection, currentDocumentId, relationnal_field) {
+    //     return remoteCollection.findOne({_id: currentCollection.findOne({_id: currentDocumentId}).relationnal_field});
+    // }
+
     // USEFULL FUNCTIONS
     // The function below find out which mongo operator is needed (depends on the selected field for the search)
 

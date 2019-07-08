@@ -2,19 +2,19 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "http://localhost:3000/recruitment"
+            "url": "/recruitment"
         },
         "new-collection-sample": {
             "name": "New Collection Sample",
-            "url": "http://localhost:3000/recruitment/new-collection-sample"
+            "url": "/recruitment/new-collection-sample"
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "http://localhost:3000/recruitment/sub-module"
+            "url": "/recruitment/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "http://localhost:3000/recruitment/settings"
+            "url": "/recruitment/settings"
         }
     }
 }

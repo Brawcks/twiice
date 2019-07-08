@@ -30,19 +30,19 @@ echo "{
     \"sidebar\": {
         \"dashboard\": {
             \"name\": \"Dashboard\",
-            \"url\": \"http://localhost:3000/${1}\"
+            \"url\": \"/${1}\"
         },
         \"new-collection-sample\": {
             \"name\": \"New Collection Sample\",
-            \"url\": \"http://localhost:3000/${1}/new-collection-sample\"
+            \"url\": \"/${1}/new-collection-sample\"
         },
         \"sub-module\": {
             \"name\": \"Sub-Module\",
-            \"url\": \"http://localhost:3000/${1}/sub-module\"
+            \"url\": \"/${1}/sub-module\"
         },
         \"settings\": {
             \"name\": \"Settings\",
-            \"url\": \"http://localhost:3000/${1}/settings\"
+            \"url\": \"/${1}/settings\"
         }
     }
 }" > client/z-customer/${1}/static/js/data/sidebar.json

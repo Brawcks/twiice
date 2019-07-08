@@ -2,6 +2,8 @@
 
 // GENERATE MAIN MENU
 var publicSettings = Meteor.settings.public;
+var global_domain = publicSettings.environment.global_domain;
+var global_port = publicSettings.environment.global_port;
 
 // ADD ITEMS TO MENU
 // THIS FUNCTION SHOULD MOVE TO CLIENT STANDARD FOLDER
@@ -9,7 +11,7 @@ export function mainTopNavbarStandard() {
     var menuStandard = "";
     $.each(publicSettings.modules.standard, function (i, item) {
         // console.log(item);
-        menuStandard += '<a class="dropdown-item" href="' + item.url + '">' + item.name + '</a>';
+        menuStandard += '<a class="dropdown-item" href="http://' + global_domain + global_port + item.url + '">' + item.name + '</a>';
     });
     return menuStandard;
 }
@@ -19,7 +21,7 @@ export function mainTopNavbarCustomer() {
     var menuCustomer = "";
     $.each(publicSettings.modules.customer, function (i, item) {
         // console.log(item);
-        menuCustomer += '<a class="dropdown-item" href="' + item.url + '">' + item.name + '</a>';
+        menuCustomer += '<a class="dropdown-item" href="http://' + global_domain + global_port + item.url + '">' + item.name + '</a>';
     });
     return menuCustomer;
 }
@@ -30,7 +32,7 @@ export function leftSidebarStandard() {
     var leftSidebar = "";
 
     $.each(leftSidebarData.sidebar, function (i, item) {
-        leftSidebar += '<a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="' + item.url + '" role="tab" aria-controls="v-pills-home" aria-selected="true">' + item.name + '</a>';
+        leftSidebar += '<a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="http://' + global_domain + global_port + item.url + '" role="tab" aria-controls="v-pills-home" aria-selected="true">' + item.name + '</a>';
     });
     return leftSidebar;
 }

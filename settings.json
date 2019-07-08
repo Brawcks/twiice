@@ -5,44 +5,48 @@
         }
     },
     "public": {
+        "environment": {
+            "global_domain": "localhost",
+            "global_port": ":3000"
+        },
         "modules": {
             "standard": {
                 "tpee": {
                     "name": "Tpee",
                     "technical_name": "tpee",
-                    "url": "http://localhost:3000"
+                    "url": "/"
                 },
                 "users": {
                     "name": "Users",
                     "technical_name": "users",
-                    "url": "http://localhost:3000/users"
+                    "url": "/users"
                 },
                 "crm": {
                     "name": "CRM",
                     "technical_name": "crm",
-                    "url": "http://localhost:3000/crm"
+                    "url": "/crm"
                 },
                 "project": {
                     "name": "Project",
                     "technical_name": "project",
-                    "url": "http://localhost:3000/project"
+                    "url": "/project"
                 },
                 "partners": {
                     "name": "Partners",
                     "technical_name": "partners",
-                    "url": "http://localhost:3000/partners"
+                    "url": "/partners"
                 },
                 "recruitment": {
                     "name": "Recruitment",
                     "technical_name": "recruitment",
-                    "url": "http://localhost:3000/recruitment"
+                    "url": "/recruitment"
                 }
             },
             "customer": {
                 "module_test": {
                     "name": "Module test",
                     "technical_name": "module_test",
-                    "url": "http://localhost:3000/module-test"
+                    "url": "/module-test"
                 }
             },
             "displayOptions": {

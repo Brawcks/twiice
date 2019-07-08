@@ -2,19 +2,19 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "http://localhost:3000/project"
+            "url": "/project"
         },
         "new-collection-sample": {
             "name": "New task",
-            "url": "http://localhost:3000/project/newproject"
+            "url": "/project/newproject"
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "http://localhost:3000/project/sub-module"
+            "url": "/project/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "http://localhost:3000/project/settings"
+            "url": "/project/settings"
         }
     }
 }

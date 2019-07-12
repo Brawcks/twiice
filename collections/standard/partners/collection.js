@@ -5,7 +5,9 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
 
-Partners = new Mongo.Collection('Partners');
+var collections = Mongo.Collection.getAll();
+
+Partners = new Mongo.Collection('partners');
 
 Partners.allow({
     insert: function(userId, doc) {
@@ -64,7 +66,8 @@ PartnersSchema = new SimpleSchema ({
 
 Meteor.methods({
     partnersDeletePartners: function(id) {
-        Partners.remove(id)
+        Partners.remove(id);
+        Pipelines.update({partners_id: id}, {$set: {partners_id: null}}); // FIXME : We should find a better way to do this
     },
 });
 

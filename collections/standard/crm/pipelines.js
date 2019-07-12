@@ -53,17 +53,16 @@ PipelinesSchema = new SimpleSchema ({
     partners_id: {
         type: String,
         label: "Customer",
+        foreign_key: true,
+        cascade: false,
         optional: true,
         autoform: {
             type: 'select',
             options: function() { 
-                let partners = [];
-                Partners.find({'partner_details.is_customer': true}).forEach((doc) => {
-                    object = {};
-                    object.label = doc['name'] + ' ' + doc['surname'];
-                    object.value = doc['_id'];
-                    partners.push(object);
-                });
+                let partners = Partners.find({'partner_details.is_customer': true}).map((doc) => ({
+                    label: doc['name'] + ' ' + doc['surname'],
+                    value: doc['_id']
+                 }))
                 return partners;
             }
         }

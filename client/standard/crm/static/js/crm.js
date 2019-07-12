@@ -30,6 +30,22 @@ Template.crmTreeView.onCreated(function () {
     const instance = this;
     // This var will allow us to use filters on collection, with events and helpers
     instance.filtersVar = new ReactiveVar({});
+
+    // Here we will build pagination
+    instance.page = new ReactiveVar({});
+    instance.computedSkip = new ReactiveVar({});
+    // Use the value below to define how many result you want to display
+    instance.resultPerPage = new ReactiveVar({});
+    instance.resultPerPage.set(3);
+
+
+    if (FlowRouter.getParam('page')) {
+        instance.page.set(FlowRouter.getParam('page'));
+        instance.computedSkip.set((instance.resultPerPage.get() * instance.page.get()) - instance.resultPerPage.get());
+    } else {
+        instance.computedSkip.set(0);
+        instance.page.set(0);
+    }
 });
 
 Template.crmNewPipeline.onCreated(function () {
@@ -44,7 +60,34 @@ Template.crmTreeView.helpers({
     pipelines: () => {
         // here we return data according on our filters. If no filter, filtersVar is an empty object
         // so we will get all the data
-        return Pipelines.find(Template.instance().filtersVar.get(), { limit: 10 });
+        return Pipelines.find(Template.instance().filtersVar.get(), {
+            limit: Template.instance().resultPerPage.get(), 
+            skip: Template.instance().computedSkip.get()
+        });
+    },
+    pagination: () => {
+        var totalRecords = Pipelines.find().count();
+        var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage.get());
+        var lastRecords = totalRecords % Template.instance().resultPerPage.get();
+        switch (lastRecords) {
+            case 0:
+                break;
+            default:
+                pagesNumber += 1;
+                break;
+        };
+        var displayPages = "";
+        if (pagesNumber > 1) {
+            displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() - 1)+'" href="'+FlowRouter.path('partners/page')+'/'+(Template.instance().page.get() - 1)+'">Previous</a></li>';
+            if (Template.instance().page.get() == 0) {
+                displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() + 1)+'" href="'+FlowRouter.path('partners/page')+'/'+(Template.instance().page.get() + 1)+'">Previous</a></li>';
+            } 
+            for (let index = 1; index <= pagesNumber; index++) {
+                displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+index+'" href="'+FlowRouter.path('partners/page')+'/'+index+'">'+index+'</a></li>';
+            };
+            displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'" href="'+FlowRouter.path('partners/page')+'/'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'">Next</a></li>';
+        }
+        return displayPages;
     },
     collection_key: () => {
         var filters = [];
@@ -89,6 +132,14 @@ Template.crmTreeView.events({
     'click .tw-filter-remove': function (events, template) {
         Template.instance().filtersVar.set({});
     },
+    'click .tw-paginate-button': function (events, template) {
+        Template.instance().page.set(event.target.id)
+        Template.instance().computedSkip.set((Template.instance().resultPerPage.get() * event.target.id) - Template.instance().resultPerPage.get())
+    },
+    'keyup #resultsNumber': function (events, template) {
+        var resultsNumber = $('#resultsNumber').val();
+        Template.instance().resultPerPage.set(parseFloat(resultsNumber));
+    }
 });
 
 // CRM ADD TEMPLATE

@@ -34,6 +34,5 @@ Template.crmSinglePipeline.events({
     },
     'click .btn-warning': function (event, template){
         template.editMode.set(!template.editMode.get());
-        console.log(template.editMode.get());
     },
 });

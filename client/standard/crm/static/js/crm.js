@@ -78,6 +78,8 @@ Template.crmTreeView.helpers({
     pipelines: () => {
         // here we return data according on our filters. If no filter, filtersVar is an empty object
         // so we will get all the data
+        // FIXME : We should use a function here to see if m2m or o2m exist, then, we check the other Collection
+
         return Pipelines.find(Template.instance().filtersVar.get(), {
             limit: Template.instance().resultPerPage.get(), 
             skip: Template.instance().computedSkip.get()
@@ -96,14 +98,14 @@ Template.crmTreeView.helpers({
         };
         var displayPages = "";
         if (pagesNumber > 1) {
-            displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() - 1)+'" href="'+FlowRouter.path('partners/page')+'/'+(Template.instance().page.get() - 1)+'">Previous</a></li>';
+            displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() - 1)+'" href="'+FlowRouter.path('crm/page')+'/'+(Template.instance().page.get() - 1)+'">Previous</a></li>';
             if (Template.instance().page.get() == 0) {
-                displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() + 1)+'" href="'+FlowRouter.path('partners/page')+'/'+(Template.instance().page.get() + 1)+'">Previous</a></li>';
+                displayPages = '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(Template.instance().page.get() + 1)+'" href="'+FlowRouter.path('crm/page')+'/'+(Template.instance().page.get() + 1)+'">Previous</a></li>';
             } 
             for (let index = 1; index <= pagesNumber; index++) {
-                displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+index+'" href="'+FlowRouter.path('partners/page')+'/'+index+'">'+index+'</a></li>';
+                displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+index+'" href="'+FlowRouter.path('crm/page')+'/'+index+'">'+index+'</a></li>';
             };
-            displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'" href="'+FlowRouter.path('partners/page')+'/'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'">Next</a></li>';
+            displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'" href="'+FlowRouter.path('crm/page')+'/'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'">Next</a></li>';
         }
         return displayPages;
     },

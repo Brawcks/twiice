@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
 import SimpleSchema from 'simpl-schema';
-SimpleSchema.extendOptions(['autoform']);
+SimpleSchema.extendOptions(['autoform', 'foreign_key', 'cascade']);
 
 const self = this.Meteor;
 

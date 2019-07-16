@@ -234,7 +234,7 @@ Template.${1}SingleCollectionSample.events({
 
 echo "<template name=\"${1}\">
     <div class=\"col-12\">
-        <h1>${1} Dashboard</h1>
+        <h1>{{_ \"${1} Dashboard\"}}</h1>
     </div>
 </template>
 

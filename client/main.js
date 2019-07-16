@@ -11,7 +11,7 @@ import './main.html';
 import '../lib/router/main.js'; // General file, importing all routes
 
 // LOAD COLLECTIONS
-import '../collections/main.js'; // General file, importing all routes
+import '../collections/main.js'; // General file, importing all collections
 
 // LOAD STANDARD MODULES (USE ALPHABETICAL ORDER)
 import './standard/main.js'; // General module

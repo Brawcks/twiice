@@ -74,17 +74,7 @@ Template.sideNavbarcrm.helpers({
     },
 });
 
-Template.crmTreeView.helpers({
-    pipelines: () => {
-        // here we return data according on our filters. If no filter, filtersVar is an empty object
-        // so we will get all the data
-        // FIXME : We should use a function here to see if m2m or o2m exist, then, we check the other Collection
-
-        return Pipelines.find(Template.instance().filtersVar.get(), {
-            limit: Template.instance().resultPerPage.get(), 
-            skip: Template.instance().computedSkip.get()
-        });
-    },
+Template.crmHeader.helpers({
     pagination: () => {
         var totalRecords = Pipelines.find().count();
         var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage.get());
@@ -115,6 +105,19 @@ Template.crmTreeView.helpers({
             filters.push(key);
         }
         return filters;
+    }
+})
+
+Template.crmTreeView.helpers({
+    pipelines: () => {
+        // here we return data according on our filters. If no filter, filtersVar is an empty object
+        // so we will get all the data
+        // FIXME : We should use a function here to see if m2m or o2m exist, then, we check the other Collection
+
+        return Pipelines.find(Template.instance().filtersVar.get(), {
+            limit: Template.instance().resultPerPage.get(), 
+            skip: Template.instance().computedSkip.get()
+        });
     }
 });
 

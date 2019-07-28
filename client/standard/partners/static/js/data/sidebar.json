@@ -2,19 +2,19 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "/partners"
+            "url": "/admin/partners"
         },
         "new-collection-sample": {
             "name": "New partner",
-            "url": "/partners/new-partner"
+            "url": "/admin/partners/new-partner"
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "/partners/sub-module"
+            "url": "/admin/partners/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "/partners/settings"
+            "url": "/admin/partners/settings"
         }
     }
 }

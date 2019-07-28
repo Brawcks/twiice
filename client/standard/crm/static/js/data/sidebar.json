@@ -2,19 +2,19 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "/crm"
+            "url": "/admin/crm"
         },
         "new-pipelines": {
             "name": "New Pipelines",
-            "url": "/crm/new-pipeline"
+            "url": "/admin/crm/new-pipeline"
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "/crm/sub-module"
+            "url": "/admin/crm/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "/crm/settings"
+            "url": "/admin/crm/settings"
         }
     }
 }

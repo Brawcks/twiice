@@ -2,19 +2,19 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "/recruitment"
+            "url": "/admin/recruitment"
         },
         "new-collection-sample": {
             "name": "New Collection Sample",
-            "url": "/recruitment/new-collection-sample"
+            "url": "/admin/recruitment/new-collection-sample"
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "/recruitment/sub-module"
+            "url": "/admin/recruitment/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "/recruitment/settings"
+            "url": "/admin/recruitment/settings"
         }
     }
 }

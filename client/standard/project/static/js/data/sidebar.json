@@ -2,19 +2,19 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "/project"
+            "url": "/admin/project"
         },
         "new-collection-sample": {
             "name": "New task",
-            "url": "/project/newproject"
+            "url": "/admin/project/newproject"
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "/project/sub-module"
+            "url": "/admin/project/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "/project/settings"
+            "url": "/admin/project/settings"
         }
     }
 }

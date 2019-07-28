@@ -6,11 +6,11 @@
         },
         "sub-module": {
             "name": "Sub-Module",
-            "url": "/tpee/sub-module"
+            "url": "/admin/tpee/sub-module"
         },
         "settings": {
             "name": "Settings",
-            "url": "/tpee/settings"
+            "url": "/admin/tpee/settings"
         }
     }
 }

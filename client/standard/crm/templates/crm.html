@@ -95,10 +95,8 @@
                         <a href="{{pathFor 'crm/pipeline' _id=_id}}">
                             <h5 class="card-title">{{ label }}</h5>
                         </a>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <p class="card-text">{{ description }}</p>
+                        <a href="{{pathFor 'crm/pipeline' _id=_id}}" class="btn btn-primary">View</a>
                     </div>
                 </div>
             </div>

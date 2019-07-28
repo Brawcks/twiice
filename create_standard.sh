@@ -30,19 +30,19 @@ echo "{
     \"sidebar\": {
         \"dashboard\": {
             \"name\": \"Dashboard\",
-            \"url\": \"/${1}\"
+            \"url\": \"/admin/${1}\"
         },
         \"new-collection-sample\": {
             \"name\": \"New Collection Sample\",
-            \"url\": \"/${1}/new-collection-sample\"
+            \"url\": \"/admin/${1}/new-collection-sample\"
         },
         \"sub-module\": {
             \"name\": \"Sub-Module\",
-            \"url\": \"/${1}/sub-module\"
+            \"url\": \"/admin/${1}/sub-module\"
         },
         \"settings\": {
             \"name\": \"Settings\",
-            \"url\": \"/${1}/settings\"
+            \"url\": \"/admin/${1}/settings\"
         }
     }
 }" > client/standard/${1}/static/js/data/sidebar.json
@@ -238,39 +238,45 @@ echo "<template name=\"${1}\">
     </div>
 </template>
 
+<template name=\"${1}Header\">
+    <div class=\"row justify-content-end\">
+        {{#if collection_key}}
+            <select name=\"${1}FilterSelect\" id=\"${1}FilterSelect\">
+                {{#each collection_key}}
+                    <option value=\"{{this}}\">{{_ this}}</option>
+                {{/each}}
+            </select>
+        {{/if}}
+        <select name=\"${1}FilterOperator\" id=\"${1}FilterOperator\">
+            <option value=\"equalTo\">{{_ \"Equal to\"}}</option>
+            <option value=\"isDifferentFrom\">{{_ \"Is different from\"}}</option>
+            <option value=\"contain\">{{_ \"Contain\"}}</option>
+            <option value=\"doNotContain\">{{_ \"Do not contain\"}}</option>
+            <option value=\"isSet\">{{_ \"Is set\"}}</option>
+            <option value=\"isNotSet\">{{_ \"Is not set\"}}</option>
+        </select>
+        <input type=\"text\" placeholder=\"Filter by ...\" class=\"col-6 tw-filter-input\">
+        <button class=\"btn btn-primary tw-filter-submit\" type=\"submit\">{{_ \"Validate\"}}</button>
+        <button class=\"btn btn-warning tw-filter-remove\" type=\"submit\">{{_ \"Remove filters\"}}</button>
+    </div>
+    <hr>
+    <div class=\"row\">
+        <div class=\"col-6\">
+            <a href=\"{{ pathFor '${1}/new-collection-sample' }}\">{{_ \"New Data\"}}</a>
+        </div>
+        <div class=\"col-6 text-right\">
+            <button type=\"button\" class=\"btn btn-success export-csv pull-right\">{{_ \"Export to csv\"}}</button>
+            <button type=\"button\" class=\"btn btn-info import-csv pull-right\">{{_ \"Import csv\"}}</button>
+            <input type=\"text\" class=\"form-control mt-2\" placeholder=\"Number of results\" id=\"resultsNumber\">
+            <input id=\"file\" type=\"file\" class=\"btn btn-info import-csv-file pull-right d-none\"/>
+        </div>
+    </div>
+    <hr>
+</template>
+
 <template name=\"${1}TreeView\">
     <div class=\"col-12 self-align-end\">
-        <div class=\"row justify-content-end\">
-            {{#if collection_key}}
-                <select name=\"${1}FilterSelect\" id=\"${1}FilterSelect\">
-                    {{#each collection_key}}
-                        <option value=\"{{this}}\">{{_ this}}</option>
-                    {{/each}}
-                </select>
-            {{/if}}
-            <select name=\"${1}FilterOperator\" id=\"${1}FilterOperator\">
-                <option value=\"equalTo\">{{_ \"Equal to\"}}</option>
-                <option value=\"isDifferentFrom\">{{_ \"Is different from\"}}</option>
-                <option value=\"contain\">{{_ \"Contain\"}}</option>
-                <option value=\"doNotContain\">{{_ \"Do not contain\"}}</option>
-                <option value=\"isSet\">{{_ \"Is set\"}}</option>
-                <option value=\"isNotSet\">{{_ \"Is not set\"}}</option>
-            </select>
-            <input type=\"text\" placeholder=\"Filter by ...\" class=\"col-6 tw-filter-input\">
-            <button class=\"btn btn-primary tw-filter-submit\" type=\"submit\">{{_ \"Validate\"}}</button>
-            <button class=\"btn btn-warning tw-filter-remove\" type=\"submit\">{{_ \"Remove filters\"}}</button>
-        </div>
-        <div class=\"row justify-content-end\">
-            <div class=\"row col-2 align-self-end mt-4\">
-                <div class=\"col\">
-                    <input type=\"text\" class=\"form-control\" placeholder=\"Number of results\" id=\"resultsNumber\">
-                </div>
-            </div>
-        </div>
-        <hr>
-        <button type=\"button\" class=\"btn btn-success export-csv pull-right\">{{_ \"Export to csv\"}}</button>
-        <button type=\"button\" class=\"btn btn-info import-csv pull-right\">{{_ \"Import csv\"}}</button>
-        <input id=\"file\" type=\"file\" class=\"btn btn-info import-csv-file pull-right d-none\"/>
+        {{> ${1}Header }}
         <table class=\"table table-hover mt-3\">
             <thead>
                 <tr>
@@ -360,7 +366,12 @@ printf "\nimport './${1}/main.js';" >> client/standard/main.js
 
 mkdir lib/router/standard/${1}
 
-echo "FlowRouter.route('/${1}', {
+echo "var ${1}Routes = FlowRouter.group({
+    prefix: '/admin/${1}',
+    name: '${1}',
+})
+
+${1}Routes.route('/', {
     name: '${1}',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
@@ -368,7 +379,7 @@ echo "FlowRouter.route('/${1}', {
     }
 });
 
-FlowRouter.route('/${1}/page/:page', {
+${1}Routes.route('/page/:page', {
     name: '${1}/page',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
@@ -376,7 +387,7 @@ FlowRouter.route('/${1}/page/:page', {
     }
 });
 
-FlowRouter.route('/${1}/sub-module', {
+${1}Routes.route('/sub-module', {
     name: '${1}/sub-module',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
@@ -384,7 +395,7 @@ FlowRouter.route('/${1}/sub-module', {
     }
 });
 
-FlowRouter.route('/${1}/settings', {
+${1}Routes.route('/settings', {
     name: '${1}/settings',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
@@ -392,7 +403,7 @@ FlowRouter.route('/${1}/settings', {
     }
 });
 
-FlowRouter.route('/${1}/new-collection-sample', {
+${1}Routes.route('/new-collection-sample', {
     name: '${1}/new-collection-sample',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE
@@ -400,7 +411,7 @@ FlowRouter.route('/${1}/new-collection-sample', {
     }
 });
 
-FlowRouter.route('/${1}/collection-sample/:_id', {
+${1}Routes.route('/collection-sample/:_id', {
     name: '${1}/collection-sample-single',
     action() {
         // IT RENDER THE MAIN TEMPLATE, AND USE A VARIABLE TO LOAD A MODULE TEMPLATE INSIDE

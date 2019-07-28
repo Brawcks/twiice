@@ -25,6 +25,12 @@
         <button class="btn btn-primary tw-filter-submit" type="submit">{{_ "Validate"}}</button>
         <button class="btn btn-warning tw-filter-remove" type="submit">{{_ "Remove filters"}}</button>
     </div>
+    <div class="row justify-content-end mt-2">
+        <div class="col-6 self-align-end text-right">
+            <a href="{{ pathFor 'crm' }}">Table</a>
+            <a href="{{ pathFor 'crm/kanban' }}">Kanban</a>
+        </div>
+    </div>
     <hr>
     <div class="row">
         <div class="col-6">
@@ -37,6 +43,7 @@
             <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none" />
         </div>
     </div>
+    <hr>
 </template>
 
 <template name="crmTreeView">
@@ -77,7 +84,26 @@
 
 <template name="crmKanbanView">
     <div class="col-12">
-
+        {{> crmHeader }}
+        <div class="row">
+            {{#each pipelines}}
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://place-hold.it/200x150?text=Something Here"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <a href="{{pathFor 'crm/pipeline' _id=_id}}">
+                            <h5 class="card-title">{{ label }}</h5>
+                        </a>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
     </div>
 </template>
 

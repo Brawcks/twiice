@@ -1,0 +1,20 @@
+{
+    "sidebar": {
+        "dashboard": {
+            "name": "Dashboard",
+            "url": "/admin/website"
+        },
+        "new-collection-sample": {
+            "name": "New Collection Sample",
+            "url": "/admin/website/new-collection-sample"
+        },
+        "sub-module": {
+            "name": "Sub-Module",
+            "url": "/admin/website/sub-module"
+        },
+        "settings": {
+            "name": "Settings",
+            "url": "/admin/website/settings"
+        }
+    }
+}

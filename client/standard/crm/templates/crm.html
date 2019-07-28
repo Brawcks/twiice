@@ -46,15 +46,6 @@
     <hr>
 </template>
 
-<template name="crmFooter">
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            {{{pagination}}}
-        </ul>
-    </nav>
-    <h1>test</h1>
-</template>
-
 <template name="crmTreeView">
     <div class="col-12 self-align-end">
         {{> crmHeader }}
@@ -83,7 +74,11 @@
                 {{/each}}
             </tbody>
         </table>
-        {{> crmFooter }}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {{{pagination}}}
+            </ul>
+        </nav>
     </div>
 </template>
 

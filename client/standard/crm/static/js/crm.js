@@ -75,34 +75,6 @@ Template.crmKanbanView.onCreated(function () {
     instance.resultPerPage = new ReactiveVar({});
     instance.resultPerPage.set(3);
 
-
-    if (FlowRouter.getParam('page')) {
-        instance.page.set(FlowRouter.getParam('page'));
-        instance.computedSkip.set((instance.resultPerPage.get() * instance.page.get()) - instance.resultPerPage.get());
-    } else {
-        instance.computedSkip.set(0);
-        instance.page.set(0);
-    }
-});
-
-Template.crmFooter.onCreated(function () {
-    if (FlowRouter.getParam('page')) {
-        var page = FlowRouter.getParam('page');
-    }
-
-    // Here we build the instance to set variables
-    const instance = this;
-    // This var will allow us to use filters on collection, with events and helpers
-    instance.filtersVar = new ReactiveVar({});
-
-    // Here we will build pagination
-    instance.page = new ReactiveVar({});
-    instance.computedSkip = new ReactiveVar({});
-    // Use the value below to define how many result you want to display
-    instance.resultPerPage = new ReactiveVar({});
-    instance.resultPerPage.set(3);
-
-
     if (FlowRouter.getParam('page')) {
         instance.page.set(FlowRouter.getParam('page'));
         instance.computedSkip.set((instance.resultPerPage.get() * instance.page.get()) - instance.resultPerPage.get());
@@ -139,7 +111,27 @@ Template.sideNavbarcrm.helpers({
     },
 });
 
-Template.crmFooter.helpers({
+Template.crmHeader.helpers({
+    collection_key: () => {
+        var filters = [];
+        for (var key in Pipelines.findOne({})) {
+            filters.push(key);
+        }
+        return filters;
+    }
+})
+
+Template.crmTreeView.helpers({
+    pipelines: () => {
+        // here we return data according on our filters. If no filter, filtersVar is an empty object
+        // so we will get all the data
+        // FIXME : We should use a function here to see if m2m or o2m exist, then, we check the other Collection
+
+        return Pipelines.find(Template.instance().filtersVar.get(), {
+            limit: Template.instance().resultPerPage.get(), 
+            skip: Template.instance().computedSkip.get()
+        });
+    },
     pagination: () => {
         var totalRecords = Pipelines.find().count();
         var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage.get());
@@ -165,33 +157,9 @@ Template.crmFooter.helpers({
         return displayPages;
     }
 });
-
-Template.crmHeader.helpers({
-    collection_key: () => {
-        var filters = [];
-        for (var key in Pipelines.findOne({})) {
-            filters.push(key);
-        }
-        return filters;
-    }
-})
-
-Template.crmTreeView.helpers({
-    pipelines: () => {
-        // here we return data according on our filters. If no filter, filtersVar is an empty object
-        // so we will get all the data
-        // FIXME : We should use a function here to see if m2m or o2m exist, then, we check the other Collection
-
-        return Pipelines.find(Template.instance().filtersVar.get(), {
-            limit: Template.instance().resultPerPage.get(), 
-            skip: Template.instance().computedSkip.get()
-        });
-    }
-});
 // Simple inheritance from tree view
 Template.crmKanbanView.inheritsHelpersFrom('crmTreeView');
 Template.crmHeader.inheritsHelpersFrom('crmTreeView');
-Template.crmFooter.inheritsHelpersFrom('crmTreeView');
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -250,7 +218,6 @@ Template.crmTreeView.events({
 });
 // Simple inheritance of tree events
 Template.crmKanbanView.inheritsEventsFrom('crmTreeView');
-Template.crmFooter.inheritsEventsFrom('crmTreeView');
 Template.crmHeader.inheritsEventsFrom('crmTreeView');
 
 // CRM ADD TEMPLATE

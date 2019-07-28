@@ -1,112 +1,94 @@
-# A lire avant tout développement du projet
+<p align="center">
+  <img src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.15752-9/57761938_400569364116966_7496256994395815936_n.png?_nc_cat=103&_nc_oc=AQnSiXWciZKsjy5-w1V7Rq4qjnk_P6IAY5Ftean-lrnjpokadgs3MKOIIi_r9xm9y1k&_nc_ht=scontent-cdg2-1.xx&oh=7a7d722e4d6163e1a7d3d28d8835d222&oe=5DE70E1B">
+</p>
 
-Dans le but de développer le projet correctement, merci de bien lire le guide 
-contribution disponible à la racine du projet. 
+# Read before contributing
 
-**Twiice** est content de vous compter dans ses rangs :D
+In order to develop the project correctly, please read the guide
+contribution available at the root of the project.
 
-# Créateurs
+**Twiice** is happy to count you in it ranks :D
 
-Le projet est actuellement porté par **Vincent COFFIN et Antoine LE TROADEC**. Le code du projet est disponible sous 
-license **GNU GPL V3**.
+# Founder
 
-# Documentation du projet
+Project actually supported by **Vincent COFFIN**. Project licence is actually **GNU GPL V3**.
 
-La documentation du projet est disponible dans la sidebar de gauche de votre 
-Gitlab. En bas, vous verrez d'affiché `wiki`. Cliquez dessus pour atterir sur 
-le wiki du projet, qui détaille certaines fonctionnalités et la façon de 
-développer le projet :). Le sommaire du wiki est cliquable sur la gauche après 
-avoir **cliqué sur wiki**
+# Project documentation
 
-# Démarrer le projet
+The project documentation is available in the wiki section of
+Github. 
 
-Pour démarrer le projet, il est nécessaire d'actualiser l'environnement node avant chaque
-démarrage du projet via cette commande :
+# Start project
 
-`meteor npm install && meteor -s settings.json`
-
-Il est aussi possible de lancer le script de lancement du projet, en vous positionnant à la racine du projet, puis en
-lançant la commande : `./start.sh` .
-
-# Twiice - La gestion simplifiée
-
-**Twiice** est un projet né de la diffiulté à laquelle sont confrontée les petites 
-entrerises à se gérer au quotidien. De nombreux outils de gestion existent
-actuellement, mais ne permettent pas aux petites entreprises de combler leurs 
-besoins, souvent complexes et très singuliers.
-
-**Twiice** apporte **une solution simple** de gestion d'une entreprise, capable de 
-s'adapter facilement aux problématiques métier de toute TPE.
-
-**Twiice** se rapproche de ce que sait faire un ERP, tout en étant modulaire
-et facilement paramétrable.
-
-## Ouvertures et possibilités
-
-**Twiice** est un projet ouvert. Cela signifie qu'il tend à vouloir s'adapter à tout besoin formulé par une TPE (Dans un premier temps).
-
-Voici les points pouvant être couverts par Twiice, hypothétiquement de la création des modules : 
-
-*  Gestion de projet
-*  Gestion CRM (Customer Relationship Management)
-*  Mise en place CMS (Création d'un CMS complet)
-*  Gestion d'inventaire
-*  Gestion de factures
-*  Gestion de devis, bons de commande ...
-*  Toute gestion spécifique voulue par vous ou votre entreprise !
-
-
-**Twiice**, c'est le besoin réel formulé par les entreprise de trouver un outil adaptable à leurs spécificités métier. Au stade actuel, 
-il s'apparente à un **Framework ++** de mise en place d'une solution de gestion de données diverses.
-
-## Comment faire ?
-
-Dans un premier temps, **Twiice** se destine au petites entreprises du numérique, ou petites entreprises extérieures à cette bulle métier,
-accompagnées par une personne maîtrisant le domaine du web et du développement. A partir de là, il est possible d'apprendre à développer et comprendre
-le projet Twiice, par le biais de notre **WIKI** ainsi que de nos scripts automatisés.
-
-**Et après ?**
-
-Twiice veut voir plus loin. Etant encore un projet jeune, il se limite à des besoins techniques légers pour développer son propre logiciel de gestion de données.
-Cependant, dans un futur proche, **Twiice** veut se rendre disponible tout public, et proposer via une interface graphique simple, d'automatiser les développements
-en passant par du développement "Graphique" directement dans le logiciel. **Il ne sera plus nécessaire de coder !**.
-
-### Un projet Open-Source
-
-Twiice est un projet dont les sources sont ouvertes afin de vous permettre d'apporter votre contribution.
-Toute contribution est la bienvenue, tant qu'elle contribue à l'amélioration continue du projet initial. Le but est
-de profiter des compétences de tous afin de fournir un outil qualitatif. 
-
-Dans le but de contribuer, il est nécessaire de suivre les guidelines de développement et de s'adapter à la structure
-du projet.
-
-### Créez vos propre modules
-
-**Twiice** vous offre de nombreuses possibilitées, mais vous laisse aussi le droit de créer vos propres solutions. 
-Vous avez besoin de votre propre **CRM** ? Twiice vous permet de le créer. Vous voulez créer un **CMS** spécifique ?
-Twiice vous apporte les éléments essentiels. Un **module standard** ne vous convient pas ? Adaptez le sans écraser le
-code principal du projet. 
-
-**Twiice** s'articule autour du framework [Meteor](https://www.meteor.com/), afin que tout le monde puisse contribuer
-et créer simplement ses **propres modules**. N'hésitez pas à nous contacter directement pour toute suggestion
-d'amélioration.
-
-
-## Installation du projet
-
-Pour installer le projet, clonez ce dépôt puis lancez l'instance à l'aide de la
-chaine de commandes suivante : 
+To start the project, it is necessary to update the node environment before each
+start the project using this command:
 
 `meteor npm install && meteor -s settings.json`
 
-Cette commande va dans un premier installer les paquets node requis par le 
-projet pour fonctionner, puis lancer l'instance en chargeant les modules
-définis dans le fichier `settings.json` à la racine du projet. 
+It is also possible to launch this script, by positioning you at the root of the project: `./start.sh` .
+
+# Twiice - Simplified management and development
+
+**Twiice** is a project born of the difficulty faced by small businesses
+enterises to manage themselves daily. Many management tools exist
+currently, but do not allow small businesses to fill their
+needs, often complex and very singular.
+
+**Twiice** brings **a simple solution** to manage a company, capable of
+adapt easily to the business problems of any TPE.
+
+**Twiice** gets closer to what an ERP can do, while being modular
+and easily customizable.
+
+## Openings and possibilities
+
+**Twiice** is an open project. This means that it tends to want to adapt to any need formulated by a TPE (At first).
+
+Here are the points that can be covered by Twiice, hypothetically of the creation of modules:
+
+*  Project management
+*  CRM (Customer Relationship Management)
+*  Content Management System (CMS)
+*  Inventory management
+*  And so on ...
+
+
+**Twiice**, it is the real need formulated by the companies to find a tool adaptable to their specificities. At the current stage,
+it is akin to a **Framework ++** setting up a solution for managing various data.
+
+## How to ?
+
+In first place, **Twiice** is intended for small digital businesses, or small businesses outside this business bubble,
+accompanied by a person who is familiar with the field of web and development. From there, it is possible to learn to develop and understand
+the Twiice project, through our **WIKI** as well as our automated scripts.
+
+**And after ?**
+
+Twiice wants to see further. Being still a young project, it is limited to light technical needs to develop its own data management software.
+However, in the near future, **Twiice** wants to make itself available to all, and offer a simple graphical interface to automate developments
+going through "Graphic" development directly in the software. **It will no longer be necessary to code!**.
+
+### Open Source Project
+
+Twiice is a project whose sources are open to allow you to make your contribution.
+Any contribution is welcome, as long as it contributes to the continuous improvement of the initial project. The goal is
+to use the skills of all to provide a qualitative tool.
+
+In order to contribute, it is necessary to follow the development guidelines and adapt to the structure
+of the project.
+
+### Create your own modules
+
+**Twiice** offers many possibilities, but also gives you the right to create your own solutions.
+Do you need your own **CRM** ? Twiice allows you to create it. Do you want to create a specific **CMS** ?
+Twiice brings you the essentials. A **standard module** does not suit you? Adapt it without crushing the
+main code of the project.
+
+**Twiice** is built around the framework [Meteor](https://www.meteor.com/), so everyone can contribute
+and simply create his **own modules**. Do not hesitate to contact us directly for any suggestion
+improvement.
 
 
 ## Products Owner 
 
-Cette section définit les personnes responsables du développement de chaque module standard implémenté dans **Twiice**.
-
-**Project** : Antoine LE TROADEC
-**CRM** : Vincent COFFIN
+To do ...

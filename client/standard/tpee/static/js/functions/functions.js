@@ -47,14 +47,14 @@ export function isEmptyObject(obj) {
     }
 }
 
-export function filter_operator(operator, filter, val) {
+export function filter_operator(concat, operator, filter, val) {
     var complete_filter = {};
     switch (operator) {
         case "equalTo":
-            complete_filter = {[filter]: { $eq: val } };
+            complete_filter = {[filter]: { $eq: val }};
             break;
         case "isDifferentFrom":
-            complete_filter = {[filter]: { $ne: val } };
+            complete_filter = {[filter]: { $ne: val }};
             break
         case "contain":
             complete_filter = {[filter]: { $regex: '.*' + val + '.*' }};
@@ -71,6 +71,7 @@ export function filter_operator(operator, filter, val) {
         default:
             break;
     }
+
     return complete_filter;
 }
 

@@ -111,7 +111,6 @@ Template.partnersTreeView.events({
     'click .btn-danger': function (){
         Meteor.call('partnersDeletePartners', this._id);
         swal("Deleted", "This record was properly deleted !", "success");
-        filter_operator
     },
     'click .export-csv': function(events, template){
         var data = Papa.unparse(Partners.find(Template.instance().filtersVar.get(), { 
@@ -139,13 +138,14 @@ Template.partnersTreeView.events({
         // swal("Ooops !", "This function is not available yet !", "info");
         var concatFilters = Template.instance().filtersVar.get();
         // Code below check if object is empty
-        if (isEmptyObject(concatFilters)) {
-            console.log("mdr");
-        }
+        // if (isEmptyObject(concatFilters)) {
+        //     console.log("mdr");
+        // }
+        console.log(concatFilters);
         var filterOperator = $('#partnersFilterOperator').val();
         var selectFilter = $('#partnersFilterSelect').val();
         var filterVal = $('.tw-filter-input').val();
-        Template.instance().filtersVar.set(filter_operator(filterOperator, selectFilter, filterVal))
+        Template.instance().filtersVar.set(filter_operator(concatFilters, filterOperator, selectFilter, filterVal))
     },
     'click .tw-filter-remove': function (events, template) {
         Template.instance().filtersVar.set({});

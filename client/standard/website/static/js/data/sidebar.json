@@ -1,16 +1,12 @@
 {
     "sidebar": {
         "dashboard": {
-            "name": "Dashboard",
+            "name": "Articles",
             "url": "/admin/website"
         },
         "new-collection-sample": {
-            "name": "New Collection Sample",
+            "name": "Nouvel article",
             "url": "/admin/website/new-collection-sample"
-        },
-        "sub-module": {
-            "name": "Sub-Module",
-            "url": "/admin/website/sub-module"
         },
         "settings": {
             "name": "Settings",

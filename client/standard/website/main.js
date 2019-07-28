@@ -7,3 +7,4 @@ import './templates/views/settings.html';
 import './static/js/functions/functions.js';
 import './static/js/website_single.js';
 import './static/js/website.js';
+import './static/js/websiteArticlesCategories.js';

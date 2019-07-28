@@ -9,10 +9,20 @@ Template.sideNavbarwebsite.helpers({
 });
 
 // SUBSCRIBE TO PIPELINES PUBLICATIONS ON TEMPLATES
-Template.websiteTreeView.onCreated(function() {
+
+Template.websiteSingleArticlesCategory.onCreated(function() {
+    var self = this;
+    this.editMode = new ReactiveVar(false);
+    self.autorun(function() {
+        var id = FlowRouter.getParam('_id');
+        self.subscribe('websiteArticlesCategories', id);
+    });
+});
+
+Template.websiteCategoriesTreeView.onCreated(function() {
     var self = this;
     self.autorun(function() {
-        self.subscribe('websiteCollection_sample');
+        self.subscribe('websiteArticlesCategories');
     });
     // Here we build the instance to set variables
     const instance = this;
@@ -35,18 +45,30 @@ Template.websiteTreeView.onCreated(function() {
     }
 });
 
-Template.newCollectionSamplewebsite.onCreated(function() {
-    var self = this;
-    self.autorun(function() {
-        self.subscribe('websiteCollection_sample');
-        self.subscribe('websiteArticlesCategories');
-    });
-});
+// Template.newCollectionSamplewebsite.onCreated(function() {
+//     var self = this;
+//     self.autorun(function() {
+//         self.subscribe('websiteCollection_sample');
+//     });
+// });
 
 // LOAD DATA ON TEMPLATES 
-Template.websiteTreeView.helpers({
-    websiteCollection_sample: () => {
-        return websiteCollection_sample.find(Template.instance().filtersVar.get(), { 
+Template.websiteSingleArticlesCategory.helpers({
+    article_category: () => {
+        var id = FlowRouter.getParam('_id');
+        return websiteArticlesCategories.findOne({_id: id});
+    },
+    updateWebsiteArticlesCategoriesId: function() {
+        return FlowRouter.getParam('_id');
+    },
+    editMode: function () {
+        return Template.instance().editMode.get();
+    },
+});
+
+Template.websiteCategoriesTreeView.helpers({
+    websiteArticlesCategories: () => {
+        return websiteArticlesCategories.find(Template.instance().filtersVar.get(), { 
             limit: Template.instance().resultPerPage.get(), 
             skip: Template.instance().computedSkip.get()
         });
@@ -77,20 +99,20 @@ Template.websiteTreeView.helpers({
     },
     collection_key: () => {
         var filters_website = [];
-        for (var key in websiteCollection_sample.findOne({})) {
+        for (var key in websiteArticlesCategories.findOne({})) {
             filters_website.push(key);
         }
         return filters_website;
     }
 });
 
-Template.websiteTreeView.events({
+Template.websiteCategoriesTreeView.events({
     'click .btn-danger': function (){
-        Meteor.call('websiteDeleteCollection_sample', this._id);
+        Meteor.call('websiteDeleteArticlesCategories', this._id);
         swal("Deleted", "This record was properly deleted !", "success");
     },
     'click .export-csv': function(events, template){
-        var data = Papa.unparse(websiteCollection_sample.find({}, { limit: 10 }).fetch());
+        var data = Papa.unparse(websiteArticlesCategories.find({}, { limit: 10 }).fetch());
         var date = new Date().toISOString().slice(0, 10);
         Meteor.call('download_csv', data, 'website_'+date+'.csv', 'text/csv;encoding:utf-8');
         swal("Yeah !", "Your CSV document is available !", "success");
@@ -128,10 +150,20 @@ Template.websiteTreeView.events({
     }
 });
 
-// CRM ADD TEMPLATE
-
-Template.newCollectionSamplewebsite.events({
+Template.websiteNewCategorie.events({
     'click button[type="submit"]': function (){
         swal("Hooray !", "This record was properly created !", "success");
+    },
+});
+
+Template.websiteSingleArticlesCategory.events({
+    'click .btn-danger': function (){
+        var id = FlowRouter.getParam('_id');
+        Meteor.call('websiteDeleteArticlesCategories', id);
+        FlowRouter.go('website/categories');
+        swal("Deleted", "This record was properly deleted !", "success");
+    },
+    'click .btn-warning': function (event, template){
+        template.editMode.set(!template.editMode.get());
     },
 });

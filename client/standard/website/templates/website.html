@@ -1,17 +1,17 @@
 <template name="website">
     <div class="col-12">
-        <h1>{{_ "website Dashboard"}}</h1>
+        <h1>{{_ "Articles Dashboard"}}</h1>
     </div>
 </template>
 
 <template name="websiteHeader">
     <div class="row justify-content-end">
         {{#if collection_key}}
-            <select name="websiteFilterSelect" id="websiteFilterSelect">
-                {{#each collection_key}}
-                    <option value="{{this}}">{{_ this}}</option>
-                {{/each}}
-            </select>
+        <select name="websiteFilterSelect" id="websiteFilterSelect">
+            {{#each collection_key}}
+            <option value="{{this}}">{{_ this}}</option>
+            {{/each}}
+        </select>
         {{/if}}
         <select name="websiteFilterOperator" id="websiteFilterOperator">
             <option value="equalTo">{{_ "Equal to"}}</option>
@@ -34,7 +34,7 @@
             <button type="button" class="btn btn-success export-csv pull-right">{{_ "Export to csv"}}</button>
             <button type="button" class="btn btn-info import-csv pull-right">{{_ "Import csv"}}</button>
             <input type="text" class="form-control mt-2" placeholder="Number of results" id="resultsNumber">
-            <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none"/>
+            <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none" />
         </div>
     </div>
     <hr>
@@ -56,10 +56,12 @@
                 {{#each websiteCollection_sample}}
                 <tr>
                     <th scope="row">{{@index}}</th>
-                    <td><a href="{{pathFor 'website/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a></td>
+                    <td><a href="{{pathFor 'website/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a>
+                    </td>
                     <td>{{desc}}</td>
                     <td>
-                        <a href="{{pathFor 'website/collection-sample-single' _id=_id}}" title="{{name}}">{{_ "View Details"}}</a>
+                        <a href="{{pathFor 'website/collection-sample-single' _id=_id}}"
+                            title="{{name}}">{{_ "View Details"}}</a>
                         <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
                     </td>
                 </tr>
@@ -76,7 +78,7 @@
 
 <template name="newCollectionSamplewebsite">
     <div class="col-12">
-        <h1>New Collection sample</h1>
+        <h1>{{_ "New article"}}</h1>
         {{> quickForm collection="websiteCollection_sample" id="insertCollection_sampleForm" type="insert" class="new-collection-sample-form"}}
     </div>
 </template>
@@ -84,7 +86,7 @@
 <template name="websiteSingleCollectionSample">
     <div class="row col-md-12">
         <div class="col-md-8">
-            <h1>Collection</h1>
+            <h1>{{_ "Article"}}</h1>
         </div>
         <div class="col-md-4">
             <div class="pull-right">

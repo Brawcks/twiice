@@ -1,5 +1,156 @@
 <template name="settingswebsite">
     <div class="col-10">
-        <h1>Settings</h1>
+        <h1>{{_ "Settings"}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://place-hold.it/200x150?text=Catégories Articles"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <a href="{{pathFor 'website/categories' }}">
+                            <h5 class="card-title">{{_ "Categories"}}</h5>
+                        </a>
+                        <p class="card-text">{{_ "Manage your categories"}}</p>
+                        <a href="{{pathFor 'website/categories' }}"
+                            class="btn btn-primary">{{_ "Manage categories"}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="websiteCategoriesTreeView">
+    <div class="col-12 self-align-end">
+        <div class="row justify-content-end">
+            {{#if collection_key}}
+            <select name="websiteFilterSelect" id="websiteFilterSelect">
+                {{#each collection_key}}
+                <option value="{{this}}">{{_ this}}</option>
+                {{/each}}
+            </select>
+            {{/if}}
+            <select name="websiteFilterOperator" id="websiteFilterOperator">
+                <option value="equalTo">{{_ "Equal to"}}</option>
+                <option value="isDifferentFrom">{{_ "Is different from"}}</option>
+                <option value="contain">{{_ "Contain"}}</option>
+                <option value="doNotContain">{{_ "Do not contain"}}</option>
+                <option value="isSet">{{_ "Is set"}}</option>
+                <option value="isNotSet">{{_ "Is not set"}}</option>
+            </select>
+            <input type="text" placeholder="Filter by ..." class="col-6 tw-filter-input">
+            <button class="btn btn-primary tw-filter-submit" type="submit">{{_ "Validate"}}</button>
+            <button class="btn btn-warning tw-filter-remove" type="submit">{{_ "Remove filters"}}</button>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <a href="{{ pathFor 'website/categories/add' }}">{{_ "New categorie"}}</a>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-success export-csv pull-right">{{_ "Export to csv"}}</button>
+                <button type="button" class="btn btn-info import-csv pull-right">{{_ "Import csv"}}</button>
+                <input type="text" class="form-control mt-2" placeholder="Number of results" id="resultsNumber">
+                <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none" />
+            </div>
+        </div>
+        <hr>
+        <table class="table table-hover mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">{{_ "Name"}}</th>
+                    <th scope="col">{{_ "Description"}}</th>
+                    <th scope="col">{{_ "Actions"}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each websiteArticlesCategories}}
+                <tr>
+                    <th scope="row">{{@index}}</th>
+                    <td><a href="{{pathFor 'website/categories/id' _id=_id}}" title="{{name}}">{{name}}</a>
+                    </td>
+                    <td>{{desc}}</td>
+                    <td>
+                        <a href="{{pathFor 'website/categories/id' _id=_id}}"
+                            title="{{name}}">{{_ "View Details"}}</a>
+                        <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {{{pagination}}}
+            </ul>
+        </nav>
+    </div>
+</template>
+
+<template name="websiteSingleArticlesCategory">
+    <div class="row col-md-12">
+        <div class="col-md-8">
+            <h1>{{_ "Articles Category"}}</h1>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
+                <button type="button" class="btn btn-warning">{{_ "Edit"}}</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {{#if editMode}}
+    {{> quickForm collection="websiteArticlesCategories" doc=article_category id=updateWebsiteArticlesCategoriesId type="update" class="edit edit-collection-form"}}
+    {{else}}
+    <div class="row col-md-12">
+        <div class="col-md-6">
+            <h3>{{article_category.name}}</h3>
+            <p>{{article_category.desc}}</p>
+        </div>
+    </div>
+    {{/if}}
+    <a href="{{ pathFor 'website/categories' }}">{{_ "Previous page"}}</a>
+</template>
+
+<template name="websiteSingleArticlesCategorie">
+        <div class="row col-md-12">
+            <div class="col-md-8">
+                <h1>{{_ "Catégorie"}}</h1>
+            </div>
+            <div class="col-md-4">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
+                    <button type="button" class="btn btn-warning">{{_ "Edit"}}</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        {{#if editMode}}
+        {{> quickForm collection="websiteArticlesCategories" doc=collection_sample_single id=updateWebsiteArticlesCategories type="update" class="edit edit-collection-form"}}
+        {{else}}
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <h3>{{collection_sample_single.name}}</h3>
+                <p>{{collection_sample_single.desc}}</p>
+            </div>
+        </div>
+        {{/if}}
+    </template>
+
+<template name="websiteNewCategorie">
+    <div class="col-12">
+        <a href="{{ pathFor 'website/categories' }}">{{_ "Previous page"}}</a>
+        <h1>{{_ "New categorie"}}</h1>
+        {{> quickForm collection="websiteArticlesCategories" id="insertWebsiteArticlesCategories" type="insert" class="new-website-categorie"}}
+    </div>
+</template>
+
+<template name="websiteCategories">
+    <div class="col-12">
+        <h1>{{_ "Articles Categories Dashboard"}}</h1>
     </div>
 </template>

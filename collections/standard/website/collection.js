@@ -21,6 +21,24 @@ Collection_sampleSchema = new SimpleSchema ({
     desc: {
         type: String,
         label: "Description"
+    },
+    articleCategory_id: {
+        type: String,
+        label: "Category",
+        optional: true,
+        autoform: {
+            type: 'select',
+            options: function() { 
+                let categories = websiteArticlesCategories.find({}).map((doc) => ({
+                    label: doc['name'],
+                    value: doc['_id']
+                 }))
+                return categories;
+            }
+        }
+        // allowedValues() {
+        //     return Partners.find({'partner_details.is_customer': true}).map(s => s.name + ' ' + s.surname + ' | ' + s._id)
+        // }
     }
 });
 

@@ -85,6 +85,33 @@ Template.crmKanbanView.onCreated(function () {
     }
 });
 
+Template.crmFooter.onCreated(function () {
+    if (FlowRouter.getParam('page')) {
+        var page = FlowRouter.getParam('page');
+    }
+
+    // Here we build the instance to set variables
+    const instance = this;
+    // This var will allow us to use filters on collection, with events and helpers
+    instance.filtersVar = new ReactiveVar({});
+
+    // Here we will build pagination
+    instance.page = new ReactiveVar({});
+    instance.computedSkip = new ReactiveVar({});
+    // Use the value below to define how many result you want to display
+    instance.resultPerPage = new ReactiveVar({});
+    instance.resultPerPage.set(3);
+
+
+    if (FlowRouter.getParam('page')) {
+        instance.page.set(FlowRouter.getParam('page'));
+        instance.computedSkip.set((instance.resultPerPage.get() * instance.page.get()) - instance.resultPerPage.get());
+    } else {
+        instance.computedSkip.set(0);
+        instance.page.set(0);
+    }
+});
+
 Template.crmNewPipeline.onCreated(function () {
     var self = this;
     self.subscribe('Partners');
@@ -112,7 +139,7 @@ Template.sideNavbarcrm.helpers({
     },
 });
 
-Template.crmHeader.helpers({
+Template.crmFooter.helpers({
     pagination: () => {
         var totalRecords = Pipelines.find().count();
         var pagesNumber = Math.trunc(totalRecords / Template.instance().resultPerPage.get());
@@ -136,7 +163,10 @@ Template.crmHeader.helpers({
             displayPages += '<li class="page-item tw-paginate-button"><a class="page-link" id="'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'" href="'+FlowRouter.path('crm/page')+'/'+(parseFloat(Template.instance().page.get()) + parseFloat(1))+'">Next</a></li>';
         }
         return displayPages;
-    },
+    }
+});
+
+Template.crmHeader.helpers({
     collection_key: () => {
         var filters = [];
         for (var key in Pipelines.findOne({})) {
@@ -160,6 +190,8 @@ Template.crmTreeView.helpers({
 });
 // Simple inheritance from tree view
 Template.crmKanbanView.inheritsHelpersFrom('crmTreeView');
+Template.crmHeader.inheritsHelpersFrom('crmTreeView');
+Template.crmFooter.inheritsHelpersFrom('crmTreeView');
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -218,6 +250,8 @@ Template.crmTreeView.events({
 });
 // Simple inheritance of tree events
 Template.crmKanbanView.inheritsEventsFrom('crmTreeView');
+Template.crmFooter.inheritsEventsFrom('crmTreeView');
+Template.crmHeader.inheritsEventsFrom('crmTreeView');
 
 // CRM ADD TEMPLATE
 

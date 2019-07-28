@@ -8,11 +8,11 @@
     <div class="col-12 self-align-end">
         <div class="row justify-content-end">
             {{#if collection_key}}
-                <select name="partnersFilterSelect" id="partnersFilterSelect">
-                    {{#each collection_key}}
-                        <option value="{{this}}">{{_ this}}</option>
-                    {{/each}}
-                </select>
+            <select name="partnersFilterSelect" id="partnersFilterSelect">
+                {{#each collection_key}}
+                <option value="{{this}}">{{_ this}}</option>
+                {{/each}}
+            </select>
             {{/if}}
             <select name="partnersFilterOperator" id="partnersFilterOperator">
                 <option value="equalTo">{{_ "Equal to"}}</option>
@@ -26,11 +26,10 @@
             <button class="btn btn-primary tw-filter-submit" type="submit">{{_ "Validate"}}</button>
             <button class="btn btn-warning tw-filter-remove" type="submit">{{_ "Remove filters"}}</button>
         </div>
-        <div class="row justify-content-end">
-            <div class="row col-2 align-self-end mt-4">
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Number of results" id="resultsNumber">
-                </div>
+        <div class="row justify-content-end mt-2">
+            <div class="col-6 self-align-end text-right">
+                <a href="{{ pathFor 'crm' }}">Table</a>
+                <a href="{{ pathFor 'crm/kanban' }}">Kanban</a>
             </div>
         </div>
         <hr>
@@ -43,7 +42,8 @@
             <div class="col-6 text-right">
                 <button type="button" class="btn btn-success export-csv pull-right">{{_ "Export to csv"}}</button>
                 <button type="button" class="btn btn-info import-csv pull-right">{{_ "Import csv"}}</button>
-                <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none"/>
+                <input type="text" class="form-control mt-2" placeholder="Number of results" id="resultsNumber">
+                <input id="file" type="file" class="btn btn-info import-csv-file pull-right d-none" />
             </div>
         </div>
         <table class="table table-hover mt-3">
@@ -60,11 +60,15 @@
                 {{#each partners}}
                 <tr>
                     <th scope="row">{{@index}}</th>
-                    <td><a href="{{pathFor 'partners/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a></td>
-                    <td><a href="{{pathFor 'partners/collection-sample-single' _id=_id}}" title="{{name}}">{{surname}}</a></td>
-                    <td>{{address.street1}}{{#if address.street2}},{{address.street2}}{{/if}} {{address.city}} - {{address.zip}}</td>
+                    <td><a href="{{pathFor 'partners/collection-sample-single' _id=_id}}" title="{{name}}">{{name}}</a>
+                    </td>
+                    <td><a href="{{pathFor 'partners/collection-sample-single' _id=_id}}"
+                            title="{{name}}">{{surname}}</a></td>
+                    <td>{{address.street1}}{{#if address.street2}},{{address.street2}}{{/if}} {{address.city}} -
+                        {{address.zip}}</td>
                     <td>
-                        <a href="{{pathFor 'partners/collection-sample-single' _id=_id}}" title="{{name}}">{{_ "View Details"}}</a>
+                        <a href="{{pathFor 'partners/collection-sample-single' _id=_id}}"
+                            title="{{name}}">{{_ "View Details"}}</a>
                         <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
                     </td>
                 </tr>
@@ -115,9 +119,9 @@
             </div>
             <div class="bg-light tw-display-partnerInfo col-6">
                 {{#if partner_single.partner_details.is_customer}}
-                    <h5>{{_ "This partner is a customer"}}</h5>
-                    {{else}}
-                    <h5>{{_ "This partner isn't a customer"}}</h5>
+                <h5>{{_ "This partner is a customer"}}</h5>
+                {{else}}
+                <h5>{{_ "This partner isn't a customer"}}</h5>
                 {{/if}}
             </div>
         </div>

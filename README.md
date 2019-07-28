@@ -9,6 +9,8 @@ contribution available at the root of the project.
 
 **Twiice** is happy to count you in it ranks :D
 
+Actually, most of the work (Development cycles / tests ...) is done on **Partners and CRM module.**
+
 # Founder
 
 Project actually supported by **Vincent COFFIN**. Project licence is actually **GNU GPL V3**.

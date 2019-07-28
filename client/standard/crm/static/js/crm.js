@@ -158,19 +158,8 @@ Template.crmTreeView.helpers({
         });
     }
 });
-
-Template.crmKanbanView.helpers({
-    pipelines: () => {
-        // here we return data according on our filters. If no filter, filtersVar is an empty object
-        // so we will get all the data
-        // FIXME : We should use a function here to see if m2m or o2m exist, then, we check the other Collection
-
-        return Pipelines.find(Template.instance().filtersVar.get(), {
-            limit: Template.instance().resultPerPage.get(), 
-            skip: Template.instance().computedSkip.get()
-        });
-    }
-});
+// Simple inheritance from tree view
+Template.crmKanbanView.inheritsHelpersFrom('crmTreeView');
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -227,50 +216,8 @@ Template.crmTreeView.events({
         Template.instance().resultPerPage.set(parseFloat(resultsNumber));
     }
 });
-
-Template.crmKanbanView.events({
-    'click .btn-danger': function () {
-        Meteor.call('crmDeletePipeline', this._id);
-        swal("Deleted", "This record was properly deleted !", "success");
-    },
-    'click .export-csv': function (events, template) {
-        var data = Papa.unparse(Pipelines.find({}, { limit: 10 }).fetch());
-        var date = new Date().toISOString().slice(0, 10);
-        Meteor.call('download_csv', data, 'crm_' + date + '.csv', 'text/csv;encoding:utf-8');
-        swal("Yeah !", "Your CSV document is available !", "success");
-    },
-    'click .import-csv': function (events, template) {
-        swal("Ooops !", "This function is not available yet !", "info");
-        // $(".import-csv-file").click();
-        // $(".import-csv-file").change(function () {
-        //     var fileInput = document.querySelector('.import-csv-file');
-        //     var reader = new FileReader();
-        //     reader.addEventListener('load', function () {
-        //         alert('Contenu du fichier "' + fileInput.files[0].name + '" :\n\n' + reader.result);
-        //     });
-        //     reader.readAsText(fileInput.files[0]);
-        //     console.log(Papa.parse(reader.result, {delimiter: ";"}));
-        // });
-    },
-    'click .tw-filter-submit': function (events, template) {
-        // swal("Ooops !", "This function is not available yet !", "info");
-        var filterOperator = $('#crmFilterOperator').val();
-        var selectFilter = $("#crmFilterSelect").val();
-        var filterVal = $(".tw-filter-input").val();
-        Template.instance().filtersVar.set(filter_operator(filterOperator, selectFilter, filterVal))
-    },
-    'click .tw-filter-remove': function (events, template) {
-        Template.instance().filtersVar.set({});
-    },
-    'click .tw-paginate-button': function (events, template) {
-        Template.instance().page.set(event.target.id)
-        Template.instance().computedSkip.set((Template.instance().resultPerPage.get() * event.target.id) - Template.instance().resultPerPage.get())
-    },
-    'keyup #resultsNumber': function (events, template) {
-        var resultsNumber = $('#resultsNumber').val();
-        Template.instance().resultPerPage.set(parseFloat(resultsNumber));
-    }
-});
+// Simple inheritance of tree events
+Template.crmKanbanView.inheritsEventsFrom('crmTreeView');
 
 // CRM ADD TEMPLATE
 

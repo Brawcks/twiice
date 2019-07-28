@@ -26,6 +26,16 @@ PipelinesSchema = new SimpleSchema ({
             placeholder: "Name this opportunity",
         }
     },
+    description: {
+        type: String,
+        label: "Description",
+        optional: true,
+        autoform: {
+            title: "Field name : description",
+            placeholder: "Fill a description",
+            type: "textarea"
+        }
+    },
     opportunity_qualification: {
         type: String,
         label: "Opportunity qualification",

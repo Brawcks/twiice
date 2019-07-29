@@ -2,7 +2,7 @@
     "sidebar": {
         "dashboard": {
             "name": "Dashboard",
-            "url": "/"
+            "url": "/admin/tpee"
         },
         "sub-module": {
             "name": "Sub-Module",

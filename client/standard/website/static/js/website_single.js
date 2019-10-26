@@ -5,6 +5,7 @@ Template.websiteSingleCollectionSample.onCreated(function() {
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
         self.subscribe('websiteCollection_sample', id);
+        self.subscribe('websiteArticlesCategories', id);
     });
 });
 
@@ -30,6 +31,9 @@ Template.websiteSingleCollectionSample.events({
     },
     'click .btn-warning': function (event, template){
         template.editMode.set(!template.editMode.get());
+    },
+    'click button[type="submit"]': function (){
+        swal("Hooray !", "This record was properly updated !", "success");
     },
 });
 

@@ -36,9 +36,6 @@ Collection_sampleSchema = new SimpleSchema ({
                 return categories;
             }
         }
-        // allowedValues() {
-        //     return Partners.find({'partner_details.is_customer': true}).map(s => s.name + ' ' + s.surname + ' | ' + s._id)
-        // }
     }
 });
 

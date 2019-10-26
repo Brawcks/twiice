@@ -26,7 +26,8 @@ websiteArticlesCategories_sampleSchema = new SimpleSchema ({
 
 Meteor.methods({
     websiteDeleteArticlesCategories: function(id) {
-        websiteArticlesCategories.remove(id)
+        websiteArticlesCategories.remove(id);
+        websiteCollection_sample.update({articleCategory_id: id}, {$set: {articleCategory_id: null}});
     },
 });
 

@@ -1,7 +1,7 @@
 import { leftSidebarCustomer, filter_operator } from './functions/functions.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-var publicSettings = Meteor.settings.public;
+const publicSettings = Meteor.settings.public;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,6 @@
 <template name="mainTemplate">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/client/standard/project/static/css/project.css">
     {{> tpeeTopNavbar}}
     {{> tpeeHeaderAssets}}
     <div class="container-fluid">
@@ -15,7 +17,11 @@
         </div>
         {{> tpeeFooterAssets}}
     </div>
-
+    <script
+    src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+    integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+    crossorigin="anonymous"></script>
+    <script src="/bootstrap/bootstrap.min.js"></script>
 
 </template>
 
@@ -32,6 +38,9 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="{{pathFor 'tpee/dashboard' }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{pathFor 'web' }}">Frontend</a>
                     </li>
                     {{> loginButtons}}
                     <li class="nav-item dropdown">

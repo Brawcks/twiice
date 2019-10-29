@@ -36,6 +36,8 @@ aldeed:autoform
 aldeed:simple-schema@1.4.3
 aldeed:collection2
 aldeed:template-extension
+ostrio:autoform-files
+ostrio:files
 
 
 # ACCOUNTS PACKAGES

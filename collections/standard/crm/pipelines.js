@@ -5,6 +5,7 @@ import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform', 'foreign_key', 'cascade']);
 
 const self = this.Meteor;
+// const setting = Crm_settings.find({crm_settings: true}).fetch();
 
 Pipelines = new Mongo.Collection('pipelines');
 
@@ -101,6 +102,7 @@ PipelinesSchema = new SimpleSchema ({
     author: {
         type: String,
         label: "Author",
+        optional: true,
         autoValue: function () {
             return self.userId();
         },
@@ -122,8 +124,8 @@ PipelinesSchema = new SimpleSchema ({
 
 Meteor.methods({
     crmDeletePipeline: function(id) {
-        Pipelines.remove(id)
-    },
+        Pipelines.remove(id);
+    }
 });
 
 Pipelines.attachSchema(PipelinesSchema);

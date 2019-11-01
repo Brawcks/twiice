@@ -39,6 +39,8 @@ aldeed:template-extension
 ostrio:autoform-files
 ostrio:files
 
+# Migrations
+percolate:migrations
 
 # ACCOUNTS PACKAGES
 accounts-ui@1.3.1

@@ -1,5 +1,6 @@
 <template name="mainTemplate">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="/client/standard/project/static/css/project.css">
     {{> tpeeTopNavbar}}
     {{> tpeeHeaderAssets}}
@@ -17,10 +18,8 @@
         </div>
         {{> tpeeFooterAssets}}
     </div>
-    <script
-    src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
-    integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
     <script src="/bootstrap/bootstrap.min.js"></script>
 
 </template>
@@ -44,8 +43,8 @@
                     </li>
                     {{> loginButtons}}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Standard Modules
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -53,8 +52,8 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Specific Modules
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -92,6 +91,15 @@
             <p>Twiice Project has a documentation available here :</p>
             <a class="btn btn-primary btn-lg" href="https://github.com/Brawcks/twiice" target="_blank"
                 role="button">Learn Twiice</a>
+        </div>
+    </div>
+</template>
+
+<template name="tpeeTopActions">
+    <div class="col-md-4">
+        <div class="pull-right">
+            <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
+            <button type="button" class="btn btn-warning">{{_ "Edit"}}</button>
         </div>
     </div>
 </template>

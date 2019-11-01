@@ -1,6 +1,6 @@
 <template name="settingscrm">
     <div class="col-10">
-        <h1>Settings</h1>
-        {{> quickForm collection="Crm_settings" id="insertCrmSettingsForm" type="insert" class="new-crm-settings-form"}}
+        <h1>{{_ "Settings"}}</h1>
+        {{> quickForm collection="Crm_settings" doc=settings id="insertCrmSettingsForm" type="update" class="new-crm-settings-form"}}
     </div>
 </template>

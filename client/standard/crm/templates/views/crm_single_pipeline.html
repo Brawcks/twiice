@@ -3,12 +3,7 @@
         <div class="col-md-8">
             <h1 class="fields-title">{{pipeline.label}}</h1>
         </div>
-        <div class="col-md-4">
-            <div class="pull-right">
-                <button type="button" class="btn btn-danger">{{_ "Delete"}}</button>
-                <button type="button" class="btn btn-warning">{{_ "Edit"}}</button>
-            </div>
-        </div>
+        {{> tpeeTopActions}}
     </div>
     <hr>
     {{#if editMode}}

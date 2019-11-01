@@ -118,6 +118,9 @@ Meteor.methods({
     // get_relationnal_document: function (remoteCollection, currentCollection, currentDocumentId, relationnal_field) {
     //     return remoteCollection.findOne({_id: currentCollection.findOne({_id: currentDocumentId}).relationnal_field});
     // }
+    get_reldoc: function(col, remote_col, remote_field) {
+        return remote_col.findOne({_id: col.findOne({_id: id}).remote_field});
+    }
 
     // USEFULL FUNCTIONS
     // The function below find out which mongo operator is needed (depends on the selected field for the search)

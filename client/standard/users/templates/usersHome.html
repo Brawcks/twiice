@@ -10,32 +10,29 @@
             <thead>
                 <tr>
                     <th scope="col"># Record ID</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Verified</th>
                 </tr>
             </thead>
             <tbody>
+                {{#each users}}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
+                    <th scope="row">{{@index}}</th>
+                    <td>{{_id}}</td>
+                    <td><a href="{{pathFor 'users/user' _id=_id}}">{{email.address}}</a></td>
                     <td>@twitter</td>
                 </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>
+</template>
 
+<template name="sideNavbarUsers">
+    <div class="col">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            {{{leftSidebar}}}
+        </div>
+    </div>
 </template>

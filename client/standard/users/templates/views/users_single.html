@@ -1,0 +1,19 @@
+<template name="usersSingleUser">
+    <div class="row col-md-12">
+        <div class="col-md-8">
+            <h1 class="fields-title">{{pipeline.label}}</h1>
+        </div>
+        {{> tpeeTopActions}}
+    </div>
+    <hr>
+    {{#if editMode}}
+        {{> quickForm collection="users" doc=user id=updateUserId type="update" class="edit edit-users-form"}}
+    {{else}}
+    <div class="row col-md-12">
+        <div class="row col-md-12">
+            <h1>{{user._id}}</h1>
+            <h2>{{email.address}}</h2>
+        </div>
+    </div>
+    {{/if}}
+</template>

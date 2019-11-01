@@ -16,6 +16,7 @@ Template.crmSinglePipeline.helpers({
     customer: () => {
         var id = FlowRouter.getParam('_id');
         return Partners.findOne({_id: Pipelines.findOne({_id: id}).partners_id});
+        // return Meteor.call('get_reldoc', Pipelines, Partners, partners_id); // FIXME !
     },
     updatePipelineId: function() {
         return FlowRouter.getParam('_id');

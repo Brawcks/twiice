@@ -10,3 +10,4 @@ import './project/main.js';
 import './partners/main.js';
 import './recruitment/main.js';
 import './website/main.js';
+import './users/main.js';

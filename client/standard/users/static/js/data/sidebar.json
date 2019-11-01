@@ -1,0 +1,8 @@
+{
+    "sidebar": {
+        "dashboard": {
+            "name": "Dashboard",
+            "url": "/admin/users"
+        }
+    }
+}

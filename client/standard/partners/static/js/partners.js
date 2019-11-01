@@ -36,6 +36,33 @@ Template.partnersTreeView.onCreated(function() {
     }
 });
 
+Template.partnersKanbanView.onCreated(function() {
+    var self = this;
+    self.autorun(function() {
+        self.subscribe('Partners');
+    });
+    // Here we build the instance to set variables
+    const instance = this;
+    // This var will allow us to use filters on collection, with events and helpers
+    instance.filtersVar = new ReactiveVar({});
+    
+    // Here we will build pagination
+    instance.page = new ReactiveVar({});
+    instance.computedSkip = new ReactiveVar({});
+    // Use the value below to define how many result you want to display
+    instance.resultPerPage = new ReactiveVar({});
+    instance.resultPerPage.set(3);
+
+
+    if (FlowRouter.getParam('page')) {
+        instance.page.set(FlowRouter.getParam('page'));
+        instance.computedSkip.set((instance.resultPerPage.get() * instance.page.get()) - instance.resultPerPage.get());
+    } else {
+        instance.computedSkip.set(0);
+        instance.page.set(0);
+    }
+});
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////     END TEMPLATES     //////////////////////////////
@@ -94,6 +121,9 @@ Template.partnersTreeView.helpers({
         return filters_partners;
     }
 });
+// Simple inheritance for other templates
+Template.partnersKanbanView.inheritsHelpersFrom('partnersTreeView');
+Template.partnersHeader.inheritsHelpersFrom('partnersTreeView');
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -159,6 +189,9 @@ Template.partnersTreeView.events({
         Template.instance().resultPerPage.set(parseFloat(resultsNumber));
     }
 });
+// Simple inheritance of tree events
+Template.partnersKanbanView.inheritsEventsFrom('partnersTreeView');
+Template.partnersHeader.inheritsEventsFrom('partnersTreeView');
 
 // CRM ADD TEMPLATE
 

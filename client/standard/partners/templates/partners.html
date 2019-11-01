@@ -4,35 +4,39 @@
     </div>
 </template>
 
+<template name="partnersHeader">
+    <div class="row justify-content-end">
+        {{#if collection_key}}
+        <select name="partnersFilterSelect" id="partnersFilterSelect">
+            {{#each collection_key}}
+            <option value="{{this}}">{{_ this}}</option>
+            {{/each}}
+        </select>
+        {{/if}}
+        <select name="partnersFilterOperator" id="partnersFilterOperator">
+            <option value="equalTo">{{_ "Equal to"}}</option>
+            <option value="isDifferentFrom">{{_ "Is different from"}}</option>
+            <option value="contain">{{_ "Contain"}}</option>
+            <option value="doNotContain">{{_ "Do not contain"}}</option>
+            <option value="isSet">{{_ "Is set"}}</option>
+            <option value="isNotSet">{{_ "Is not set"}}</option>
+        </select>
+        <input type="text" placeholder="Filter by ..." class="col-6 tw-filter-input">
+        <button class="btn btn-primary tw-filter-submit" type="submit">{{_ "Validate"}}</button>
+        <button class="btn btn-warning tw-filter-remove" type="submit">{{_ "Remove filters"}}</button>
+    </div>
+    <div class="row justify-content-end mt-2">
+        <div class="col-6 self-align-end text-right">
+            <a href="{{ pathFor 'partners' }}">Table</a>
+            <a href="{{ pathFor 'partners/kanban' }}">Kanban</a>
+        </div>
+    </div>
+    <hr>
+</template>
+
 <template name="partnersTreeView">
     <div class="col-12 self-align-end">
-        <div class="row justify-content-end">
-            {{#if collection_key}}
-            <select name="partnersFilterSelect" id="partnersFilterSelect">
-                {{#each collection_key}}
-                <option value="{{this}}">{{_ this}}</option>
-                {{/each}}
-            </select>
-            {{/if}}
-            <select name="partnersFilterOperator" id="partnersFilterOperator">
-                <option value="equalTo">{{_ "Equal to"}}</option>
-                <option value="isDifferentFrom">{{_ "Is different from"}}</option>
-                <option value="contain">{{_ "Contain"}}</option>
-                <option value="doNotContain">{{_ "Do not contain"}}</option>
-                <option value="isSet">{{_ "Is set"}}</option>
-                <option value="isNotSet">{{_ "Is not set"}}</option>
-            </select>
-            <input type="text" placeholder="Filter by ..." class="col-6 tw-filter-input">
-            <button class="btn btn-primary tw-filter-submit" type="submit">{{_ "Validate"}}</button>
-            <button class="btn btn-warning tw-filter-remove" type="submit">{{_ "Remove filters"}}</button>
-        </div>
-        <div class="row justify-content-end mt-2">
-            <div class="col-6 self-align-end text-right">
-                <a href="{{ pathFor 'crm' }}">Table</a>
-                <a href="{{ pathFor 'crm/kanban' }}">Kanban</a>
-            </div>
-        </div>
-        <hr>
+        {{> partnersHeader}}
         <div class="row">
             <div class="col-6">
                 <div class="col-6">
@@ -75,6 +79,37 @@
                 {{/each}}
             </tbody>
         </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {{{pagination}}}
+            </ul>
+        </nav>
+    </div>
+</template>
+
+<template name="partnersKanbanView">
+    <div class="col-12">
+        {{> partnersHeader}}
+        <div class="row">
+            {{#each partners}}
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://place-hold.it/200x150?text=Something Here"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <a href="{{pathFor 'partners/collection-sample-single' _id=_id}}">
+                            <h5 class="card-title">{{ name }} {{ surname }}</h5>
+                        </a>
+                        <p class="card-text">{{address.street1}}{{#if address.street2}},{{address.street2}}{{/if}}
+                            {{address.city}} -
+                            {{address.zip}}</p>
+                        <a href="{{pathFor 'partners/collection-sample-single' _id=_id}}"
+                            class="btn btn-primary">{{_ "View"}}</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 {{{pagination}}}

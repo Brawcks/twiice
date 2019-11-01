@@ -2,6 +2,7 @@
 import { mainTopNavbarStandard } from './functions/functions.js';
 import { mainTopNavbarCustomer } from './functions/functions.js';
 import { leftSidebarStandard } from './functions/functions.js';
+import { leftSidebarStandardSettings } from './functions/functions.js';
 
 // HELPERS
 Template.tpeeTopNavbar.helpers({
@@ -19,5 +20,11 @@ Template.tpeeTopNavbar.helpers({
 Template.tpeeSideNavbar.helpers({
     leftSidebar: () => {
         return leftSidebarStandard();
+    },
+});
+
+Template.tpeeSideNavbarSettings.helpers({
+    leftSidebarSettings: () => {
+        return leftSidebarStandardSettings();
     },
 });

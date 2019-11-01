@@ -37,6 +37,17 @@ export function leftSidebarStandard() {
     return leftSidebar;
 }
 
+export function leftSidebarStandardSettings() {
+    // SIDEBAR
+    var leftSidebarData = require('../data/settingsSidebar.json');
+    var leftSidebar = "";
+
+    $.each(leftSidebarData.sidebar, function (i, item) {
+        leftSidebar += '<a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="http://' + global_domain + global_port + item.url + '" role="tab" aria-controls="v-pills-home" aria-selected="true">' + item.name + '</a>';
+    });
+    return leftSidebar;
+}
+
 // FILTER FUNCTION
 
 export function isEmptyObject(obj) {

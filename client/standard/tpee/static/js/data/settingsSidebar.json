@@ -1,0 +1,16 @@
+{
+    "sidebar": {
+        "dashboard": {
+            "name": "General Settings",
+            "url": "/admin/tpee/settings"
+        },
+        "sub-module": {
+            "name": "Outgoing Mail Server",
+            "url": "/admin/tpee/settings/oms"
+        },
+        "settings": {
+            "name": "Incoming Mail Server",
+            "url": "/admin/tpee/settings/ims"
+        }
+    }
+}

@@ -19,3 +19,7 @@ Meteor.publish('Pipelines', function() {
 Meteor.publish('Crm_settings', function() {
   return Crm_settings.find({})
 })
+
+Meteor.publish('Crm_messages', function() {
+  return Crm_messages.find({})
+})

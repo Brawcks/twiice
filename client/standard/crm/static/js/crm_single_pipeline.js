@@ -6,6 +6,7 @@ Template.crmSinglePipeline.onCreated(function() {
         var id = FlowRouter.getParam('_id');
         self.subscribe('Pipelines', id);
         self.subscribe('Partners');
+        self.subscribe('Crm_messages');
     });
 });
 
@@ -18,6 +19,10 @@ Template.crmSinglePipeline.helpers({
         var id = FlowRouter.getParam('_id');
         return Partners.findOne({_id: Pipelines.findOne({_id: id}).partners_id});
         // return Meteor.call('get_reldoc', Pipelines, Partners, partners_id); // FIXME !
+    },
+    mailsMessages: () => {
+        var id = FlowRouter.getParam('_id');
+        return Crm_messages.find({pipeline_id: id}, {sort: { created_at: -1}});
     },
     updatePipelineId: function() {
         return FlowRouter.getParam('_id');
@@ -61,6 +66,17 @@ Template.crmSinglePipeline.events({
                     swal("Oops!", "Something went wrong! Mail not sent !", "error");
                 } else {
                     swal("Yeah !", "E-mail sent !", "success");
+                    Crm_messages.insert({
+                        crm_author: 'Test',
+                        crm_title: pipeline.label,
+                        crm_content: content,
+                        crm_ismail: true,
+                        pipeline_id: id
+                    }, function (error, result) {
+                        if (error) {
+                            console.error(error);
+                        }
+                    });
                 }
             }
         );

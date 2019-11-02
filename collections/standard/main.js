@@ -1,6 +1,7 @@
 // IMPORT ALL COLLECTIONS HERE
 import './crm/pipelines.js';
 import './crm/crm_settings.js';
+import './crm/crm_messages.js';
 
 import './users/users.js';
 

@@ -63,4 +63,16 @@
         {{/if}}
     </div>
     <hr>
+    <div class="row col-12">
+        {{#if mailSend }}
+            {{#each mailsMessages}}
+                <div class="col-12">
+                    <h3>Test</h3>
+                    <p>{{ crm_content }}</p>
+                </div>
+            {{/each}}
+        {{ else }}
+
+        {{/if}}
+    </div>
 </template>

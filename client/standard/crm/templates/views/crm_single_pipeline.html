@@ -43,25 +43,24 @@
     </div>
     <div class="row col-12">
         {{#if mailSend }}
-        <form>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">{{_ "Mail content"}}</label>
-                <textarea class="form-control" id="mailSendContent" cols="100%" row="5">{{_ "Send an e-mail to the linked customer"}}</textarea>
-            </div>
-            <div class="row col-12">
-                <input type="submit" value="Send email" id="mailSend" class="btn btn-success">
-            </div>
-        </form>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">{{_ "Mail content"}}</label>
+            <textarea class="form-control" id="mailSendContent" cols="100%"
+                row="5">{{_ "Send an e-mail to the linked customer"}}</textarea>
+        </div>
+        <div class="row col-12">
+            <input type="submit" value="Send email" id="mailSend" class="btn btn-success">
+        </div>
         {{ else }}
-        <form>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">{{_ "Note content"}}</label>
-                <textarea class="form-control" id="writeNoteContent" cols="100%" row="5">{{_ "Let a note on this document"}}</textarea>
-            </div>
-            <div class="row col-12">
-                <input type="submit" value="Save note" id="writeNote" class="btn btn-success">
-            </div>
-        </form>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">{{_ "Note content"}}</label>
+            <textarea class="form-control" id="writeNoteContent" cols="100%"
+                row="5">{{_ "Let a note on this document"}}</textarea>
+        </div>
+        <div class="row col-12">
+            <input type="submit" value="Save note" id="writeNote" class="btn btn-success">
+        </div>
         {{/if}}
     </div>
+    <hr>
 </template>

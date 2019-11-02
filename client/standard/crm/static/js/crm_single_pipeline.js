@@ -47,6 +47,22 @@ Template.crmSinglePipeline.events({
         template.mailSend.set(true);
     },
     'click #mailSend': function (event, template) {
-        
+        var id = FlowRouter.getParam('_id');
+        var pipeline = Pipelines.findOne({_id: id});
+        var contact = Partners.findOne({_id: Pipelines.findOne({_id: id}).partners_id});
+        var content = $('#mailSendContent').val()
+        Meteor.call(
+            'sendEmail',
+            contact.email,
+            'catchall@tiktakweb.fr',
+            pipeline.label,
+            content, function (error, result) {
+                if (error) {
+                    swal("Oops!", "Something went wrong! Mail not sent !", "error");
+                } else {
+                    swal("Yeah !", "E-mail sent !", "success");
+                }
+            }
+        );
     }
 });

@@ -7,7 +7,7 @@ Template.crmSinglePipeline.onCreated(function() {
         var id = FlowRouter.getParam('_id');
         self.subscribe('Pipelines', id);
         self.subscribe('Partners');
-        self.subscribe('Crm_messages');
+        self.subscribe('mailMessages');
     });
 });
 
@@ -23,7 +23,7 @@ Template.crmSinglePipeline.helpers({
     },
     mailsMessages: () => {
         var id = FlowRouter.getParam('_id');
-        return Crm_messages.find({pipeline_id: id}, {sort: { createdAt: -1}});
+        return mailMessages.find({document_id: id, collection: "Pipelines"}, {sort: { createdAt: -1}});
     },
     updatePipelineId: function() {
         return FlowRouter.getParam('_id');
@@ -57,12 +57,13 @@ Template.crmSinglePipeline.events({
         var contact = Partners.findOne({_id: Pipelines.findOne({_id: id}).partners_id});
         var content = $('#writeNoteContent').val()
 
-        Crm_messages.insert({
-            crm_author: 'Test',
-            crm_title: pipeline.label,
-            crm_content: content,
-            crm_ismail: false,
-            pipeline_id: id
+        mailMessages.insert({
+            author: 'Test',
+            title: pipeline.label,
+            content: content,
+            ismail: false,
+            document_id: id,
+            collection: "Pipelines"
         }, function (error, result) {
             if (error) {
                 console.error(error);
@@ -84,12 +85,13 @@ Template.crmSinglePipeline.events({
                     swal("Oops!", "Something went wrong! Mail not sent !", "error");
                 } else {
                     swal("Yeah !", "E-mail sent !", "success");
-                    Crm_messages.insert({
-                        crm_author: 'Test',
-                        crm_title: pipeline.label,
-                        crm_content: content,
-                        crm_ismail: true,
-                        pipeline_id: id
+                    mailMessages.insert({
+                        author: 'Test',
+                        title: pipeline.label,
+                        content: content,
+                        ismail: true,
+                        document_id: id,
+                        collection: "Pipelines"
                     }, function (error, result) {
                         if (error) {
                             console.error(error);

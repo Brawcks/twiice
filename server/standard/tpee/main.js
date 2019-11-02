@@ -12,3 +12,7 @@ Meteor.startup(() => {
 Meteor.publish('General_settings', function() {
   return General_settings.find({})
 })
+
+Meteor.publish('mailMessages', function() {
+  return mailMessages.find({})
+})

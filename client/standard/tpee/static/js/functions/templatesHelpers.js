@@ -18,6 +18,18 @@ Template.registerHelper('formatMinutesSince', function (date) {
     let datetimeA = moment(initialdate + " " + start_time);
     let datetimeB = moment(enddate + " " + end_time);
 
+    diff = datetimeB.diff(datetimeA, "minutes");
+
+    if (diff > 60) {
+        var hours = Math.floor(diff/60);
+        var minutes = diff%60;
+        if (hours > 24) {
+            var days = Math.floor(hours/24);
+            return days + " days ago";
+        }
+        return hours + " hours, " + minutes + " minutes ago";
+    }
+
     return datetimeB.diff(datetimeA, "minutes") + ' minutes ago';
 });
 

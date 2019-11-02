@@ -1,7 +1,6 @@
 // IMPORT ALL COLLECTIONS HERE
 import './crm/pipelines.js';
 import './crm/crm_settings.js';
-import './crm/crm_messages.js';
 
 import './users/users.js';
 
@@ -15,3 +14,4 @@ import './website/collection.js';
 import './website/articlesCategories.js';
 
 import './tpee/collection.js';
+import './tpee/mailMessages.js';

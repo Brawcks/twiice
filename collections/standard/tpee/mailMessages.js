@@ -6,22 +6,22 @@ SimpleSchema.extendOptions(['autoform']);
 
 const self = this.Meteor;
 
-export default Crm_messages = new Mongo.Collection('crm_messages');
+export default mailMessages = new Mongo.Collection('mailMessages');
 
-Crm_messages.deny({
+mailMessages.deny({
     update: function (userId, doc) {
         return !!userId;
     }
 });
 
-Crm_messages.allow({
+mailMessages.allow({
     insert: function (userId, doc) {
         return !!userId;
     }
 });
 
-Crm_messagesSchema = new SimpleSchema ({
-    crm_author: {
+mailMessagesSchema = new SimpleSchema ({
+    author: {
         type: String,
         autoform: {
             type: "hidden",
@@ -30,21 +30,25 @@ Crm_messagesSchema = new SimpleSchema ({
             return Meteor.user().emails[0].address;
         }
     },
-    crm_title: {
+    title: {
         type: String,
         label: "Message Title"
     },
-    crm_content: {
+    content: {
         type: String,
         label: "Message Content"
     },
-    crm_ismail: {
+    ismail: {
         type: Boolean,
         label: "Is an email"
     },
-    pipeline_id: {
+    document_id: {
         type: String,
-        label: "Pipeline ID"
+        label: "Document ID"
+    },
+    collection: {
+        type: String,
+        label: "Collection"
     },
     createdAt: {
         type: Date(),
@@ -60,8 +64,8 @@ Crm_messagesSchema = new SimpleSchema ({
 
 // Meteor.methods({
 //     crmDeleteSettings: function(id) {
-//         Crm_messages.remove(id)
+//         mailMessages.remove(id)
 //     },
 // });
 
-Crm_messages.attachSchema(Crm_messagesSchema);
+mailMessages.attachSchema(mailMessagesSchema);

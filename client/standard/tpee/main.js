@@ -7,3 +7,4 @@ import './templates/views/404.html';
 // LOAD ALL JS FILES
 import './static/js/functions/functions.js';
 import './static/js/tpeeMain.js';
+import './static/js/tpeeGeneralSettings';

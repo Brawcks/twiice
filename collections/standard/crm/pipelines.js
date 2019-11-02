@@ -104,7 +104,7 @@ PipelinesSchema = new SimpleSchema ({
         label: "Author",
         optional: true,
         autoValue: function () {
-            return self.userId();
+            return Meteor.user().emails[0].address;
         },
         autoform: {
             type: "hidden",

@@ -4,6 +4,7 @@
             <h1 class="fields-title">{{pipeline.label}}</h1>
         </div>
         {{> tpeeTopActions}}
+        <button class="btn btn-info">Export PDF</button>
     </div>
     <hr>
     {{#if editMode}}
@@ -67,7 +68,7 @@
         {{#if mailSend }}
             {{#each mailsMessages}}
                 <div class="col-12 bg-light pt-3 pb-3">
-                    <h3>Test - <small>by {{crm_author}}, {{formatMinutesSince createdAt}}</small></h3>
+                    <h3>Test - <small>by {{crm_author}}, {{formatMinutesSince createdAt}}</small> <i class="fas fa-envelope-square"></i></h3>
                     <p>{{ crm_content }}</p>
                 </div>
             {{/each}}

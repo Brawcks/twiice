@@ -1,3 +1,5 @@
+import jsPDF from 'jspdf';
+
 Template.crmSinglePipeline.onCreated(function() {
     var self = this;
     this.editMode = new ReactiveVar(false);
@@ -50,6 +52,14 @@ Template.crmSinglePipeline.events({
     },
     'click .btn-sendmail': function (event, template){
         template.mailSend.set(true);
+    },
+    'click .btn-info': function (event, template){
+        var doc = new jsPDF()
+        var id = FlowRouter.getParam('_id');
+        var pipeline = Pipelines.findOne({_id: id});
+
+        doc.text(pipeline.label, 10, 10)
+        doc.save('a4.pdf')
     },
     'click #mailSend': function (event, template) {
         var id = FlowRouter.getParam('_id');

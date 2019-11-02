@@ -65,15 +65,11 @@
     </div>
     <hr>
     <div class="row col-12">
-        {{#if mailSend }}
-            {{#each mailsMessages}}
-                <div class="col-12 bg-light pt-3 pb-3">
-                    <h3>Test - <small>by {{crm_author}}, {{formatMinutesSince createdAt}}</small> <i class="fas fa-envelope-square"></i></h3>
-                    <p>{{ crm_content }}</p>
-                </div>
-            {{/each}}
-        {{ else }}
-
-        {{/if}}
+        {{#each mailsMessages}}
+            <div class="col-12 bg-light pt-3 pb-3">
+                <h3>Test - <small>by {{crm_author}}, {{formatMinutesSince createdAt}}</small> <i class="fas fa-envelope-square"></i></h3>
+                <p>{{ crm_content }}</p>
+            </div>
+        {{/each}}
     </div>
 </template>

@@ -59,7 +59,7 @@ Template.crmSinglePipeline.events({
         var pipeline = Pipelines.findOne({_id: id});
 
         doc.text(pipeline.label, 10, 10)
-        doc.save('a4.pdf')
+        doc.save(pipeline.label + '.pdf')
     },
     'click #mailSend': function (event, template) {
         var id = FlowRouter.getParam('_id');

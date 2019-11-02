@@ -2,8 +2,8 @@
 
 // GENERATE MAIN MENU
 var publicSettings = Meteor.settings.public;
-var global_domain = publicSettings.environment.global_domain;
-var global_port = publicSettings.environment.global_port;
+var global_domain = publicSettings.env.global_domain;
+var global_port = publicSettings.env.global_port;
 
 // ADD ITEMS TO MENU
 // THIS FUNCTION SHOULD MOVE TO CLIENT STANDARD FOLDER

@@ -1,4 +1,5 @@
 import './migrations/1-preload.js';
+import './functions/smtp.js';
 
 import { Meteor } from 'meteor/meteor';
 

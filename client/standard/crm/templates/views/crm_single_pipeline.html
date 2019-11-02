@@ -7,25 +7,61 @@
     </div>
     <hr>
     {{#if editMode}}
-        {{> quickForm collection="Pipelines" doc=pipeline id=updatePipelineId type="update" class="edit edit-pipelines-form"}}
+    {{> quickForm collection="Pipelines" doc=pipeline id=updatePipelineId type="update" class="edit edit-pipelines-form"}}
     {{else}}
     <div class="row col-md-12">
         <div class="row col-md-12">
             <div class="col-md-6">
-                <h5 class="fields-labels" title="Field name : expected_revenue">{{_ "Expected revenue"}} : <span class="fields-values">{{pipeline.expected_revenue}} €</span></h5>
-                <h5 class="fields-labels" title="Field name : probability">{{_ "Probability"}} : <span class="fields-values">{{pipeline.probability}} %</span></h5>
-                <h5 class="fields-labels" title="Field name : opportunity_qualification">{{_ "Opportunity qualification"}} : <span class="fields-values">{{pipeline.opportunity_qualification}}</span></h5>
+                <h5 class="fields-labels" title="Field name : expected_revenue">{{_ "Expected revenue"}} : <span
+                        class="fields-values">{{pipeline.expected_revenue}} €</span></h5>
+                <h5 class="fields-labels" title="Field name : probability">{{_ "Probability"}} : <span
+                        class="fields-values">{{pipeline.probability}} %</span></h5>
+                <h5 class="fields-labels" title="Field name : opportunity_qualification">
+                    {{_ "Opportunity qualification"}} : <span
+                        class="fields-values">{{pipeline.opportunity_qualification}}</span></h5>
             </div>
             <div class="col-md-6">
-                <h5 class="fields-labels" title="Field name : customer">{{_ "Customer"}} : <a class="relationnal-link" href="{{pathFor 'partners/collection-sample-single' _id=customer._id}}"><span class="fields-values">{{customer.name}} {{customer.surname}}</span></a></h5>
-                <h5 class="fields-labels" title="Field name : expected_closing">{{_ "Expected closing date"}} : <span class="fields-values">{{pipeline.expected_closing}} %</span></h5>
+                <h5 class="fields-labels" title="Field name : customer">{{_ "Customer"}} : <a class="relationnal-link"
+                        href="{{pathFor 'partners/collection-sample-single' _id=customer._id}}"><span
+                            class="fields-values">{{customer.name}} {{customer.surname}}</span></a></h5>
+                <h5 class="fields-labels" title="Field name : expected_closing">{{_ "Expected closing date"}} : <span
+                        class="fields-values">{{pipeline.expected_closing}} %</span></h5>
             </div>
             <hr>
             <div class="row col-md-12 mt-4">
-                <h5 class="fields-labels" title="Field name : createdAt">{{_ "Document created"}} : <span class="fields-values">{{pipeline.createdAt}}</span></h5>
-                <h5 class="fields-labels" title="Field name : author">{{_ "Document author"}} : <span class="fields-values">{{pipeline.author}}</span></h5>
+                <h5 class="fields-labels" title="Field name : createdAt">{{_ "Document created"}} : <span
+                        class="fields-values">{{pipeline.createdAt}}</span></h5>
+                <h5 class="fields-labels" title="Field name : author">{{_ "Document author"}} : <span
+                        class="fields-values">{{pipeline.author}}</span></h5>
             </div>
         </div>
     </div>
     {{/if}}
+    <hr>
+    <div class="row col-12">
+        <a href="" class="btn-sendmail">Send an e-mail</a><a href="" class="ml-3 btn-note">Write a note</a>
+    </div>
+    <div class="row col-12">
+        {{#if mailSend }}
+        <form>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">{{_ "Mail content"}}</label>
+                <textarea class="form-control" id="mailSendContent" cols="100%" row="5">{{_ "Send an e-mail to the linked customer"}}</textarea>
+            </div>
+            <div class="row col-12">
+                <input type="submit" value="Send email" id="mailSend" class="btn btn-success">
+            </div>
+        </form>
+        {{ else }}
+        <form>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">{{_ "Note content"}}</label>
+                <textarea class="form-control" id="writeNoteContent" cols="100%" row="5">{{_ "Let a note on this document"}}</textarea>
+            </div>
+            <div class="row col-12">
+                <input type="submit" value="Save note" id="writeNote" class="btn btn-success">
+            </div>
+        </form>
+        {{/if}}
+    </div>
 </template>

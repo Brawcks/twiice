@@ -1,6 +1,7 @@
 Template.crmSinglePipeline.onCreated(function() {
     var self = this;
     this.editMode = new ReactiveVar(false);
+    this.mailSend = new ReactiveVar(true);
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
         self.subscribe('Pipelines', id);
@@ -24,6 +25,9 @@ Template.crmSinglePipeline.helpers({
     editMode: function () {
         return Template.instance().editMode.get();
     },
+    mailSend: function() {
+        return Template.instance().mailSend.get();
+    },
 });
 
 Template.crmSinglePipeline.events({
@@ -36,4 +40,13 @@ Template.crmSinglePipeline.events({
     'click .btn-warning': function (event, template){
         template.editMode.set(!template.editMode.get());
     },
+    'click .btn-note': function (event, template){
+        template.mailSend.set(false);
+    },
+    'click .btn-sendmail': function (event, template){
+        template.mailSend.set(true);
+    },
+    'click #mailSend': function (event, template) {
+        
+    }
 });

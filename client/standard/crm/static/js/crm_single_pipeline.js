@@ -22,7 +22,7 @@ Template.crmSinglePipeline.helpers({
     },
     mailsMessages: () => {
         var id = FlowRouter.getParam('_id');
-        return Crm_messages.find({pipeline_id: id}, {sort: { created_at: -1}});
+        return Crm_messages.find({pipeline_id: id}, {sort: { createdAt: -1}});
     },
     updatePipelineId: function() {
         return FlowRouter.getParam('_id');

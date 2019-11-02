@@ -33,6 +33,7 @@ lablancas:export-csv
 email
 check
 matb33:collection-hooks
+momentjs:moment
 
 # Automation
 aldeed:autoform

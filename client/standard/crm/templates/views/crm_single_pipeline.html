@@ -25,12 +25,12 @@
                         href="{{pathFor 'partners/collection-sample-single' _id=customer._id}}"><span
                             class="fields-values">{{customer.name}} {{customer.surname}}</span></a></h5>
                 <h5 class="fields-labels" title="Field name : expected_closing">{{_ "Expected closing date"}} : <span
-                        class="fields-values">{{pipeline.expected_closing}} %</span></h5>
+                        class="fields-values">{{formatDate pipeline.expected_closing}}</span></h5>
             </div>
             <hr>
             <div class="row col-md-12 mt-4">
                 <h5 class="fields-labels" title="Field name : createdAt">{{_ "Document created"}} : <span
-                        class="fields-values">{{pipeline.createdAt}}</span></h5>
+                        class="fields-values">{{formatDateTime pipeline.createdAt}}</span></h5>
                 <h5 class="fields-labels" title="Field name : author">{{_ "Document author"}} : <span
                         class="fields-values">{{pipeline.author}}</span></h5>
             </div>
@@ -66,8 +66,8 @@
     <div class="row col-12">
         {{#if mailSend }}
             {{#each mailsMessages}}
-                <div class="col-12">
-                    <h3>Test</h3>
+                <div class="col-12 bg-light pt-3 pb-3">
+                    <h3>Test - <small>by {{crm_author}}, {{formatMinutesSince createdAt}}</small></h3>
                     <p>{{ crm_content }}</p>
                 </div>
             {{/each}}

@@ -25,6 +25,9 @@ Crm_messagesSchema = new SimpleSchema ({
         type: String,
         autoform: {
             type: "hidden",
+        },
+        autoValue: function () {
+            return Meteor.user().emails[0].address;
         }
     },
     crm_title: {
@@ -47,7 +50,7 @@ Crm_messagesSchema = new SimpleSchema ({
         type: Date(),
         label: "Created At",
         autoValue: function () {
-            return new Date()
+            return Date.now()
         },
         autoform: {
             type: "hidden",

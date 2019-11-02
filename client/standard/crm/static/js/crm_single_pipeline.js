@@ -3,7 +3,6 @@ import jsPDF from 'jspdf';
 Template.crmSinglePipeline.onCreated(function() {
     var self = this;
     this.editMode = new ReactiveVar(false);
-    this.mailSend = new ReactiveVar(true);
     self.autorun(function() {
         var id = FlowRouter.getParam('_id');
         self.subscribe('Pipelines', id);
@@ -32,9 +31,6 @@ Template.crmSinglePipeline.helpers({
     editMode: function () {
         return Template.instance().editMode.get();
     },
-    mailSend: function() {
-        return Template.instance().mailSend.get();
-    },
 });
 
 Template.crmSinglePipeline.events({
@@ -47,12 +43,6 @@ Template.crmSinglePipeline.events({
     'click .btn-warning': function (event, template){
         template.editMode.set(!template.editMode.get());
     },
-    'click .btn-note': function (event, template){
-        template.mailSend.set(false);
-    },
-    'click .btn-sendmail': function (event, template){
-        template.mailSend.set(true);
-    },
     'click .btn-info': function (event, template){
         var doc = new jsPDF()
         var id = FlowRouter.getParam('_id');
@@ -60,6 +50,24 @@ Template.crmSinglePipeline.events({
 
         doc.text(pipeline.label, 10, 10)
         doc.save(pipeline.label + '.pdf')
+    },
+    'click #writeNote': function (event, template) {
+        var id = FlowRouter.getParam('_id');
+        var pipeline = Pipelines.findOne({_id: id});
+        var contact = Partners.findOne({_id: Pipelines.findOne({_id: id}).partners_id});
+        var content = $('#writeNoteContent').val()
+
+        Crm_messages.insert({
+            crm_author: 'Test',
+            crm_title: pipeline.label,
+            crm_content: content,
+            crm_ismail: false,
+            pipeline_id: id
+        }, function (error, result) {
+            if (error) {
+                console.error(error);
+            }
+        });
     },
     'click #mailSend': function (event, template) {
         var id = FlowRouter.getParam('_id');

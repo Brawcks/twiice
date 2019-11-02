@@ -39,37 +39,21 @@
     </div>
     {{/if}}
     <hr>
-    <div class="row col-12">
-        <a href="" class="btn-sendmail">Send an e-mail</a><a href="" class="ml-3 btn-note">Write a note</a>
-    </div>
-    <div class="row col-12">
-        {{#if mailSend }}
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">{{_ "Mail content"}}</label>
-            <textarea class="form-control" id="mailSendContent" cols="100%"
-                row="5">{{_ "Send an e-mail to the linked customer"}}</textarea>
-        </div>
-        <div class="row col-12">
-            <input type="submit" value="Send email" id="mailSend" class="btn btn-success">
-        </div>
-        {{ else }}
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">{{_ "Note content"}}</label>
-            <textarea class="form-control" id="writeNoteContent" cols="100%"
-                row="5">{{_ "Let a note on this document"}}</textarea>
-        </div>
-        <div class="row col-12">
-            <input type="submit" value="Save note" id="writeNote" class="btn btn-success">
-        </div>
-        {{/if}}
-    </div>
-    <hr>
+    {{> tpeeGlobalMessages}}
     <div class="row col-12">
         {{#each mailsMessages}}
-            <div class="col-12 bg-light pt-3 pb-3">
-                <h3>Test - <small>by {{crm_author}}, {{formatMinutesSince createdAt}}</small> <i class="fas fa-envelope-square"></i></h3>
-                <p>{{ crm_content }}</p>
-            </div>
+        {{#if crm_ismail}}
+        <div class="col-12 bg-light pt-3 pb-3">
+            <h3>{{_ "Mail"}} - <small>by {{crm_author}}, {{formatMinutesSince createdAt}}</small> <i
+                    class="fas fa-envelope-square"></i></h3>
+            <p>{{ crm_content }}</p>
+        </div>
+        {{else}}
+        <div class="col-12 pt-3 pb-3">
+            <h3>{{_ "Note"}} - <small>by {{crm_author}}, {{formatMinutesSince createdAt}}</small></h3>
+            <p>{{ crm_content }}</p>
+        </div>
+        {{/if}}
         {{/each}}
     </div>
 </template>

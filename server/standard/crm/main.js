@@ -1,5 +1,3 @@
-import './migrations/1-preload.js';
-
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {

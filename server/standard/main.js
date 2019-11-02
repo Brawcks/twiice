@@ -11,3 +11,4 @@ import './partners/main.js';
 import './recruitment/main.js';
 import './website/main.js';
 import './users/main.js';
+import './tpee/main.js';

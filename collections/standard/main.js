@@ -12,3 +12,5 @@ import './recruitment/collection.js';
 
 import './website/collection.js';
 import './website/articlesCategories.js';
+
+import './tpee/collection.js';

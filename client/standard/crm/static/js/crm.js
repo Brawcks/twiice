@@ -16,7 +16,6 @@ Template.crmTreeView.onCreated(function () {
         self.subscribe('Pipelines');
         var filters = [];
         for (var key in Pipelines.findOne({})) {
-            // console.log(key);
             filters.push(key);
         }
     });
@@ -54,7 +53,6 @@ Template.crmKanbanView.onCreated(function () {
         self.subscribe('Pipelines');
         var filters = [];
         for (var key in Pipelines.findOne({})) {
-            // console.log(key);
             filters.push(key);
         }
     });
@@ -194,7 +192,6 @@ Template.crmTreeView.events({
         //         alert('Contenu du fichier "' + fileInput.files[0].name + '" :\n\n' + reader.result);
         //     });
         //     reader.readAsText(fileInput.files[0]);
-        //     console.log(Papa.parse(reader.result, {delimiter: ";"}));
         // });
     },
     'click .tw-filter-submit': function (events, template) {

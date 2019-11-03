@@ -167,11 +167,6 @@ Template.partnersTreeView.events({
     'click .tw-filter-submit': function (events, template) {
         // swal("Ooops !", "This function is not available yet !", "info");
         var concatFilters = Template.instance().filtersVar.get();
-        // Code below check if object is empty
-        // if (isEmptyObject(concatFilters)) {
-        //     console.log("mdr");
-        // }
-        console.log(concatFilters);
         var filterOperator = $('#partnersFilterOperator').val();
         var selectFilter = $('#partnersFilterSelect').val();
         var filterVal = $('.tw-filter-input').val();

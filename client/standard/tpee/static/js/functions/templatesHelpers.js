@@ -8,6 +8,10 @@ Template.registerHelper('formatDateTime', function (date) {
     return moment(date).format('DD-MM-YYYY HH:mm:ss');
 });
 
+Template.registerHelper('__', function (date) {
+    return _;
+});
+
 Template.registerHelper('formatMinutesSince', function (date) {
     let initialdate = moment(date).format('YYYY-MM-DD');
     let start_time = moment(date).format('HH:mm:ss');

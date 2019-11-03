@@ -7,6 +7,16 @@
         <button class="btn btn-info">Export PDF</button>
     </div>
     <hr>
+    <div class="pull-right">
+        {{#each crm_step in crm_steps}}
+        {{#if __.isEqual crm_step pipeline.crm_steps}}
+            <b><a href="">{{crm_step}}</a> ></b>
+        {{else}}
+            <a href="" class="step">{{crm_step}}</a> >
+        {{/if}}
+        {{/each}}
+    </div>
+    <hr>
     {{#if editMode}}
     {{> quickForm collection="Pipelines" doc=pipeline id=updatePipelineId type="update" class="edit edit-pipelines-form"}}
     {{else}}

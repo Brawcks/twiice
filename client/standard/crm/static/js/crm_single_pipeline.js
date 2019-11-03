@@ -21,6 +21,9 @@ Template.crmSinglePipeline.helpers({
         return Partners.findOne({_id: Pipelines.findOne({_id: id}).partners_id});
         // return Meteor.call('get_reldoc', Pipelines, Partners, partners_id); // FIXME !
     },
+    crm_steps: () => {
+        return PipelinesSchema.get('crm_steps', 'allowedValues');
+    },
     mailsMessages: () => {
         var id = FlowRouter.getParam('_id');
         return mailMessages.find({document_id: id, collection: "Pipelines"}, {sort: { createdAt: -1}});
@@ -50,6 +53,15 @@ Template.crmSinglePipeline.events({
 
         doc.text(pipeline.label, 10, 10)
         doc.save(pipeline.label + '.pdf')
+    },
+    'click .step': function (e){
+        var id = FlowRouter.getParam('_id');
+        var step = $(e.target).text();
+        Pipelines.update(id, {
+            $set: { 
+                crm_steps: step 
+            }
+        });
     },
     'click #writeNote': function (event, template) {
         var id = FlowRouter.getParam('_id');

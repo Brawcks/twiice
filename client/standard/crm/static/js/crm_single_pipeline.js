@@ -1,4 +1,4 @@
-import jsPDF from 'jspdf';
+import * as tw from './functions/functions.js';
 
 Template.crmSinglePipeline.onCreated(function() {
     var self = this;
@@ -47,12 +47,7 @@ Template.crmSinglePipeline.events({
         template.editMode.set(!template.editMode.get());
     },
     'click .btn-info': function (event, template){
-        var doc = new jsPDF()
-        var id = FlowRouter.getParam('_id');
-        var pipeline = Pipelines.findOne({_id: id});
-
-        doc.text(pipeline.label, 10, 10)
-        doc.save(pipeline.label + '.pdf')
+        tw.exportPDF();
     },
     'click .step': function (e){
         var id = FlowRouter.getParam('_id');
@@ -87,6 +82,7 @@ Template.crmSinglePipeline.events({
         var pipeline = Pipelines.findOne({_id: id});
         var contact = Partners.findOne({_id: Pipelines.findOne({_id: id}).partners_id});
         var content = $('#mailSendContent').val()
+        
         Meteor.call(
             'sendEmail',
             contact.email,

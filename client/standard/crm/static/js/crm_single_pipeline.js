@@ -1,4 +1,4 @@
-import * as tw from './functions/functions.js';
+import * as tw from './reports/reports.js';
 
 Template.crmSinglePipeline.onCreated(function() {
     var self = this;

@@ -6,6 +6,9 @@ import './templates/views/settings.html';
 
 // LOAD ALL JS FILES
 import './static/js/functions/functions.js';
+import './static/js/reports/reports.js';
+
+
 import './static/js/crm.js';
 import './static/js/crm_single_pipeline.js';
 import './static/js/crm_settings.js';

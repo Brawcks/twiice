@@ -110,9 +110,9 @@ PipelinesSchema = new SimpleSchema ({
             type: "hidden",
         }
     },
-    createdAt: {
+    lastModifiedOn: {
         type: Date(),
-        label: "Created At",
+        label: "Last Modified On",
         autoValue: function () {
             return new Date()
         },

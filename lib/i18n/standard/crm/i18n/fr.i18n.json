@@ -24,5 +24,7 @@
     "Is not set": "N'est pas défini",
     "Step": "Etape",
     "Remove filters": "Retirer les filtres",
-    "New Pipeline": "Nouvelle pipeline"
+    "New Pipeline": "Nouvelle pipeline",
+    "Ooops !": "Oups !",
+    "This function is not available yet !": "Cette fonctionnalité n'est pas encore disponible !"
 }

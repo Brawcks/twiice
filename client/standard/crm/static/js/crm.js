@@ -1,6 +1,8 @@
 import { leftSidebarCustomer, filter_operator } from './functions/functions.js';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import { TAPi18n as _t } from 'meteor/tap:i18n';
+
 const publicSettings = Meteor.settings.public;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -183,7 +185,7 @@ Template.crmTreeView.events({
         swal("Yeah !", "Your CSV document is available !", "success");
     },
     'click .import-csv': function (events, template) {
-        swal("Ooops !", "This function is not available yet !", "info");
+        swal(_t.__("Ooops !"), _t.__("This function is not available yet !"), "info");
         // $(".import-csv-file").click();
         // $(".import-csv-file").change(function () {
         //     var fileInput = document.querySelector('.import-csv-file');

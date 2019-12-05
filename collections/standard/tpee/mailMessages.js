@@ -50,6 +50,10 @@ mailMessagesSchema = new SimpleSchema ({
         type: String,
         label: "Collection"
     },
+    messageId: {
+        type: String,
+        label: "Message ID"
+    },
     createdAt: {
         type: Date(),
         label: "Created At",

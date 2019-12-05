@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import { TAPi18n as _t } from 'meteor/tap:i18n';
 
 import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform', 'foreign_key', 'cascade']);

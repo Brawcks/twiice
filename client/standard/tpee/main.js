@@ -14,3 +14,4 @@ import './static/js/functions/templatesGlobal.js';
 import './static/js/tpeeMain.js';
 import './static/js/tpeeGeneralSettings.js';
 import './static/js/tpeeOms.js';
+import './static/js/tpeeImap.js';

@@ -86,11 +86,12 @@ Template.crmSinglePipeline.events({
         Meteor.call(
             'sendEmail',
             contact.email,
-            'catchall@tiktakweb.fr',
+            'ventes@tiktakweb.fr',
             pipeline.label,
-            content, function (error, result) {
+            content, function (error, messageId) {
                 if (error) {
                     swal("Oops!", "Something went wrong! Mail not sent !", "error");
+                    console.log(error);
                 } else {
                     swal("Yeah !", "E-mail sent !", "success");
                     mailMessages.insert({
@@ -99,7 +100,8 @@ Template.crmSinglePipeline.events({
                         content: content,
                         ismail: true,
                         document_id: id,
-                        collection: "Pipelines"
+                        collection: "Pipelines",
+                        messageId: messageId
                     }, function (error, result) {
                         if (error) {
                             console.error(error);

@@ -10,8 +10,11 @@
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "bcrypt": "^3.0.1",
+    "imap-simple": "^4.3.0",
     "jspdf": "^1.5.3",
+    "lodash": "^4.17.15",
     "lodash.template": ">=4.5.0",
+    "mailparser": "^2.7.6",
     "meteor-node-stubs": "^0.4.1",
     "moment": "^2.24.0",
     "simpl-schema": "^1.4.3"

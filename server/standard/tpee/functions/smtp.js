@@ -4,7 +4,7 @@ import { Random } from 'meteor/random'
 
 // Server: Define a method that the client can call.
 Meteor.methods({
-    sendEmail(to, from, subject, text) {
+    sendEmail(to, from, subject, text, inReplyTo) {
         // Make sure that all arguments are strings.
         check([to, from, subject, text] [String]);
 
@@ -12,7 +12,8 @@ Meteor.methods({
         // waiting for the email sending to complete.
         this.unblock();
         var messageId = "<" + Random.secret() + "@tiktakweb.fr>";
-        Email.send({ to, from, subject, text, messageId });
+
+        Email.send({ to, from, subject, text, messageId, inReplyTo });
         return messageId;
     }
 });

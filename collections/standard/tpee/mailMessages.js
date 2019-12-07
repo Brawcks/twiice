@@ -25,9 +25,6 @@ mailMessagesSchema = new SimpleSchema ({
         type: String,
         autoform: {
             type: "hidden",
-        },
-        autoValue: function () {
-            return Meteor.user().emails[0].address;
         }
     },
     title: {
@@ -41,6 +38,10 @@ mailMessagesSchema = new SimpleSchema ({
     ismail: {
         type: Boolean,
         label: "Is an email"
+    },
+    isReply: {
+        type: Boolean,
+        label: "Is a reply"
     },
     document_id: {
         type: String,

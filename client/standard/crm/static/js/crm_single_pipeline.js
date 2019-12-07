@@ -81,6 +81,14 @@ Template.crmSinglePipeline.events({
         var id = FlowRouter.getParam('_id');
         var pipeline = Pipelines.findOne({_id: id});
         var contact = Partners.findOne({_id: Pipelines.findOne({_id: id}).partners_id});
+        var inReplyTo = mailMessages.find({document_id: id, collection: "Pipelines", isReply: true}, {sort: { createdAt: -1}, limit: 1}).fetch();
+
+        if (Array.isArray(inReplyTo) && inReplyTo.length) {
+            inReplyTo = inReplyTo[0].messageId;
+        } else {
+            inReplyTo = false;
+        }
+
         var content = $('#mailSendContent').val()
         
         Meteor.call(
@@ -88,17 +96,19 @@ Template.crmSinglePipeline.events({
             contact.email,
             'ventes@tiktakweb.fr',
             pipeline.label,
-            content, function (error, messageId) {
+            content,
+            inReplyTo, function (error, messageId) {
                 if (error) {
                     swal("Oops!", "Something went wrong! Mail not sent !", "error");
                     console.log(error);
                 } else {
                     swal("Yeah !", "E-mail sent !", "success");
                     mailMessages.insert({
-                        author: 'Test',
+                        author: Meteor.user().emails[0].address,
                         title: pipeline.label,
                         content: content,
                         ismail: true,
+                        isReply: false,
                         document_id: id,
                         collection: "Pipelines",
                         messageId: messageId

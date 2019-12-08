@@ -33,6 +33,7 @@ lablancas:export-csv
 email
 check
 momentjs:moment
+ostrio:logger
 
 # Automation
 aldeed:autoform
@@ -41,6 +42,7 @@ aldeed:collection2
 aldeed:template-extension
 ostrio:autoform-files
 ostrio:files
+littledata:synced-cron
 
 # Migrations
 percolate:migrations

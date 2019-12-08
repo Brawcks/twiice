@@ -1,6 +1,11 @@
 import { Random } from 'meteor/random';
+import { Logger } from 'meteor/ostrio:logger';
 
 var imaps = require('imap-simple');
+
+const log = new Logger();
+
+const imapSettings = Meteor.settings.public.env.imap;
 const simpleParser = require('mailparser').simpleParser;
 const _ = require('lodash');
 
@@ -9,12 +14,12 @@ Meteor.methods({
     fetchMails() {
         var config = {
             imap: {
-                user: 'catchall@tiktakweb.fr',
-                password: 'xxxxxxxx',
-                host: 'imap.gmail.com',
-                port: 993,
-                tls: true,
-                authTimeout: 3000
+                user: imapSettings.user,
+                password: imapSettings.password,
+                host: imapSettings.host,
+                port: imapSettings.port,
+                tls: imapSettings.tls,
+                authTimeout: imapSettings.authTimeout
             }
         };
         
@@ -31,19 +36,13 @@ Meteor.methods({
                 };
 
                 return connection.search(searchCriteria, fetchOptions).then(function (results) {
-
-                    // console.log('BASE');
-                    // console.log(results[0]);
-                    // console.log('FIRST');
-                    // console.log(results[0].parts[0]);
-                    // console.log('SECOND');
-                    // console.log(results[0].parts[1]);
-                    // console.log(results[0].parts[1].body['in-reply-to'][0]);
-
+                    
                     results.forEach(r => {
-                        let incReplyTo = r.parts[2].body['in-reply-to'][0];
-                        let incMessageId = r.parts[2].body['message-id'][0];
-                        let incFrom = r.parts[2].body.from;
+                        let header = r.parts[2];
+
+                        let incReplyTo = header.body['in-reply-to'][0] ? header.body['in-reply-to'][0] : false;
+                        let incMessageId = header.body['message-id'][0] ? header.body['message-id'][0] : false;
+                        let incFrom = header.body.from ? header.body.from : false;
 
                         var all = _.find(r.parts, { "which": "" })
                         var id = r.attributes.uid;
@@ -78,4 +77,17 @@ Meteor.methods({
 
 Meteor.startup(function () {
     // process.env.MAIL_URL = Meteor.settings.public.env.smtp; // Not used here
+    SyncedCron.add({
+        name: 'Fetch mails from inbox',
+        schedule: function(parser) {
+          // parser is a later.parse object
+          return parser.text('every ' + imapSettings.interval + ' mins');
+        },
+        job: function() {
+            Meteor.call('fetchMails');
+        }
+    });
+
+    // Start cron here
+    SyncedCron.start();
 });

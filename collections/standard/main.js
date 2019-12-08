@@ -13,5 +13,5 @@ import './recruitment/collection.js';
 import './website/collection.js';
 import './website/articlesCategories.js';
 
-import './tpee/collection.js';
+import './tpee/generalSettings.js';
 import './tpee/mailMessages.js';

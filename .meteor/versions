@@ -72,6 +72,7 @@ kevohagan:sweetalert@1.0.0
 lablancas:export-csv@0.0.1
 launch-screen@1.1.1
 less@2.8.0
+littledata:synced-cron@1.5.1
 livedata@1.0.18
 localstorage@1.2.0
 logging@1.1.20
@@ -119,6 +120,7 @@ ordered-dict@1.1.0
 ostrio:autoform-files@2.2.0
 ostrio:cookies@2.3.0
 ostrio:files@1.11.2
+ostrio:logger@2.0.8
 percolate:migrations@1.0.2
 promise@0.11.1
 raix:eventemitter@0.1.3

@@ -41,7 +41,8 @@ mailMessagesSchema = new SimpleSchema ({
     },
     isReply: {
         type: Boolean,
-        label: "Is a reply"
+        label: "Is a reply",
+        defaultValue: false
     },
     document_id: {
         type: String,
@@ -53,7 +54,8 @@ mailMessagesSchema = new SimpleSchema ({
     },
     messageId: {
         type: String,
-        label: "Message ID"
+        label: "Message ID",
+        required: false
     },
     createdAt: {
         type: Date(),

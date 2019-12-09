@@ -1,0 +1,85 @@
+{
+    "galaxy.meteor.com": {
+        "env": {
+            "MONGO_URL": "mongodb://twiice:twiiceproject14@ds111422.mlab.com:11422/twiice"
+        }
+    },
+    "public": {
+        "env": {
+            "global_domain": "localhost",
+            "global_port": ":3000",
+            "smtp": "smtps://catchall@tiktakweb.fr:xxxxxxxxxx@smtp.gmail.com:465",
+            "smtp_mailtest": "coffin.vincent.sp@gmail.com",
+            "imap": {
+                "user": "catchall@tiktakweb.fr",
+                "password": "xxxxxxxx",
+                "host": "imap.gmail.com",
+                "port": 993,
+                "tls": true,
+                "authTimeout": 3000,
+                "interval": 5
+            }
+        },
+        "modules": {
+            "standard": {
+                "tpee": {
+                    "name": "Tpee",
+                    "technical_name": "tpee",
+                    "url": "/admin/tpee"
+                },
+                "users": {
+                    "name": "Users",
+                    "technical_name": "users",
+                    "url": "/admin/users"
+                },
+                "crm": {
+                    "name": "CRM",
+                    "technical_name": "crm",
+                    "url": "/admin/crm"
+                },
+                "project": {
+                    "name": "Project",
+                    "technical_name": "project",
+                    "url": "/admin/project"
+                },
+                "partners": {
+                    "name": "Partners",
+                    "technical_name": "partners",
+                    "url": "/admin/partners"
+                },
+                "recruitment": {
+                    "name": "Recruitment",
+                    "technical_name": "recruitment",
+                    "url": "/admin/recruitment"
+                },
+                "website": {
+                    "name": "Website",
+                    "technical_name": "website",
+                    "url": "/admin/website"
+                },
+                "settings": {
+                    "name": "Settings",
+                    "technical_name": "tpee",
+                    "url": "/admin/tpee/settings"
+                }
+            },
+            "customer": {
+                "module_test": {
+                    "name": "Module test",
+                    "technical_name": "module_test",
+                    "url": "/admin/module-test"
+                }
+            },
+            "displayOptions": {
+                "pagination": {
+                    "treeViewLength": 1
+                }
+            }
+        }
+    },
+    "private": {
+        "stripe": {
+            "apiPrivate": "hello"
+        }
+    }
+}

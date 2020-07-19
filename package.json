@@ -12,7 +12,7 @@
     "bcrypt": "^3.0.1",
     "imap-simple": "^4.3.0",
     "jspdf": "^1.5.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lodash.template": ">=4.5.0",
     "mailparser": "^2.7.6",
     "meteor-node-stubs": "^0.4.1",

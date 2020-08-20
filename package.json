@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "bcrypt": "^3.0.1",
+    "bcrypt": "^5.0.0",
     "imap-simple": "^4.3.0",
     "jspdf": "^1.5.3",
     "lodash": "^4.17.15",

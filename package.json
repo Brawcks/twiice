@@ -16,7 +16,7 @@
     "lodash.template": ">=4.5.0",
     "mailparser": "^2.7.6",
     "meteor-node-stubs": "^0.4.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "simpl-schema": "^1.4.3"
   },
   "meteor": {
